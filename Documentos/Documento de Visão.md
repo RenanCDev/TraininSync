@@ -11,7 +11,6 @@
 | Equipe                               | Papel                                  | E-mail                                    |
 |--------------------------------------|----------------------------------------|-------------------------------------------|
 | Arthur José dos Santos Azevêdo     | Desenvolvedor front-end, designer     | arthur.azevedo.700@ufrn.edu.br           |
-| Gabriel Azevedo de Araujo           | Desenvolvedor front-end, Testador     | gabriel.araujo.706@ufrn.edu.br           |
 | Gabriel Ygor Canuto                 | Desenvolvedor front-end               | gabriel.canuto.037@ufrn.edu.br           |
 | José Alves dos Anjos Paiva         | Desenvolvedor Full-Stack              | jose.alves.092@ufrn.edu.br               |
 | Luiz Miguel Santos Silva            | Desenvolvedor back-end, Analista      | luiz.santos.090@ufrn.edu.br              |
@@ -25,7 +24,6 @@
 | Equipe                                | Competências                                                                 |
 |---------------------------------------|-----------------------------------------------------------------------------|
 | Arthur José dos Santos Azevêdo      | React, Next, HTML, CSS, Tailwind, JavaScript, TypeScript, Figma             |
-| Gabriel Azevedo de Araujo            | HTML, CSS, Selenium, Cypress                                               |
 | Gabriel Ygor Canuto                  | React, React Native, Next, HTML, CSS, Tailwind, Figma, Styled Components, JavaScript, TypeScript |
 | José Alves dos Anjos Paiva          | Desenvolvedor Full-Stack, Python - Django, Java, Bootstrap, JavaScript, MySQL, SQLite, MariaDB |
 | Luiz Miguel Santos Silva             | Machine Learning, Python, Análise de Dados, Java, C, C#                    |
@@ -97,9 +95,9 @@ O aluno pode interagir com o sistema para gerenciar suas informações e acompan
 
 | Data       | Risco                                         | Prioridade | Responsável | Status    | Providência/Solução |
 |------------|----------------------------------------------|------------|-------------|-----------|---------------------|
-| 04/12/2024 | Não aprendizado das ferramentas utilizadas  | Alta       | Gerente     | Vigente   | Reforçar estudos e aulas práticas. |
-| 04/12/2024 | Ausência do cliente                         | Média      | Gerente     | Vigente   | Planejar cronograma considerando agenda do cliente. |
-| 04/12/2024 | Divisão de tarefas mal-sucedida            | Baixa      | Gerente     | Vigente   | Acompanhar desenvolvimento da equipe. |
+| 04/12/2024 | Não aprendizado das ferramentas utilizadas  | Alta       | Gerente     | Resolvido   | Reforçar estudos e aulas práticas. |
+| 04/12/2024 | Ausência do cliente                         | Média      | Gerente     | Resolvido   | Planejar cronograma considerando agenda do cliente. |
+| 04/12/2024 | Divisão de tarefas mal-sucedida            | Baixa      | Gerente     | Resolvido   | Acompanhar desenvolvimento da equipe. |
 | 04/12/2024 | Implementação de protótipo com tecnologias | Alta       | Todos       | Resolvido | Encontrar tutoriais e implementar caso básico. |
 
 ---
