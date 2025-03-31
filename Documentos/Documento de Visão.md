@@ -223,31 +223,23 @@ O sistema deverá permitir que o personal trainer corrija registros de progresso
 **Ator:** Personal Trainer  
 O sistema deverá permitir a remoção de registros de progresso incorretos, com confirmação da ação.  
 
-- **RF05.05 – Monitorar Evolução do Aluno**  
-**Ator:** Aluno  
-O sistema deverá fornecer feedback contínuo sobre a evolução do aluno, com registro de observações e evolução das métricas ao longo do tempo.  
-
 ---
 
 ### **RF06 – Gerar Pagamento**
 
-- **RF06.01 – Registro de Pagamento**  
+- **RF06.01 – Registro de Relatório de Pagamento**  
 **Ator:** Aluno  
 O sistema deverá registrar os pagamentos realizados pelos alunos, integrando com um gateway de pagamento para processamento.  
 
-- **RF06.02 – Visualizar Histórico de Pagamentos**  
+- **RF06.02 – Visualizar Relatório de Pagamentos**  
 **Ator:** Aluno  
 O sistema deverá exibir um histórico de transações financeiras realizadas, com detalhes como data, valor, e status do pagamento.  
 
-- **RF06.03 – Editar Dados de Pagamento**  
+- **RF06.03 – Excluir Relatório de Pagamento**  
 **Ator:** Aluno  
-O sistema deverá permitir que o aluno edite os dados de um pagamento realizado, caso haja necessidade de correção.  
+O sistema deverá permitir a exclusão de relatórios de pagamentos, porém mantendo os pagamentos registrados, não permitindo assim sua exclusão, apenas do relatório, com confirmação da ação e verificação de integridade dos dados.  
 
-- **RF06.04 – Excluir Registro de Pagamento**  
-**Ator:** Aluno  
-O sistema deverá permitir a exclusão de registros de pagamento, com confirmação da ação e verificação de integridade dos dados.  
-
-- **RF06.05 – Monitorar Inadimplência**  
+- **RF06.04 – Monitorar Inadimplência**  
 **Ator:** Aluno  
 O sistema deverá fornecer métricas sobre inadimplência, com relatórios financeiros detalhados para monitoramento.  
 
@@ -275,7 +267,52 @@ O sistema deverá permitir que o aluno exclua relatórios desatualizados ou desn
 **Ator:** Personal Trainer  
 O sistema deverá organizar e armazenar relatórios para futuras análises, mantendo registros contínuos de relatórios gerados.  
 
+---
 
+### **RF08 – Manter Agenda**
+
+- **RF08.01 – Cadastrar Horários**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir que o personal trainer cadastre novos horários para sessões de treino, definindo a data, hora e duração da sessão.  
+
+- **RF08.02 – Visualizar Agenda**  
+**Ator:** Personal Trainer  
+O sistema deverá fornecer uma interface que exiba um calendário com as sessões agendadas, permitindo visualização por dia, semana ou mês.  
+
+- **RF08.03 – Editar Sessão Agendada**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir que o personal trainer edite dados de um relatório gerado, persistindo as alterações realizadas.  
+
+- **RF08.04 – Excluir Sessão Agendada**  
+**Ator:** Aluno  
+O sistema deverá permitir que o aluno exclua relatórios desatualizados ou desnecessários, com confirmação da ação.  
+
+- **RF08.05 – Agendar Sessão**  
+**Ator:** Aluno  
+O sistema deverá organizar e armazenar relatórios para futuras análises, mantendo registros contínuos de relatórios gerados.   
+
+- **RF08.06 – Filtrar Sessão**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir a busca e filtragem das sessões agendadas por data, tipo de treino e status da sessão.
+
+- **RF08.07 – Cancelar Sessão**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir que tanto o personal trainer quanto o aluno possam cancelar sessões agendadas, registrando a ação no histórico do sistema.
+
+- **RF08.08 – Gerar Relatórios de Atendimentos**  
+**Ator:** Personal Trainer  
+OO sistema deverá permitir que o personal trainer confirme a presença do aluno na sessão agendada, registrando o comparecimento.
+
+- **RF08.09 – Notificar Agendamentos**  
+**Ator:** Sistema  
+OO sistema deverá enviar notificações automáticas de confirmação e lembrete das sessões agendadas para os alunos e personal trainers.   
+
+- **RF08.10 – Sincronizar com Calendário Externo**  
+**Ator:** Sistema  
+O sistema deverá oferecer integração com serviços de calendário externo (ex.: Google Calendar) para sincronizar automaticamente os horários agendados.
+
+
+---
 **Processo Atomizado dos Requisitos Funcionais:**
 - Cada requisito é dividido em componentes menores (cadastro, visualização, edição/atualização, exclusão/cancelamento, monitoramento).
 - Desenvolvimento iterativo com TDD (Test-Driven Development).
