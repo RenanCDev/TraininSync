@@ -10,9 +10,10 @@ Este documento fragmenta e detalha cada etapa dos processos do projeto, dividind
 
 **Objetivo:** Manter o controle e a documentação de todas as alterações do projeto.
 
-| Data       | Versão | Descrição         | Autor                   |
-|------------|--------|-------------------|-------------------------|
-| 04/12/2024 | 1.0    | Documento inicial | Gabriel Ygor Canuto     |
+| Data       | Versão | Descrição         | Autor                       |
+|------------|--------|-------------------|-----------------------------|
+| 04/12/2024 | 1.0    | Documento inicial | Gabriel Ygor Canuto         |
+| 27/03/2025 | 1.1    | Documento inicial | José Alves dos Anjos Paiva  |
 
 **Atividades Atomizadas:**
 - Coleta de feedback.
@@ -28,14 +29,14 @@ Este documento fragmenta e detalha cada etapa dos processos do projeto, dividind
 
 **Objetivo:** Assegurar que cada membro da equipe tenha funções bem definidas e que haja clareza na comunicação.
 
-| Equipe                               | Papel                             | E-mail                           |
-|-------------------------------------|-----------------------------------|----------------------------------|
-| Arthur José dos Santos Azevedo      | Desenvolvedor front-end, designer | arthur.azevedo.700@ufrn.edu.br    |
-| Gabriel Ygor Canuto                 | Desenvolvedor front-end           | gabriel.canuto.037@ufrn.edu.br    |
-| José Alves dos Anjos Paiva          | Desenvolvedor Full-Stack          | jose.alves.092@ufrn.edu.br        |
-| Luiz Miguel Santos Silva            | Desenvolvedor back-end, Analista  | luiz.santos.090@ufrn.edu.br       |
-| Raul Araújo Silva                   | Desenvolvedor back-end            | rael.araujo.706@ufrn.edu.br       |
-| Renan Messias Rodrigues Alves da Costa | Gerente, Testador, Desenvolvedor back-end | renan.costa.117@ufrn.edu.br |
+| Equipe                                 | Papel                                     | E-mail                           |
+|----------------------------------------|-------------------------------------------|----------------------------------|
+| Arthur José dos Santos Azevedo         | Desenvolvedor front-end, designer         | arthur.azevedo.700@ufrn.edu.br   |
+| Gabriel Ygor Canuto                    | Desenvolvedor front-end                   | gabriel.canuto.037@ufrn.edu.br   |
+| José Alves dos Anjos Paiva             | Desenvolvedor back-end                    | jose.alves.092@ufrn.edu.br       |
+| Luiz Miguel Santos Silva               | Desenvolvedor back-end, Analista          | luiz.santos.090@ufrn.edu.br      |
+| Raul Araújo Silva                      | Desenvolvedor back-end                    | rael.araujo.706@ufrn.edu.br      |
+| Renan Messias Rodrigues Alves da Costa | Gerente, Testador, Desenvolvedor back-end | renan.costa.117@ufrn.edu.br      |
 
 - **Mapeamento de Habilidades:**
   - Listar integrantes com suas competências técnicas e comportamentais.
@@ -108,163 +109,172 @@ Este documento fragmenta e detalha cada etapa dos processos do projeto, dividind
 
 **Objetivo:** Especificar cada funcionalidade do sistema em ações atômicas e separadas.
 
-### RF01 – Manter Personal Trainer
+### **RF01 – Manter Personal Trainer**
 
-- **Cadastro:**
-  - Criar tela com campos obrigatórios.
-  - Validar dados (ex.: email, campos não nulos).
-  - Persistir informações no banco de dados.
+- **RF01.01 – Cadastro de Personal Trainer**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir o cadastro de novos personal trainers, com campos obrigatórios para informações básicas (nome, email, etc.), e validação dos dados (ex.: email válido, campos não nulos).  
 
-- **Visualização:**
-  - Desenvolver tela para listar personal trainers.
-  - Implementar filtros e visualização detalhada.
+- **RF01.02 – Visualizar Personal Trainer**  
+**Ator:** Personal Trainer  
+O sistema deverá listar os personal trainers cadastrados, com a possibilidade de exibir informações detalhadas sobre cada um deles, com filtros de busca para facilitar a visualização.  
 
-- **Edição/Atualização:**
-  - Interface para modificar dados já cadastrados.
-  - Validar alterações e atualizar registros.
+- **RF01.03 – Editar Dados do Personal Trainer**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir que o personal trainer edite seus dados, como informações de contato, especializações, etc., e atualize essas informações no banco de dados após validação.  
 
-- **Exclusão/Cancelamento:**
-  - Confirmar ação de exclusão.
-  - Remover dados e registrar a ação (log).
+- **RF01.04 – Excluir Personal Trainer**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir a exclusão de um personal trainer, solicitando confirmação antes da remoção e registrando essa ação no log de atividades.  
 
-- **Monitoramento:**
-  - Acompanhar métricas do desempenho (ex.: número de atendimentos, feedbacks).
+- **RF01.05 – Monitorar Desempenho do Personal Trainer**  
+**Ator:** Personal Trainer  
+O sistema deverá fornecer métricas sobre o desempenho do personal trainer, como número de atendimentos realizados, feedbacks de alunos, etc.  
 
-### RF02 – Manter Aluno
+---
 
-- **Cadastro:**
-  - Formulário com informações pessoais e de saúde.
-  - Validação dos dados e persistência.
+### **RF02 – Manter Aluno**
 
-- **Visualização:**
-  - Tela para listar alunos e visualizar detalhes, incluindo histórico de progresso.
+- **RF02.01 – Cadastro de Aluno**  
+**Ator:** Aluno  
+O sistema deverá permitir que os alunos se cadastrem, preenchendo informações pessoais e de saúde, com validação de dados (ex.: campos obrigatórios, email válido) e persistência no banco de dados.  
 
-- **Edição/Atualização:**
-  - Interface para atualizar informações do aluno.
-  - Validação e atualização no banco.
+- **RF02.02 – Visualizar Aluno**  
+**Ator:** Aluno  
+O sistema deverá exibir uma lista de alunos cadastrados, com a possibilidade de acessar informações detalhadas, incluindo histórico de progresso físico.  
 
-- **Exclusão/Cancelamento:**
-  - Processo de remoção com confirmação, preservando dados históricos relevantes.
+- **RF02.03 – Editar Dados do Aluno**  
+**Ator:** Aluno  
+O sistema deverá permitir que o aluno edite suas informações de cadastro, como dados pessoais, preferências, etc., e atualizar essas informações no banco de dados após validação.  
 
-- **Monitoramento:**
-  - Acompanhar evolução dos alunos com registros e feedback.
+- **RF02.04 – Excluir Aluno**  
+**Ator:** Aluno  
+O sistema deverá permitir que o aluno exclua seu próprio cadastro, com confirmação antes da remoção e registro da ação no log, mantendo dados históricos preservados.  
 
-### RF03 – Manter Serviço
+- **RF02.05 – Monitorar Evolução do Aluno**  
+**Ator:** Aluno  
+O sistema deverá acompanhar o progresso do aluno, registrando métricas físicas e feedbacks contínuos para análise do desenvolvimento.  
 
-- **Cadastro:**
-  - Tela para inserção de novo serviço (nome, descrição, preço, duração).
-  - Validação dos dados e persistência.
+---
 
-- **Visualização:**
-  - Listar serviços cadastrados com filtros por categoria.
-  - Exibir detalhes de cada serviço.
+### **RF03 – Manter Serviço**
 
-- **Edição/Atualização:**
-  - Interface para modificar informações do serviço.
-  - Atualizar dados e persistir mudanças.
+- **RF03.01 – Cadastro de Serviço**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir que o personal trainer cadastre novos serviços oferecidos, com informações sobre nome, descrição, preço e duração, validando dados e persistindo as informações.  
 
-- **Exclusão/Cancelamento:**
-  - Confirmar e remover serviço, com registro da ação.
+- **RF03.02 – Visualizar Serviços Cadastrados**  
+**Ator:** Aluno  
+O sistema deverá exibir uma lista de serviços cadastrados, permitindo a filtragem por categoria e exibição detalhada das características de cada serviço.  
 
-- **Monitoramento:**
-  - Acompanhar métricas (ex.: número de contratações, feedback de clientes).
+- **RF03.03 – Editar Serviço**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir que o personal trainer edite os dados de um serviço, como nome, descrição, preço e duração, validando as alterações antes de persistir as mudanças.  
 
-### RF04 – Manter Contrato de Serviço
+- **RF03.04 – Excluir Serviço**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir que o personal trainer exclua um serviço, com confirmação da ação e registro no log de atividades.  
 
-- **Cadastro:**
-  - Interface para criação de contrato (termos, condições, valores, duração).
-  - Geração de documento digital (ex.: PDF).
+- **RF03.05 – Monitorar Contratações de Serviços**  
+**Ator:** Personal Trainer  
+O sistema deverá monitorar o número de contratações de cada serviço e o feedback recebido de alunos, apresentando essas métricas para análise do personal trainer.  
 
-- **Visualização:**
-  - Listar contratos ativos e históricos.
-  - Exibir detalhes e status do contrato.
+---
 
-- **Edição/Atualização:**
-  - Interface para atualizar termos e condições.
-  - Persistir alterações no contrato.
+### **RF04 – Manter Contrato de Serviço**
 
-- **Exclusão/Cancelamento:**
-  - Processo de encerramento de contrato, com registro da ação.
+- **RF04.01 – Cadastro de Contrato**  
+**Ator:** Aluno  
+O sistema deverá permitir a criação de contratos de serviços, com termos e condições, valores e duração, gerando um documento digital (como PDF) ao final do processo.  
 
-- **Monitoramento:**
-  - Acompanhar vencimentos, uploads de comprovantes e envio de notificações.
+- **RF04.02 – Visualizar Contratos**  
+**Ator:** Aluno  
+O sistema deverá listar todos os contratos ativos e históricos, com a possibilidade de exibir os detalhes e o status atual de cada contrato.  
 
-### RF05 – Manter Registro de Progresso
+- **RF04.03 – Editar Contrato**  
+**Ator:** Aluno  
+O sistema deverá permitir a edição dos termos e condições de um contrato, registrando as alterações e mantendo a versão atualizada.  
 
-- **Cadastro:**
-  - Tela para inserir métricas físicas (peso, medidas, etc.) com registro de data/hora.
-  
-- **Visualização:**
-  - Exibição do histórico em forma de lista e gráficos.
-  - Ferramenta para comparação de métricas.
+- **RF04.04 – Excluir Contrato**  
+**Ator:** Aluno  
+O sistema deverá permitir o encerramento de contratos, com confirmação da ação e registro no log de atividades.  
 
-- **Edição/Atualização:**
-  - Interface para corrigir registros.
-  - Atualizar dados conforme feedback do personal trainer.
+- **RF04.05 – Monitorar Vencimentos e Comprovantes**  
+**Ator:** Aluno  
+O sistema deverá acompanhar os vencimentos de contratos, os uploads de comprovantes de pagamento e enviar notificações aos envolvidos.  
 
-- **Exclusão/Cancelamento:**
-  - Remoção de registros incorretos com confirmação.
-  
-- **Monitoramento:**
-  - Armazenar e atualizar feedback continuamente.
+---
 
-### RF06 – Gerar Pagamento
+### **RF05 – Manter Registro de Progresso**
 
-- **Cadastro:**
-  - Registro dos pagamentos realizados.
-  - Integração com gateway de pagamento.
+- **RF05.01 – Cadastro de Métricas**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir o registro de métricas físicas dos alunos (peso, medidas, etc.), associando a data e hora do registro.  
 
-- **Visualização:**
-  - Tela para listar o histórico de transações.
-  - Detalhamento de cada pagamento (data, valor, status).
+- **RF05.02 – Visualizar Histórico de Progresso**  
+**Ator:** Aluno  
+O sistema deverá exibir o histórico de progresso físico do aluno em uma lista ou gráficos comparativos.  
 
-- **Edição/Atualização:**
-  - Interface para correção de dados de pagamento, se necessário.
+- **RF05.03 – Editar Registros de Progresso**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir que o personal trainer corrija registros de progresso, atualizando os dados conforme novas medições ou feedbacks.  
 
-- **Exclusão/Cancelamento:**
-  - Processo para remover registros de pagamento com verificação.
-  
-- **Monitoramento:**
-  - Acompanhar inadimplência e histórico financeiro com relatórios.
+- **RF05.04 – Excluir Registros de Progresso**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir a remoção de registros de progresso incorretos, com confirmação da ação.  
 
-### RF07 – Manter Relatórios de Alunos
+- **RF05.05 – Monitorar Evolução do Aluno**  
+**Ator:** Aluno  
+O sistema deverá fornecer feedback contínuo sobre a evolução do aluno, com registro de observações e evolução das métricas ao longo do tempo.  
 
-- **Geração:**
-  - Módulo para criar relatórios com filtros (por período, serviço, tipo de aluno).
-  - Opções de exportação (PDF, Excel).
+---
 
-- **Visualização:**
-  - Tela para listar e visualizar relatórios gerados.
-  - Ferramenta para comparação de dados em diferentes períodos.
+### **RF06 – Gerar Pagamento**
 
-- **Edição/Atualização:**
-  - Interface para atualizar dados de relatórios.
-  - Persistência das alterações.
+- **RF06.01 – Registro de Pagamento**  
+**Ator:** Aluno  
+O sistema deverá registrar os pagamentos realizados pelos alunos, integrando com um gateway de pagamento para processamento.  
 
-- **Exclusão/Cancelamento:**
-  - Processo para remover relatórios desatualizados com confirmação.
-  
-- **Monitoramento:**
-  - Organização e armazenamento contínuo para análises futuras.
+- **RF06.02 – Visualizar Histórico de Pagamentos**  
+**Ator:** Aluno  
+O sistema deverá exibir um histórico de transações financeiras realizadas, com detalhes como data, valor, e status do pagamento.  
 
-### RF08 – Manter Agenda
+- **RF06.03 – Editar Dados de Pagamento**  
+**Ator:** Aluno  
+O sistema deverá permitir que o aluno edite os dados de um pagamento realizado, caso haja necessidade de correção.  
 
-- **Cadastro de Horários:**
-  - Tela para inserir novas sessões de treino com data, hora e duração.
+- **RF06.04 – Excluir Registro de Pagamento**  
+**Ator:** Aluno  
+O sistema deverá permitir a exclusão de registros de pagamento, com confirmação da ação e verificação de integridade dos dados.  
 
-- **Visualização:**
-  - Calendário integrado com visualização por dia, semana ou mês.
-  - Filtros para localizar sessões específicas.
+- **RF06.05 – Monitorar Inadimplência**  
+**Ator:** Aluno  
+O sistema deverá fornecer métricas sobre inadimplência, com relatórios financeiros detalhados para monitoramento.  
 
-- **Edição/Atualização:**
-  - Interface para atualizar os detalhes das sessões agendadas.
-  - Persistência das alterações.
+---
 
-- **Exclusão/Cancelamento:**
-  - Processo de cancelamento com confirmação e registro.
-  
-- **Monitoramento:**
-  - Sincronização com calendários externos (ex.: Google Calendar) e envio automático de lembretes.
+### **RF07 – Manter Relatórios de Alunos**
+
+- **RF07.01 – Gerar Relatórios**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir a geração de relatórios detalhados sobre o desempenho dos alunos, com filtros por período, serviço, e tipo de aluno, além de opções de exportação (PDF, Excel).  
+
+- **RF07.02 – Visualizar Relatórios Gerados**  
+**Ator:** Personal Trainer  
+O sistema deverá exibir a lista de relatórios gerados, permitindo visualização de dados e comparação de informações de diferentes períodos.  
+
+- **RF07.03 – Editar Relatórios**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir que o personal trainer edite dados de um relatório gerado, persistindo as alterações realizadas.  
+
+- **RF07.04 – Excluir Relatório**  
+**Ator:** Aluno  
+O sistema deverá permitir que o aluno exclua relatórios desatualizados ou desnecessários, com confirmação da ação.  
+
+- **RF07.05 – Monitorar Armazenamento de Relatórios**  
+**Ator:** Personal Trainer  
+O sistema deverá organizar e armazenar relatórios para futuras análises, mantendo registros contínuos de relatórios gerados.  
+
 
 **Processo Atomizado dos Requisitos Funcionais:**
 - Cada requisito é dividido em componentes menores (cadastro, visualização, edição/atualização, exclusão/cancelamento, monitoramento).
