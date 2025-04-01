@@ -55,3 +55,41 @@ Nesta seção, listamos os principais mecanismos arquiteturais do sistema para g
 | **Deploy**           | Hospedagem simples              | Render, Railway ou Heroku (gratuito) |
 | **Infraestrutura**   | Ambiente de desenvolvimento     | Docker (Opcional), rodando localmente |
 | **Cache**           | Melhorar desempenho              | Uso de cache básico com Django |
+
+## Implantação  
+
+O sistema será implantado de forma simples, utilizando um serviço de hospedagem gratuita ou rodando localmente no ambiente de desenvolvimento.  
+
+### **1. Ambiente de Desenvolvimento**  
+- O backend será executado usando **Django** com um servidor local (`python manage.py runserver`).  
+- O frontend será rodado com **React** via Vite (`npm run dev`).  
+- Banco de dados pode ser **PostgreSQL** ou **SQLite**, dependendo da necessidade.  
+
+### **2. Ambiente de Produção (Hospedagem Simples)**  
+- O backend será hospedado em plataformas como **Render, Railway ou Heroku**.  
+- O frontend será hospedado no **Vercel ou Netlify**.  
+- O banco de dados pode ser um serviço gratuito oferecido por esses provedores.  
+
+### **Fluxo de Deploy**  
+1. O código será versionado no **GitHub**.  
+2. Quando houver mudanças, o código será enviado para a hospedagem (exemplo: Render para o backend e Vercel para o frontend).  
+3. O banco de dados será configurado para manter os dados armazenados entre as execuções.  
+
+
+# Referências  
+
+- Django Software Foundation. **Django Documentation**. Disponível em: [https://docs.djangoproject.com/en/stable/](https://docs.djangoproject.com/en/stable/). Acesso em: 31 mar. 2025.  
+
+- TypeScript Handbook. **TypeScript Documentation**. Disponível em: [https://www.typescriptlang.org/docs/](https://www.typescriptlang.org/docs/). Acesso em: 31 mar. 2025.  
+
+- PostgreSQL Global Development Group. **PostgreSQL 16 Documentation**. Disponível em: [https://www.postgresql.org/docs/16/](https://www.postgresql.org/docs/16/). Acesso em: 31 mar. 2025.  
+
+
+- Netlify. **Deploy React Apps with Netlify**. Disponível em: [https://docs.netlify.com/](https://docs.netlify.com/). Acesso em: 31 mar. 2025.  
+
+- Render. **Deploying Django Applications**. Disponível em: [https://render.com/docs/deploy-django](https://render.com/docs/deploy-django). Acesso em: 31 mar. 2025.  
+
+
+
+
+
