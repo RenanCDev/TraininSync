@@ -27,3 +27,31 @@ A estrutura do projeto permite futuras migrações para um modelo **baseado em m
 Imagem com a organização geral dos componentes da arquitetura do projeto. Segue um exemplo da **Arquitetura Geral** de um Projeto usando **Django Framework** Integrado a um Frontend com **React e TypeScript**:
 
 ![Arquitetura Django Projeto](../Imagens/arquiteturaproj.png)
+
+## Requisitos Não-Funcionais  
+
+| **Requisito**        | **Detalhes** |
+|----------------------|-------------|
+| **Desempenho**       | 1. A página principal deve carregar em no máximo **3 segundos**.<br /> 2. Consultas ao banco de dados devem responder em até **2 segundos**.<br /> 3. O sistema deve suportar múltiplas conexões simultâneas sem perda significativa de desempenho. |
+| **Interoperabilidade** | 1. O sistema deve rodar em **Linux** e ser distribuído via **Docker**.<br /> 2. O banco de dados será **PostgreSQL 16** ou **MySQL 8**. |
+| **Escalabilidade**   | 1. O sistema deve permitir expansão para suportar mais usuários quando necessário.<br /> 2. O backend deve permitir a adição de novos serviços sem grandes mudanças na arquitetura. |
+| **Disponibilidade**  | 1. O sistema deve ficar disponível **99% do tempo**, com possíveis manutenções agendadas.<br /> 2. Deve haver um **backup periódico** dos dados. |
+| **Usabilidade**      | 1. O frontend deve ser **responsivo**, funcionando bem em celulares, tablets e desktops.<br /> 2. A interface deve ser intuitiva e de fácil navegação. |
+| **Segurança**        | 1. O sistema deve utilizar **HTTPS** para comunicação segura.<br /> 2. Implementação de um sistema de **autenticação segura** com usuários e senhas criptografadas. |
+| **Manutenção**       | 1. Atualizações e correções devem ser feitas sem impacto significativo para os usuários.<br /> 2. O código deve ser organizado para facilitar futuras modificações. |
+
+## Mecanismos Arquiteturais  
+
+Nesta seção, listamos os principais mecanismos arquiteturais do sistema para garantir uma implementação viável dentro do contexto acadêmico.  
+
+| **Mecanismo de Análise** | **Mecanismo de Design**         | **Mecanismo de Implementação**    |
+|-------------------------|--------------------------------|----------------------------------|
+| **Persistência**       | Banco de dados relacional      | PostgreSQL 16 / SQLite (para testes) |
+| **Camada de Dados**    | Mapeamento OR                  | Django ORM |
+| **Frontend**          | Interface do Usuário           | React com TypeScript, CSS Modules |
+| **Backend**           | API REST                       | Django REST Framework (DRF) |
+| **Autenticação**      | Login com senha                | Django Authentication padrão |
+| **Build**            | Execução local                  | Ambiente virtual com venv (Python) |
+| **Deploy**           | Hospedagem simples              | Render, Railway ou Heroku (gratuito) |
+| **Infraestrutura**   | Ambiente de desenvolvimento     | Docker (Opcional), rodando localmente |
+| **Cache**           | Melhorar desempenho              | Uso de cache básico com Django |
