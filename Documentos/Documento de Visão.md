@@ -35,7 +35,7 @@ Este documento fragmenta e detalha cada etapa dos processos do projeto, dividind
 | Gabriel Ygor Canuto                    | Desenvolvedor front-end                   | gabriel.canuto.037@ufrn.edu.br   |
 | José Alves dos Anjos Paiva             | Desenvolvedor back-end                    | jose.alves.092@ufrn.edu.br       |
 | Luiz Miguel Santos Silva               | Desenvolvedor back-end, Analista          | luiz.santos.090@ufrn.edu.br      |
-| Raul Araújo Silva                      | Desenvolvedor back-end                    | rael.araujo.706@ufrn.edu.br      |
+| Rael Araújo Silva                      | Desenvolvedor back-end                    | rael.araujo.706@ufrn.edu.br      |
 | Renan Messias Rodrigues Alves da Costa | Gerente, Testador, Desenvolvedor back-end | renan.costa.117@ufrn.edu.br      |
 
 - **Mapeamento de Habilidades:**
