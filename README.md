@@ -8,6 +8,10 @@ O repositório está organizado de forma modular, separando claramente:
 - *Lógica de negócio* – Camada responsável pelas regras e processos do sistema.
 - *Integração com o banco de dados* – Módulos que gerenciam conexões e operações com o PostgreSQL.
 - *APIs* – Rotas e endpoints que comunicam o back-end com o front-end.
+- *Componentes:* Blocos reutilizáveis de interface (botões, inputs, cards).
+- *Páginas:* Estrutura de roteamento do sistema (dashboard, perfil, etc.).
+- *Serviços:* Comunicação com as APIs fornecidas pelo back-end.
+- *Estilos:* Customização com Tailwind CSS e a paleta de cores personalizada.
 
 ## Como Contribuir
 1. Faça um fork deste repositório.
