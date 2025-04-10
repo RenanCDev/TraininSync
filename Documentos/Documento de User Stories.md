@@ -25,13 +25,13 @@ Este documento fragmenta e detalha cada etapa das histórias de usuário, dividi
 | RF01.04                       | Excluir Personal Trainer                                                                    |
 | RF01.05                       | Monitorar Desempenho do Personal Trainer                                                    |
 | **Prioridade** | Essencial                                                                                   |
-| **Estimativa** | 8 h                                                                                         |
+| **Estimativa** |                                                                                          |
 | **Tempo Gasto (real):** |                                                                                             |
-| **Tamanho Funcional** | 7 PF                                                                                        |
-| **Analista** | Luiz Miguel (Responsável pela descrição, especificação e detalhamento da US).                |
-| **Desenvolvedor** | Gabriel Ygor (responsável por implementar e realizar testes de unidade e estilização do front-end).<br>Rael Araujo (responsável por implementar e realizar testes de integração, análise e implementação no banco de dados.) |
-| **Revisor** | Renan Missias (responsável por avaliar a implementação e executar os testes de unidade e testes de integração). |
-| **Testador** | Gabriel Azevedo (Responsável pela execução dos testes de aceitação e da criação do relatório de testes). |
+| **Tamanho Funcional** |                                                                                         |
+| **Analistas** | Luiz Miguel (Responsável pela descrição, especificação e detalhamento da US).                |
+| **Desenvolvedores** | Gabriel Ygor (responsável por implementar e realizar testes de unidade e estilização do front-end).<br>José Alves (responsável por implementar e realizar testes de integração, análise e implementação no banco de dados.) |
+| **Revisores** | Renan Missias (responsável por avaliar a implementação e executar os testes de unidade e testes de integração). |
+| **Testadores** | Rael Araujo (Responsável pela execução dos testes de aceitação e da criação do relatório de testes). |
 
 | Testes de Aceitação (TA) |          |
 | ------------------------ | -------- |
@@ -58,13 +58,13 @@ Este documento fragmenta e detalha cada etapa das histórias de usuário, dividi
 | RF02.04                       | Excluir Aluno                                                                               |
 | RF02.05                       | Monitorar Evolução do Aluno                                                                 |
 | **Prioridade** | Essencial                                                                                   |
-| **Estimativa** | 2h                                                                                          |
+| **Estimativa** |                                                                                           |
 | **Tempo Gasto (real):** |                                                                                             |
 | **Tamanho Funcional** |                                                                                             |
 | **Analista** | Luiz Miguel (Responsável pela descrição, especificação e detalhamento da US).                |
 | **Desenvolvedor** | Gabriel Ygor (responsável por implementar e realizar testes de unidade e estilização do front-end).<br>José Alves (responsável por implementar e realizar testes de integração, análise e implementação no banco de dados.) |
 | **Revisor** | Renan Missias (responsável por avaliar a implementação e executar os testes de unidade e testes de integração). |
-| **Testador** | Gabriel Azevedo (Responsável pela execução dos testes de aceitação e da criação do relatório de testes). |
+| **Testador** | Rael Araújo (Responsável pela execução dos testes de aceitação e da criação do relatório de testes). |
 
 | Testes de Aceitação (TA) |          |
 | ------------------------ | -------- |
@@ -97,7 +97,7 @@ Este documento fragmenta e detalha cada etapa das histórias de usuário, dividi
 | **Analista** | Luiz Miguel (Responsável pela descrição, especificação e detalhamento da US).                |
 | **Desenvolvedor** | Arthur Azevedo (responsável por implementar e realizar testes de unidade e estilização do front-end).<br>José Alves (responsável por implementar e realizar testes de integração, análise e implementação no banco de dados.) |
 | **Revisor** | Renan Missias (responsável por avaliar a implementação e executar os testes de unidade e testes de integração). |
-| **Testador** | Gabriel Azevedo (Responsável pela execução dos testes de aceitação e da criação do relatório de testes). |
+| **Testador** | Rael Araújo (Responsável pela execução dos testes de aceitação e da criação do relatório de testes). |
 
 | Testes de Aceitação (TA) |          |
 | ------------------------ | -------- |
@@ -124,13 +124,13 @@ Este documento fragmenta e detalha cada etapa das histórias de usuário, dividi
 | RF04.04                       | Excluir Contrato                                                                            |
 | RF04.05                       | Monitorar Vencimentos e Comprovantes                                                         |
 | **Prioridade** | Essencial                                                                                   |
-| **Estimativa** | 8h                                                                                          |
+| **Estimativa** |                                                                                           |
 | **Tempo Gasto (real):** |                                                                                             |
 | **Tamanho Funcional** |                                                                                             |
 | **Analista** | Luiz Miguel (Responsável pela descrição, especificação e detalhamento da US).                |
-| **Desenvolvedor** | Gabriel Ygor (responsável por implementar e realizar testes de unidade e estilização do front-end).<br>Rael Araujo (responsável por implementar e realizar testes de integração, análise e implementação no banco de dados.) |
+| **Desenvolvedor** | Gabriel Ygor (responsável por implementar e realizar testes de unidade e estilização do front-end).<br>José Alves (responsável por implementar e realizar testes de integração, análise e implementação no banco de dados.) |
 | **Revisor** | Renan Missias (responsável por avaliar a implementação e executar os testes de unidade e testes de integração). |
-| **Testador** | Gabriel Azevedo (Responsável pela execução dos testes de aceitação e da criação do relatório de testes). |
+| **Testador** | Rael Araújo (Responsável pela execução dos testes de aceitação e da criação do relatório de testes). |
 
 | Testes de Aceitação (TA) |          |
 | ------------------------ | -------- |
@@ -156,13 +156,13 @@ Este documento fragmenta e detalha cada etapa das histórias de usuário, dividi
 | RF05.03                       | Editar Registros de Progresso                                                               |
 | RF05.04                       | Excluir Registro de Progresso                                                               |
 | **Prioridade** | Essencial                                                                                   |
-| **Estimativa** | 8h                                                                                          |
+| **Estimativa** |                                                                                           |
 | **Tempo Gasto (real):** |                                                                                             |
 | **Tamanho Funcional** |                                                                                             |
 | **Analista** | Luiz Miguel (Responsável pela descrição, especificação e detalhamento da US).                |
 | **Desenvolvedor** | Arthur Azevedo (responsável por implementar e realizar testes de unidade e estilização do front-end).<br>José Alves (responsável por implementar e realizar testes de integração, análise e implementação no banco de dados.) |
 | **Revisor** | Renan Missias (responsável por avaliar a implementação e executar os testes de unidade e testes de integração). |
-| **Testador** | Gabriel Azevedo (Responsável pela execução dos testes de aceitação e da criação do relatório de testes). |
+| **Testador** | Rael Araújo (Responsável pela execução dos testes de aceitação e da criação do relatório de testes). |
 
 | Testes de Aceitação (TA) |          |
 | ------------------------ | -------- |
@@ -187,13 +187,13 @@ Este documento fragmenta e detalha cada etapa das histórias de usuário, dividi
 | RF06.03                       | Excluir Relatório de Pagamento                                                              |
 | RF06.04                       | Monitorar Inadimplência                                                                     |
 | **Prioridade** | Essencial                                                                                   |
-| **Estimativa** | 3h                                                                                          |
+| **Estimativa** |                                                                                           |
 | **Tempo Gasto (real):** |                                                                                             |
 | **Tamanho Funcional** |                                                                                             |
 | **Analista** | Luiz Miguel (Responsável pela descrição, especificação e detalhamento da US).                |
-| **Desenvolvedor** |                                                                                             |
+| **Desenvolvedor** | Arthur Azevedo (responsável por implementar e realizar testes de unidade e estilização do front-end).<br>José Alves (responsável por implementar e realizar testes de integração, análise e implementação no banco de dados.)                                                                                            |
 | **Revisor** | Renan Missias (responsável por avaliar a implementação e executar os testes de unidade e testes de integração). |
-| **Testador** | Gabriel Azevedo (Responsável pela execução dos testes de aceitação e da criação do relatório de testes). |
+| **Testador** | Rael Araújo (Responsável pela execução dos testes de aceitação e da criação do relatório de testes). |
 
 | Testes de Aceitação (TA) |          |
 | ------------------------ | -------- |
@@ -218,13 +218,13 @@ Este documento fragmenta e detalha cada etapa das histórias de usuário, dividi
 | RF07.04                       | Excluir Relatório                                                                           |
 | RF07.05                       | Monitorar Armazenamento de Relatórios                                                       |
 | **Prioridade** | Essencial                                                                                   |
-| **Estimativa** | 3h                                                                                          |
-| **Tempo Gasto (real):** | 0h                                                                                          |
+| **Estimativa** |                                                                                           |
+| **Tempo Gasto (real):** |                                                                                           |
 | **Tamanho Funcional** |                                                                                             |
 | **Analista** | Luiz Miguel (Responsável pela descrição, especificação e detalhamento da US).                |
-| **Desenvolvedor** | Gabriel Ygor (responsável por implementar e realizar testes de unidade e estilização do front-end).<br>Rael Araujo (responsável por implementar e realizar testes de integração, análise e implementação no banco de dados.) |
+| **Desenvolvedor** | Gabriel Ygor (responsável por implementar e realizar testes de unidade e estilização do front-end).<br>Luiz Miguel (responsável por implementar e realizar testes de integração, análise e implementação no banco de dados.) |
 | **Revisor** | Renan Missias (responsável por avaliar a implementação e executar os testes de unidade e testes de integração). |
-| **Testador** | Renan Missias (Responsável pela execução dos testes de aceitação e da criação do relatório de testes). |
+| **Testador** | Rael Araújo (Responsável pela execução dos testes de aceitação e da criação do relatório de testes). |
 
 | Testes de Aceitação (TA) |          |
 | ------------------------ | -------- |
@@ -258,13 +258,13 @@ Este documento fragmenta e detalha cada etapa das histórias de usuário, dividi
 | RF08.09                       | Notificar Agendamentos                                                                      |
 | RF08.10                       | Sincronizar com Calendário Externo                                                          |
 | **Prioridade** | Essencial                                                                                   |
-| **Estimativa** | 8h                                                                                          |
+| **Estimativa** |                                                                                           |
 | **Tempo Gasto (real):** |                                                                                             |
 | **Tamanho Funcional** |                                                                                             |
 | **Analista** | Luiz Miguel (Responsável pela descrição, especificação e detalhamento da US).                |
-| **Desenvolvedor** | Gabriel Ygor (responsável por implementar e realizar testes de unidade e estilização do front-end).<br>Rael Araujo (responsável por implementar e realizar testes de integração, análise e implementação no banco de dados.) |
+| **Desenvolvedor** | Gabriel Ygor (responsável por implementar e realizar testes de unidade e estilização do front-end).<br>Luiz Miguel (responsável por implementar e realizar testes de integração, análise e implementação no banco de dados.) |
 | **Revisor** | Renan Missias (responsável por avaliar a implementação e executar os testes de unidade e testes de integração). |
-| **Testador** | Gabriel Azevedo (Responsável pela execução dos testes de aceitação e da criação do relatório de testes). |
+| **Testador** | Rael Araújo (Responsável pela execução dos testes de aceitação e da criação do relatório de testes). |
 
 | Testes de Aceitação (TA) |          |
 | ------------------------ | -------- |
