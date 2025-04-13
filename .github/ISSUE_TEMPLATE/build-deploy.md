@@ -1,8 +1,8 @@
 ---
-name: "🚀 Build/Deploy Issue"
+name: "[BUILD/DEPLOY]"
 about: "Report problems encountered during the build or deploy processes"
-title: "[BUILD/DEPLOY]"
-labels: build, deploy, bug
+title: ''
+labels: ''
 assignees: ''
 
 ---
