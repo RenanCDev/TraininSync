@@ -1,5 +1,5 @@
 ---
-name: BUILD/DEPLOY]
+name: [BUILD/DEPLOY]
 about: Report problems encountered during the build or deploy processes
 title: ''
 labels: ''
