@@ -1,9 +1,8 @@
 ---
-name: "[SUPPORT]"
-about: Use this template to ask a question or request support for issues related to
-  the project
-title: ''
-labels: ''
+name: "❓ Question or Support"
+about: "Use this template to ask a question or request support for issues related to the project"
+title: "[SUPPORT]"
+labels: question, support
 assignees: ''
 
 ---

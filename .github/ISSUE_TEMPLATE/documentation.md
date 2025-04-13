@@ -1,8 +1,8 @@
 ---
-name: "[DOC]"
-about: Suggest corrections or improvements to the project documentation
-title: ''
-labels: ''
+name: "📝 Documentation Improvement"
+about: "Suggest corrections or improvements to the project documentation"
+title: "[DOC]"
+labels: documentation
 assignees: ''
 
 ---

@@ -1,8 +1,8 @@
 ---
-name: [BUILD/DEPLOY]
-about: Report problems encountered during the build or deploy processes
-title: ''
-labels: ''
+name: "🚀 Build/Deploy Issue"
+about: "Report problems encountered during the build or deploy processes"
+title: "[BUILD/DEPLOY]"
+labels: build, deploy, bug
 assignees: ''
 
 ---

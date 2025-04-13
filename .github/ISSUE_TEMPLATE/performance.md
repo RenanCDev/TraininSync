@@ -1,8 +1,8 @@
 ---
-name: "[PERFORMANCE]"
-about: Report performance issues or suggest optimizations
-title: ''
-labels: ''
+name: "⚡ Performance Improvement"
+about: "Report performance issues or suggest optimizations"
+title: "[PERFORMANCE]"
+labels: performance, enhancement
 assignees: ''
 
 ---
