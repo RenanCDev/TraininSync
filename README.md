@@ -13,6 +13,13 @@ O repositório está organizado de forma modular, separando claramente:
 - *Serviços:* Comunicação com as APIs fornecidas pelo back-end.
 - *Estilos:* Customização com Tailwind CSS e a paleta de cores personalizada.
 
+## 🎨 Figma Design
+
+Confira o design completo da aplicação no Figma:
+
+👉 [TraininSync - Design no Figma](https://www.figma.com/design/9syR7YY7qqgb0dl0cVRvp1/TraininSync?node-id=3113-83&t=VTdtzp9bPfJdluAH-1)
+
+
 ## Como Contribuir
 1. Faça um fork deste repositório.
 2. Crie uma branch específica para sua alteração (`feature/nome-da-feature` ou `bugfix/nome-do-bug`).
