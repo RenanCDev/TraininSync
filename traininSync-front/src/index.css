@@ -5,19 +5,36 @@
 html {
   box-sizing: border-box;
 }
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
 /* Remove default margin and padding */
-body, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-dl, dd, ol, ul, figure, hr {
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+dl,
+dd,
+ol,
+ul,
+figure,
+hr {
   margin: 0;
   padding: 0;
 }
 
 /* Remove list styles */
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -28,7 +45,11 @@ a {
 }
 
 /* Remove default styles for form elements */
-button, input, optgroup, select, textarea {
+button,
+input,
+optgroup,
+select,
+textarea {
   margin: 0;
   padding: 0;
   border: 0;
@@ -45,7 +66,8 @@ body {
 }
 
 /* Set default styles for images and other media */
-img, video {
+img,
+video {
   max-width: 100%;
   height: auto;
 }
@@ -57,14 +79,26 @@ table {
 }
 
 /* Set default styles for form elements */
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
   font-family: inherit;
   font-size: inherit;
 }
 
 /* Set default styles for HTML5 elements */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block;
 }
 
