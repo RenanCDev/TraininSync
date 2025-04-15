@@ -319,10 +319,24 @@ O sistema deverá oferecer integração com serviços de calendário externo (ex
 - Revisões de código e integração contínua para cada módulo.
 
 </div>
+<div style="border: 1px solid #ccc; border-radius: 5px; padding: 15px; margin-bottom: 15px; background: #f9f9f9;">
+
+## 6. Riscos 
+
+| Risco                          | Descrição                                                                 | Mitigação                                                                 |
+|-------------------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| Incompatibilidade de tecnologias | O sistema pode não funcionar corretamente em todos os navegadores ou dispositivos. | Testes contínuos, uso de tecnologias responsivas (ex: React, Tailwind). |
+| Falta de escalabilidade       | Crescimento rápido de usuários pode causar lentidão ou falhas.           | Arquitetura escalável desde o início (ex: microserviços, cache, filas).  |
+| Treinamento insuficiente dos usuários | Usuários podem ter dificuldade em usar o sistema.                     | Documentação, tutoriais, suporte técnico eficaz.                         |
+| Escopo mal definido           | Mudanças constantes nos requisitos durante o desenvolvimento.             | Definição clara do escopo, metodologias ágeis para adaptação.            |
+| Prazos irreais                | Expectativas desalinhadas comprometem a qualidade final.                  | Cronograma realista e checkpoints regulares.                             |
+| Falta de recursos             | Equipe reduzida ou ausência de profissionais chave.                       | Planejamento adequado e possível terceirização.                          |
+
+</div>
 
 <div style="border: 1px solid #ccc; border-radius: 5px; padding: 15px; margin-bottom: 15px; background: #f9f9f9;">
 
-## 6. Requisitos Não-Funcionais – Detalhamento e Fragmentação
+## 7. Requisitos Não-Funcionais – Detalhamento e Fragmentação
 
 **Objetivo:** Assegurar que o sistema seja robusto, escalável, seguro e de fácil uso.
 
@@ -388,59 +402,59 @@ O sistema deverá oferecer integração com serviços de calendário externo (ex
 
 <div style="border: 1px solid #ccc; border-radius: 5px; padding: 15px; margin-bottom: 15px; background: #f9f9f9;">
 
-## 7. Processos de Desenvolvimento – Fragmentação Detalhada
+## 8. Processos de Desenvolvimento – Fragmentação Detalhada
 
 **Objetivo:** Segmentar cada fase do desenvolvimento para maior clareza e controle.
 
-### 7.1 Elicitação de Requisitos
+### 8.1 Elicitação de Requisitos
 
 - Realizar reuniões com stakeholders.
 - Utilizar técnicas (entrevistas, workshops, prototipagem).
 - Documentar as necessidades iniciais.
 
-### 7.2 Análise dos Requisitos
+### 8.2 Análise dos Requisitos
 
 - Revisar e analisar as necessidades identificadas.
 - Definir critérios de aceitação e restrições.
 - Validar com a equipe técnica e de negócios.
 
-### 7.3 Especificação dos Requisitos
+### 8.3 Especificação dos Requisitos
 
 - Redigir documentação detalhada dos requisitos funcionais e não funcionais.
 - Estabelecer rastreabilidade com os objetivos do cliente.
 - Revisar e validar a especificação com os stakeholders.
 
-### 7.4 Projeto de Arquitetura
+### 8.4 Projeto de Arquitetura
 
 - Definir a arquitetura de alto nível (ex.: modular, microserviços).
 - Identificar componentes de hardware, software e integrações.
 - Documentar padrões e métodos de projeto.
 
-### 7.5 Implementação
+### 8.5 Implementação
 
 - Desenvolver os módulos individualmente.
 - Escrever código conforme especificações.
 - Executar testes unitários para cada módulo.
 
-### 7.6 Integração
+### 8.6 Integração
 
 - Integrar os módulos desenvolvidos.
 - Realizar testes de integração para assegurar a comunicação entre componentes.
 - Resolver conflitos e realizar ajustes conforme necessário.
 
-### 7.7 Testes e Validação
+### 8.7 Testes e Validação
 
 - Executar testes de aceitação, regressão e usabilidade.
 - Validar a conformidade com os requisitos especificados.
 - Documentar resultados e realizar ajustes.
 
-### 7.8 Deploy e Instalação
+### 8.8 Deploy e Instalação
 
 - Automatizar o deploy por meio de pipelines de CI/CD.
 - Realizar instalação em ambientes de produção.
 - Configurar monitoramento e estratégias de rollback.
 
-### 7.9 Operação e Manutenção
+### 8.9 Operação e Manutenção
 
 - Monitorar performance e disponibilidade.
 - Aplicar atualizações e patches de segurança.
@@ -455,7 +469,7 @@ O sistema deverá oferecer integração com serviços de calendário externo (ex
 
 <div style="border: 1px solid #ccc; border-radius: 5px; padding: 15px; margin-bottom: 15px; background: #f9f9f9;">
 
-## 8. Processos de Gestão e Automação
+## 9. Processos de Gestão e Automação
 
 **Objetivo:** Otimizar a execução e o monitoramento dos processos do projeto.
 
@@ -480,7 +494,7 @@ O sistema deverá oferecer integração com serviços de calendário externo (ex
 
 <div style="border: 1px solid #ccc; border-radius: 5px; padding: 15px; background: #f9f9f9;">
 
-## 9. Conclusão
+## 10. Conclusão
 
 A fragmentação e a atomização dos processos – dividindo claramente as ações de gerenciamento, monitoramento, edição/atualização, exclusão/cancelamento e detalhando os aspectos de escalabilidade e capacidade – proporcionam:
 
