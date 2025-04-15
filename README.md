@@ -35,11 +35,6 @@ O repositório está organizado de forma modular, separando claramente:
 | Renan Messias Rodrigues Alves da Costa | [GitHub](https://github.com/renancdev) – Tech Lead & Desenvolvedor Back-end |
 
 
-**Repositório do Projeto:**
-
- Back: https://github.com/RenanCDev/TraininSync-Back-end
- Front: https://github.com/RenanCDev/TraininSync-Front-end
-
 ## 💻 Linguagem de Programação
 O projeto utilizará **Python com Django** no backend e **React com TypeScript** no frontend.
 
