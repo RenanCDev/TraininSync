@@ -30,4 +30,3 @@
 | **RC-v1.0** | 28/05/2025   | 24/06/2025 | Renan Missias                                                                                                                                                             | Funcionalidades: |
 |                   |              |            | -**It5:** US08 – Manter Agenda.                                                                                                                                    |                  |
 |                   |              |            | -**It6:** Correções finais, testes e entrega final do projeto.                                                                                                    |                  |
-
