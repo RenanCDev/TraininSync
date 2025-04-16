@@ -1,6 +1,13 @@
 @import "tailwindcss";
 /* Reset CSS */
 
+@theme {
+  --color-midPurple: #c133ff;
+  --color-darkPurple: #7e28a4;
+  --color-midGray: #252525;
+  --color-darkGray: #151515;
+}
+
 /* Box sizing border-box */
 html {
   box-sizing: border-box;
