@@ -1,12 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import { Teste } from "../pages/teste";
 import App from "../App";
+import { RegisterForm } from "../pages/register";
 
 export function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="/teste" element={<Teste />} />
+      <Route path="/register" element={<RegisterForm />} />
     </Routes>
   );
 }
