@@ -1,28 +1,8 @@
-@import "tailwindcss";
-/* Reset CSS */
 
-@theme {
-  --color-midPurple: #c133ff;
-  --color-darkPurple: #7e28a4;
-  --color-midGray: #252525;
-  --color-darkGray: #151515;
-}
-
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
 body {
 	color: white;
 	background-color: #151515;
 	-webkit-font-smoothing: antialiased;
-}
-body,
-input,
-textarea,
-button {
-	font-family: "Roboto", sans-serif;
 }
 
 ::-webkit-scrollbar {
