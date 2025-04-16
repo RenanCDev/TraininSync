@@ -8,118 +8,38 @@
   --color-darkGray: #151515;
 }
 
-/* Box sizing border-box */
-html {
-  box-sizing: border-box;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
-/* Remove default margin and padding */
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-dl,
-dd,
-ol,
-ul,
-figure,
-hr {
-  margin: 0;
-  padding: 0;
-}
-
-/* Remove list styles */
-ul,
-ol {
-  list-style: none;
-}
-
-/* Remove default styles on anchor links */
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* Remove default styles for form elements */
-button,
-input,
-optgroup,
-select,
-textarea {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font: inherit;
-  color: inherit;
-  background-color: transparent;
-}
-
-/* Set default font family and size */
 body {
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
+	color: white;
+	background-color: #151515;
+	-webkit-font-smoothing: antialiased;
 }
-
-/* Set default styles for images and other media */
-img,
-video {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Set default styles for tables */
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-/* Set default styles for form elements */
-button,
+body,
 input,
-select,
-textarea {
-  font-family: inherit;
-  font-size: inherit;
+textarea,
+button {
+	font-family: "Roboto", sans-serif;
 }
 
-/* Set default styles for HTML5 elements */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
+::-webkit-scrollbar {
+	width: 6px;
 }
 
-/* Set default styles for embedded content */
-iframe {
-  border: 0;
+::-webkit-scrollbar-thumb {
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 4px;
+	transition: background-color 1s ease;
 }
 
-/* Clear floats */
-.clearfix::before,
-.clearfix::after {
-  content: " ";
-  display: table;
+::-webkit-scrollbar-thumb:hover {
+	background-color: #00b3db;
 }
-.clearfix::after {
-  clear: both;
+
+::-webkit-scrollbar-track {
+	background-color: #333;
+	border-radius: 4px;
 }
