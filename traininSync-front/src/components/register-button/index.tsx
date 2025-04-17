@@ -10,7 +10,7 @@ export function RegisterButton() {
   return (
     <div
       onClick={handleClick}
-      className="bg-midPurple cursor-pointer flex justify-center items-center p-3 text-2xl rounded-2xl transition duration-300 ease-in-out hover:scale-105 hover:bg-darkPurple"
+      className="bg-midPurple cursor-pointer flex justify-center items-center p-3 text-2xl rounded-2xl transition duration-300 ease-in-out hover:scale-105 hover:bg-darkPurple z-20"
     >
       Cadastre - se
     </div>
