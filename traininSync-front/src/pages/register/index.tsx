@@ -1,3 +1,10 @@
+import { LoginButton } from "../../components/login-button";
+import { NavBar } from "../../components/navbar";
+
 export function RegisterForm() {
-  return <h1>Register Page</h1>;
+  return (
+    <div>
+      <NavBar button={<LoginButton/>} />
+    </div>
+  )
 }
