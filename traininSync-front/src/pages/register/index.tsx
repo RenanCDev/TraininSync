@@ -1,10 +1,20 @@
-import { LoginButton } from "../../components/login-button";
+import { Button } from "../../components/button";
 import { NavBar } from "../../components/navbar";
+
+function handleLoginClick() {
+  console.log("Login");
+}
+
+function handleSaveClick() {
+  console.log("Save");
+}
 
 export function RegisterForm() {
   return (
     <div className="flex flex-col">
-      <NavBar button={<LoginButton />} />
+      <NavBar>
+        <Button onClick={handleLoginClick} title="Login" />
+      </NavBar>
 
       <div className="p-8">
         <div className="flex justify-center gap-1.5 text-5xl font-black md:justify-start md:px-6 pb-6">
@@ -139,9 +149,7 @@ export function RegisterForm() {
         </div>
 
         <div className="mt-7">
-          <div className="max-w-[342px] bg-midPurple cursor-pointer flex justify-center items-center p-3 text-2xl rounded-2xl transition duration-300 ease-in-out hover:scale-105 hover:bg-darkPurple z-20">
-            Salvar
-          </div>
+          <Button onClick={handleSaveClick} height="max-w-[342px]" title="Salvar" />
         </div>
       </div>
     </div>

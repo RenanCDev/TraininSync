@@ -1,12 +1,20 @@
+import { useNavigate } from "react-router-dom";
+import { Button } from "./components/button";
 import { NavBar } from "./components/navbar";
-import { RegisterButton } from "./components/register-button";
 
 function App() {
+  const navigate = useNavigate();
+
+  function handleRegisterClick() {
+    navigate("/register");
+  }
+
   return (
     <div className="bg-[url('/landing-page-bg.png')] bg-[position:38%_center] bg-cover h-screen text-white sm:bg-center">
-      
-      <NavBar button={<RegisterButton/>} />
-      
+      <NavBar>
+        <Button onClick={handleRegisterClick} title="Cadastre-se"/>
+      </NavBar>
+
       <div className="flex flex-col justify-center items-end inset-0 p-3 mt-28 sm:mt-56 sm:mr-40">
         <div className="flex gap-7 flex-col">
           <div className="flex flex-col">
@@ -18,7 +26,7 @@ function App() {
             <p className="text-2xl font-semibold">mudar a sua vida</p>
           </div>
           <div className="flex justify-baseline">
-            <RegisterButton/>
+            <Button onClick={handleRegisterClick} title="Cadastre-se" />
           </div>
         </div>
       </div>
