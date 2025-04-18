@@ -135,21 +135,27 @@ export function RegisterForm() {
                 <div className="h-24 bg-midGray rounded-xl"></div>
               </div>
 
-              <div className="flex flex-col gap-2 col-span-2 md:col-span-1">
-                <h2>Horários Disponíveis</h2>
-                <div className="h-24 bg-midGray rounded-xl"></div>
-              </div>
+              <div className="flex flex-col gap-4 col-span-2 md:flex-row">
+                <div className="flex flex-col gap-2 col-span-2 md:col-span-1 md:w-1/2">
+                  <h2>Horários Disponíveis</h2>
+                  <div className="h-24 bg-midGray rounded-xl"></div>
+                </div>
 
-              <div className="flex flex-col gap-2 col-span-2 md:col-span-1">
-                <h2>Locais Disponíveis</h2>
-                <div className="h-24 bg-midGray rounded-xl"></div>
+                <div className="flex flex-col gap-2 col-span-2 md:col-span-1 md:w-1/2">
+                  <h2>Locais Disponíveis</h2>
+                  <div className="h-24 bg-midGray rounded-xl"></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         <div className="mt-7">
-          <Button onClick={handleSaveClick} height="max-w-[342px]" title="Salvar" />
+          <Button
+            onClick={handleSaveClick}
+            height="max-w-[342px]"
+            title="Salvar"
+          />
         </div>
       </div>
     </div>
