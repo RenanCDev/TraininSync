@@ -1,5 +1,7 @@
 # Trainin Sync
 
+[📌Link para o arquivo projeto01.md](https://github.com/RenanCDev/TraininSync/blob/dev/traininSync-back/scripts/p01/projeto01.md)
+
 ## Visão Geral
 Trainin Sync é uma plataforma que integra a gestão de alunos para personal trainers, abrangendo desde o controle de treinos e progresso físico até a administração financeira e incentivos gamificados. Este repositório contém a implementação do back-end, responsável pela lógica de negócio, integração com o banco de dados e disponibilização de APIs que alimentam o front-end.
 
