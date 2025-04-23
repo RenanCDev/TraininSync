@@ -1,15 +1,18 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/button";
 import { NavBar } from "../../components/navbar";
 
-function handleLoginClick() {
-  console.log("Login");
-}
-
-function handleSaveClick() {
-  console.log("Save");
-}
-
 export function RegisterForm() {
+  const navigate = useNavigate();
+
+  function handleLoginClick() {
+    navigate("/login");
+  }
+
+  function handleSaveClick() {
+    console.log("Save");
+  }
+
   return (
     <div className="flex flex-col">
       <NavBar>
