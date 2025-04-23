@@ -15,11 +15,11 @@ export function Login() {
           <h1 className="text-5xl font-black">Login</h1>
           <div className="border border-midPurple rounded-3xl text-lowGray flex flex-col gap-4 p-5">
             <div className="flex flex-col gap-2">
-              <h2>Nome completo</h2>
+              <h2>Usuário</h2>
               <div className="h-11 bg-midGray rounded-xl"></div>
             </div>
             <div className="flex flex-col gap-2">
-              <h2>Nome completo</h2>
+              <h2>Senha</h2>
               <div className="h-11 bg-midGray rounded-xl"></div>
             </div>
             <p className="flex justify-end cursor-pointer hover:text-darkPurple transition-colors duration-300 ease-in-out">
