@@ -6,5 +6,5 @@ from .views import home
 urlpatterns = [
     path('', home),
     path("admin/", admin.site.urls),
-    path("api/", include("traininsync.urls", namespace="traininsync")),
+    path("api/v1/", include("traininsync.urls", namespace="traininsync")),
 ]
