@@ -5,6 +5,8 @@ import sys
 
 
 def main():
+    sys.path.append(os.path.join(os.path.dirname(__file__)))
+    sys.path.append(os.path.join(os.path.dirname(__file__), "setup"))
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'setup.settings')
     try:
