@@ -98,3 +98,52 @@ class Personal(Pessoa):
     @classmethod
     def consultar_por_cpf(cls, cpf):
         return cls.objects.filter(cpf=cpf).first()
+    
+class Aluno(models.Model):
+    pessoa = models.OneToOneField(Pessoa, on_delete=models.CASCADE, related_name='aluno')
+    status = models.BooleanField(default=True)
+    bioimpedancia = models.CharField(max_length=15, unique=True)
+    altura = models.FloatField()
+    idade = models.IntegerField()
+    sexo = models.CharField(max_length=50)
+    dataDoExame = models.DateField()
+    horaDoExame = models.TimeField()
+    aguaCorporalTotal = models.FloatField(null=True, blank=True)
+    proteinas = models.FloatField(null=True, blank=True)
+    minerais = models.FloatField(null=True, blank=True)
+    massaGordura = models.FloatField(null=True, blank=True)
+    peso = models.FloatField()
+    massaMusculaEsqueletica = models.FloatField(null=True, blank=True)
+    imc = models.FloatField(null=True, blank=True)
+    pgc = models.FloatField(null=True, blank=True)
+    taxaMetabolicaBasal = models.FloatField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.pessoa.nome} - Bioimpedância: {self.bioimpedancia}"
+
+    def desativarAluno(self):
+        self.status = False
+        self.save()
+
+    def reativarAluno(self):
+        self.status = True
+
+        self.save()
+
+    @classmethod
+    def consultar_por_cpf(cls, cpf):
+        return cls.objects.filter(pessoa__cpf=cpf).first()
+    
+from django.db import models
+
+class Servicos(models.Model):
+    tipoDeServico = models.CharField(max_length=150, unique=True, null=False)
+    descricaoDoServico = models.TextField(null=False)
+    valorDoServico = models.FloatField(null=False)
+
+    def __str__(self):
+        return f"{self.tipoDeServico} - R${self.valorDoServico:.2f}"
+
+    @classmethod
+    def servicos_ativos(cls):
+        return cls.objects.all()
