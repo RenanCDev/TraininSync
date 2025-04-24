@@ -11,11 +11,10 @@ schema_view = get_schema_view(
         title="traininsync",
         default_version='v1',
         description="Documentação da API para integração com o front",
-        terms_of_service="https://www.google.com/policies/terms/",
-        license=openapi.License(name="MIT License"),
     ),
     public=True,
     permission_classes=[permissions.AllowAny],
+    authentication_classes=[],
 )
 
 urlpatterns = [
