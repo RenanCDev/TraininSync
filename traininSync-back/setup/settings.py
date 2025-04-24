@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-imfr^rn8-ksg45e8%&f_0i9!shdr-x-2o8*3u%6i65l&(m@=b_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['traininsync.onrender.com']
 
 
 # Application definition
