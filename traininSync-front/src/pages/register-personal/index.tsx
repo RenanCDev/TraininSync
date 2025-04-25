@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/button";
 import { NavBar } from "../../components/navbar";
 
-export function RegisterForm() {
+export function RegisterPersonal() {
   const navigate = useNavigate();
 
   function handleLoginClick() {

@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import App from "../App";
-import { RegisterForm } from "../pages/register";
+import { RegisterPersonal } from "../pages/register-personal";
 import { NotFound } from "../pages/notFound";
 import { Login } from "../pages/login";
 
@@ -10,7 +10,7 @@ export function AppRoutes() {
       <Route path="*" element={<NotFound />} />{" "}
       <Route path="/" element={<App />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<RegisterForm />} />
+      <Route path="/register/personal" element={<RegisterPersonal />} />
     </Routes>
   );
 }
