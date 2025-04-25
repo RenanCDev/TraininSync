@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.shortcuts import render
 
 def home(request):
-    return JsonResponse({'mensagem': 'Bem-vindo a API! Use /api/traininsync/ para acessar os endpoints.'})
+    return render(request, 'home.html')
