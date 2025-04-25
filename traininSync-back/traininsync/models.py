@@ -136,7 +136,7 @@ class Aluno(models.Model):
     
 from django.db import models
 
-class Servicos(models.Model):
+class Servico(models.Model):
     tipoDeServico = models.CharField(max_length=150, unique=True, null=False)
     descricaoDoServico = models.TextField(null=False)
     valorDoServico = models.FloatField(null=False)
