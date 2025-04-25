@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="bg-[url('/landing-page-bg.png')] bg-[position:38%_center] bg-cover h-screen text-white sm:bg-center">
       <NavBar>
-        <Button onClick={handleRegisterClick} title="Cadastre-se"/>
+        <Button onClick={handleRegisterClick} title="Cadastre-se" />
       </NavBar>
 
       <div className="flex flex-col justify-center items-end inset-0 p-3 mt-28 sm:mt-56 sm:mr-40">
