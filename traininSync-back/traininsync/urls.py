@@ -23,9 +23,11 @@ schema_view = get_schema_view(
 
 app_name = "traininsync"
 router = SimpleRouter()
+
 router.register(r"personais", PersonalViewSet, basename="traininsync")
 router.register(r"alunos", AlunoViewSet, basename="traininsync")
 router.register(r"servicos", ServicoViewSet, basename="traininsync")
+
 urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     re_path('', include(router.urls))
