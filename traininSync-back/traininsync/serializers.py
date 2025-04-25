@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Personal, DadosBancarios, Pessoa, Aluno, Servico
+from .models import Personal, DadosBancarios, Pessoa, Aluno, Servicos
 
 
 class DadosBancariosSerializer(serializers.ModelSerializer):
@@ -65,18 +65,50 @@ class AlunoSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
     
-class ServicoSerializer(serializers.ModelSerializer):
+    from rest_framework import serializers
+from .models import Servicos
+
+class ServicosSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Servico
+        model = Servicos
         fields = '__all__'
+        extra_kwargs = {
+            'tipoDeServico': {
+                'required': True,
+                'error_messages': {
+                    'blank': 'O tipo de serviço não pode estar vazio',
+                    'null': 'O tipo de serviço é obrigatório'
+                }
+            },
+            'descricaoDoServico': {
+                'required': True,
+                'error_messages': {
+                    'blank': 'A descrição do serviço não pode estar vazia',
+                    'null': 'A descrição do serviço é obrigatória'
+                }
+            },
+            'valorDoServico': {
+                'required': True,
+                'min_value': 0.01,
+                'error_messages': {
+                    'invalid': 'O valor deve ser um número positivo',
+                    'min_value': 'O valor deve ser maior que zero'
+                }
+            }
+        }
 
-    def create(self, validated_data):
-        return Servico.objects.create(**validated_data)
-
-    def update(self, instance, validated_data):
-        for attr, value in validated_data.items():
-            setattr(instance, attr, value)
-        instance.save()
-        return instance
-
+    def validate_tipoDeServico(self, value):
+        """
+        Verifica se o tipo de serviço já existe (case insensitive)
+        """
+        if Servicos.objects.filter(tipoDeServico__iexact=value).exists():
+            raise serializers.ValidationError("Este tipo de serviço já está cadastrado")
         return value
+
+    def validate_valorDoServico(self, value):
+        """
+        Validação adicional para o valor do serviço
+        """
+        if value <= 0:
+            raise serializers.ValidationError("O valor do serviço deve ser positivo")
+        return round(value, 2)
