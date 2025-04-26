@@ -1,7 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import { ArrowBack } from "../../components/arrow-back";
 import { Button } from "../../components/button";
 
 export function Login() {
+  const navigate = useNavigate();
+
+  function handleRedirectToRegister() {
+    navigate("/register");
+  }
+
   return (
     <div className="h-screen flex items-center justify-center">
       <div className="hidden bg-[url('/login-image.png')] bg-[position:45%_center] bg-cover h-screen text-white sm:block w-2/3"></div>
@@ -28,7 +35,10 @@ export function Login() {
           </div>
           <div className="flex flex-col justify-center items-center gap-5">
             <Button title="Salvar" width="w-64" />
-            <p className="text-lowGray cursor-pointer hover:text-darkPurple transition-colors duration-300 ease-in-out">
+            <p
+              className="text-lowGray cursor-pointer hover:text-darkPurple transition-colors duration-300 ease-in-out"
+              onClick={handleRedirectToRegister}
+            >
               Ainda não tenho uma conta
             </p>
           </div>

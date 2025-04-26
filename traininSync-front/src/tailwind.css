@@ -1,10 +1,9 @@
-  @import "tailwindcss";
+@import "tailwindcss";
 
-  @theme {
-    --color-midPurple: #c133ff;
-    --color-darkPurple: #7e28a4;
-    --color-midGray: #252525;
-    --color-darkGray: #151515;
-    --color-lowGray: #8F8F8F;
-  }
-
+@theme {
+  --color-midPurple: #c133ff;
+  --color-darkPurple: #7e28a4;
+  --color-midGray: #252525;
+  --color-darkGray: #151515;
+  --color-lowGray: #8f8f8f;
+}
