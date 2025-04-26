@@ -31,4 +31,8 @@ router.register(r"", ServicoViewSet, basename="traininsync")
 urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     re_path('', include(router.urls))
+<<<<<<< HEAD
 ]
+=======
+]
+>>>>>>> 5cf9577 (fix:merge the dev branch url with 51 to resolve conflict #51)
