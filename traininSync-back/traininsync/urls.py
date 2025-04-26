@@ -1,11 +1,11 @@
 from rest_framework.routers import SimpleRouter
-from django.urls import path, re_path, include
+from django.urls import path
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-from .views import PersonalViewSet, AlunoViewSet, ServicoViewSet
+from .views import api_home, PersonalViewSet, AlunoViewSet, ServicoViewSet
 
 
 schema_view = get_schema_view(
@@ -24,11 +24,13 @@ schema_view = get_schema_view(
 app_name = "traininsync"
 router = SimpleRouter()
 
-router.register(r"", PersonalViewSet, basename="traininsync")
-router.register(r"", AlunoViewSet, basename="traininsync")
-router.register(r"", ServicoViewSet, basename="traininsync")
+router.register(r"personal", PersonalViewSet, basename="personal")
+router.register(r"aluno", AlunoViewSet, basename="aluno")
+router.register(r"servico", ServicoViewSet, basename="servico")
 
 urlpatterns = [
+    path('', api_home, name='api_home'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    re_path('', include(router.urls))
 ]
+
+urlpatterns += router.urls
