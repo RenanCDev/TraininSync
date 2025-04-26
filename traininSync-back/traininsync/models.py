@@ -134,7 +134,6 @@ class Aluno(models.Model):
     def consultar_por_cpf(cls, cpf):
         return cls.objects.filter(pessoa__cpf=cpf).first()
     
-from django.db import models
 
 class Servico(models.Model):
     tipoDeServico = models.CharField(max_length=150, unique=True, null=False)
