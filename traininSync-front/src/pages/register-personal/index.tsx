@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/button";
 import { NavBar } from "../../components/navbar";
+import { getAllPersonal } from "../../api/personal/getPersonal";
 
 export function RegisterPersonal() {
   const navigate = useNavigate();
@@ -11,6 +12,15 @@ export function RegisterPersonal() {
 
   function handleSaveClick() {
     console.log("Save");
+  }
+
+  async function getPersonais() {
+    try {
+      const dados = await getAllPersonal();
+      console.log("Personais: ", dados);
+    } catch (err) {
+      console.error("Falha ao carregar personal:", err);
+    }
   }
 
   return (
@@ -158,6 +168,14 @@ export function RegisterPersonal() {
             onClick={handleSaveClick}
             width="w-full max-w-[342px]"
             title="Salvar"
+          />
+        </div>
+
+        <div className="mt-7">
+          <Button
+            onClick={getPersonais}
+            width="w-full max-w-[342px]"
+            title="log Personais teste"
           />
         </div>
       </div>
