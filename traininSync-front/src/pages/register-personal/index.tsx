@@ -156,7 +156,7 @@ export function RegisterPersonal() {
         <div className="mt-7">
           <Button
             onClick={handleSaveClick}
-            height="max-w-[342px]"
+            width="w-full max-w-[342px]"
             title="Salvar"
           />
         </div>
