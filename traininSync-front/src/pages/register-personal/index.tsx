@@ -43,23 +43,28 @@ export function RegisterPersonal() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-2 text-lowGray">
-              <div className="flex flex-col gap-2 col-span-4">
+              <div className="flex flex-col gap-2 col-span-2">
                 <h2>Nome completo</h2>
+                <div className="h-11 bg-midGray rounded-xl"></div>
+              </div>
+
+              <div className="flex flex-col gap-2 col-span-2">
+                <h2>Nome Social</h2>
                 <div className="h-11 bg-midGray rounded-xl"></div>
               </div>
 
               <div className="flex flex-col gap-2 col-span-4">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                   <div className="col-span-1">
-                    <h2>Estado</h2>
+                    <h2>CPF</h2>
                     <div className="h-11 bg-midGray rounded-xl"></div>
                   </div>
                   <div className="col-span-1">
-                    <h2>Cidade</h2>
+                    <h2>Etnia</h2>
                     <div className="h-11 bg-midGray rounded-xl"></div>
                   </div>
                   <div className="col-span-1">
-                    <h2>Bairro</h2>
+                    <h2>Sexo</h2>
                     <div className="h-11 bg-midGray rounded-xl"></div>
                   </div>
                   <div className="col-span-1">
@@ -81,6 +86,19 @@ export function RegisterPersonal() {
                   </div>
                 </div>
               </div>
+
+              <div className="flex flex-col gap-2 col-span-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="col-span-1">
+                    <h2>Estado Civil</h2>
+                    <div className="h-11 bg-midGray rounded-xl"></div>
+                  </div>
+                  <div className="col-span-1">
+                    <h2>CREF</h2>
+                    <div className="h-11 bg-midGray rounded-xl"></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -92,39 +110,13 @@ export function RegisterPersonal() {
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-2 text-lowGray">
               <div className="flex flex-col gap-2 col-span-4">
-                <h2>Nome Impresso</h2>
-                <div className="h-11 bg-midGray rounded-xl"></div>
-              </div>
-
-              <div className="flex flex-col gap-2 col-span-4">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="col-span-1">
                     <h2>Número da Conta</h2>
                     <div className="h-11 bg-midGray rounded-xl"></div>
                   </div>
                   <div className="col-span-1">
                     <h2>Agencia</h2>
-                    <div className="h-11 bg-midGray rounded-xl"></div>
-                  </div>
-                  <div className="col-span-1">
-                    <h2>CPF</h2>
-                    <div className="h-11 bg-midGray rounded-xl"></div>
-                  </div>
-                  <div className="col-span-1">
-                    <h2>Data de Vencimento</h2>
-                    <div className="h-11 bg-midGray rounded-xl"></div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2 col-span-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="col-span-1">
-                    <h2>E-mail</h2>
-                    <div className="h-11 bg-midGray rounded-xl"></div>
-                  </div>
-                  <div className="col-span-1">
-                    <h2>Telefone</h2>
                     <div className="h-11 bg-midGray rounded-xl"></div>
                   </div>
                 </div>
