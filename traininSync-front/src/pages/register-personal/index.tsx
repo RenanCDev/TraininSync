@@ -6,6 +6,7 @@ import { CreatePersonal } from "./zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { createPersonal } from "../../api/personal/createPersonal";
 
 type PersonalFormData = z.infer<typeof CreatePersonal>;
 
@@ -23,7 +24,7 @@ export function RegisterPersonal() {
     navigate("/login");
   }
 
-  const onSubmit = (data: PersonalFormData) => {
+  const onSubmit = async (data: PersonalFormData) => {
     const cleanData = {
       dados_bancarios: {
         numero_conta: data.numero_conta,
@@ -46,7 +47,14 @@ export function RegisterPersonal() {
       locais_disponiveis: data.locais_disponiveis,
     };
 
-    console.log("Dados submetidos:", cleanData);
+    try{
+      const newPersonal = await createPersonal(cleanData)
+      console.log(newPersonal);
+    } catch (err){
+      console.log(err);
+      console.log("Dados submetidos:", cleanData);
+    }
+
   };
 
   async function getPersonais() {
@@ -130,8 +138,8 @@ export function RegisterPersonal() {
                       <option value="parda">Parda</option>
                       <option value="preta">Preta</option>
                     </select>
-                    {errors.cpf && (
-                      <span className="text-red-500">{errors.cpf.message}</span>
+                    {errors.etnia && (
+                      <span className="text-red-500">{errors.etnia.message}</span>
                     )}
                   </div>
                   <div className="col-span-1">
@@ -248,7 +256,7 @@ export function RegisterPersonal() {
                   <div className="col-span-1">
                     <h2>Número da Conta</h2>
                     <input
-                      type="text"
+                      type="number"
                       {...register("numero_conta")}
                       className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
                     />
@@ -261,7 +269,7 @@ export function RegisterPersonal() {
                   <div className="col-span-1">
                     <h2>Agencia</h2>
                     <input
-                      type="text"
+                      type="number"
                       {...register("agencia")}
                       className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
                     />
@@ -278,7 +286,7 @@ export function RegisterPersonal() {
 
           <div className="border border-midPurple rounded-3xl flex flex-col gap-4 pt-6 px-6 pb-10">
             <div className="flex gap-1.5 text-2xl font-black">
-              <h1>Especialidades</h1>
+              <h1>Formação</h1>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-lowGray">
@@ -312,6 +320,7 @@ export function RegisterPersonal() {
                 <div className="flex flex-col gap-2 col-span-2 md:col-span-1 md:w-1/2">
                   <h2>Horários Disponíveis</h2>
                   <textarea
+                  typeof="number"
                     {...register("horarios_disponiveis")}
                     className="h-24 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none resize-none"
                   />
