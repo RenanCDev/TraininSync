@@ -352,13 +352,13 @@ export function RegisterPersonal() {
         </div>
 
         <div className="mt-7">
-          <Button type="submit" width="w-full max-w-[342px]" title="Salvar" />
+          <Button type="submit" width="w-full md:max-w-[342px]" title="Salvar" />
         </div>
 
         <div className="mt-7">
           <Button
             onClick={getPersonais}
-            width="w-full max-w-[342px]"
+            width="w-full md:max-w-[342px]"
             title="log Personais teste"
           />
         </div>
