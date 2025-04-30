@@ -47,14 +47,13 @@ export function RegisterPersonal() {
       locais_disponiveis: data.locais_disponiveis,
     };
 
-    try{
-      const newPersonal = await createPersonal(cleanData)
+    try {
+      const newPersonal = await createPersonal(cleanData);
       console.log(newPersonal);
-    } catch (err){
+    } catch (err) {
       console.log(err);
       console.log("Dados submetidos:", cleanData);
     }
-
   };
 
   async function getPersonais() {
@@ -86,7 +85,7 @@ export function RegisterPersonal() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-2 text-lowGray">
-              <div className="flex flex-col gap-2 col-span-2">
+              <div className="flex flex-col gap-2 col-span-4 md:col-span-2">
                 <h2>Nome completo</h2>
                 <input
                   type="text"
@@ -98,7 +97,7 @@ export function RegisterPersonal() {
                 )}
               </div>
 
-              <div className="flex flex-col gap-2 col-span-2">
+              <div className="flex flex-col gap-2 col-span-4 md:col-span-2">
                 <h2>Nome Social</h2>
                 <input
                   type="text"
@@ -114,7 +113,7 @@ export function RegisterPersonal() {
 
               <div className="flex flex-col gap-2 col-span-4">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  <div className="col-span-1">
+                  <div className="col-span-1 flex flex-col gap-2">
                     <h2>CPF</h2>
                     <input
                       type="text"
@@ -122,10 +121,12 @@ export function RegisterPersonal() {
                       className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
                     />
                     {errors.cpf && (
-                      <span className="text-red-500">{errors.cpf.message}</span>
+                      <span className=" text-red-500">
+                        {errors.cpf.message}
+                      </span>
                     )}
                   </div>
-                  <div className="col-span-1">
+                  <div className="col-span-1 flex flex-col gap-2">
                     <h2>Etnia</h2>
                     <select
                       {...register("etnia")}
@@ -139,10 +140,12 @@ export function RegisterPersonal() {
                       <option value="preta">Preta</option>
                     </select>
                     {errors.etnia && (
-                      <span className="text-red-500">{errors.etnia.message}</span>
+                      <span className="text-red-500">
+                        {errors.etnia.message}
+                      </span>
                     )}
                   </div>
-                  <div className="col-span-1">
+                  <div className="col-span-1 flex flex-col gap-2">
                     <h2>Sexo</h2>
                     <select
                       {...register("sexo")}
@@ -159,7 +162,7 @@ export function RegisterPersonal() {
                       </span>
                     )}
                   </div>
-                  <div className="col-span-1">
+                  <div className="col-span-1 flex flex-col gap-2">
                     <h2>Data de nascimento</h2>
                     <input
                       type="date"
@@ -177,7 +180,7 @@ export function RegisterPersonal() {
 
               <div className="flex flex-col gap-2 col-span-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="col-span-1">
+                  <div className="col-span-1 flex flex-col gap-2">
                     <h2>E-mail</h2>
                     <input
                       type="text"
@@ -190,7 +193,7 @@ export function RegisterPersonal() {
                       </span>
                     )}
                   </div>
-                  <div className="col-span-1">
+                  <div className="col-span-1 flex flex-col gap-2">
                     <h2>Celular</h2>
                     <input
                       type="text"
@@ -208,7 +211,7 @@ export function RegisterPersonal() {
 
               <div className="flex flex-col gap-2 col-span-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="col-span-1">
+                  <div className="col-span-1 flex flex-col gap-2">
                     <h2>Estado Civil</h2>
                     <select
                       {...register("estado_civil")}
@@ -226,7 +229,7 @@ export function RegisterPersonal() {
                       </span>
                     )}
                   </div>
-                  <div className="col-span-1">
+                  <div className="col-span-1 flex flex-col gap-2">
                     <h2>CREF</h2>
                     <input
                       type="text"
@@ -253,7 +256,7 @@ export function RegisterPersonal() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-2 text-lowGray">
               <div className="flex flex-col gap-2 col-span-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="col-span-1">
+                  <div className="col-span-1 flex flex-col gap-2">
                     <h2>Número da Conta</h2>
                     <input
                       type="number"
@@ -266,7 +269,7 @@ export function RegisterPersonal() {
                       </span>
                     )}
                   </div>
-                  <div className="col-span-1">
+                  <div className="col-span-1 flex flex-col gap-2">
                     <h2>Agencia</h2>
                     <input
                       type="number"
@@ -320,7 +323,7 @@ export function RegisterPersonal() {
                 <div className="flex flex-col gap-2 col-span-2 md:col-span-1 md:w-1/2">
                   <h2>Horários Disponíveis</h2>
                   <textarea
-                  typeof="number"
+                    typeof="number"
                     {...register("horarios_disponiveis")}
                     className="h-24 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none resize-none"
                   />
