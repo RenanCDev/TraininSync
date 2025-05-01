@@ -7,11 +7,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { createPersonal } from "../../api/personal/createPersonal";
+import { useState } from "react";
 
 type PersonalFormData = z.infer<typeof CreatePersonal>;
 
 export function RegisterPersonal() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -48,20 +50,26 @@ export function RegisterPersonal() {
     };
 
     try {
+      setIsLoading(true);
       const newPersonal = await createPersonal(cleanData);
       console.log(newPersonal);
     } catch (err) {
       console.log(err);
       console.log("Dados submetidos:", cleanData);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   async function getPersonais() {
     try {
+      setIsLoading(true);
       const dados = await getAllPersonal();
       console.log("Personais: ", dados);
     } catch (err) {
-      console.error("Falha ao carregar personal:", err);
+      console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -352,11 +360,17 @@ export function RegisterPersonal() {
         </div>
 
         <div className="mt-7">
-          <Button type="submit" width="w-full md:max-w-[342px]" title="Salvar" />
+          <Button
+            loading={isLoading}
+            type="submit"
+            width="w-full md:max-w-[342px]"
+            title="Salvar"
+          />
         </div>
 
         <div className="mt-7">
           <Button
+            loading={isLoading}
             onClick={getPersonais}
             width="w-full md:max-w-[342px]"
             title="log Personais teste"
