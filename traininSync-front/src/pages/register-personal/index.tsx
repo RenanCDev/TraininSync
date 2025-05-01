@@ -67,11 +67,12 @@ export function RegisterPersonal() {
   async function getPersonais() {
     try {
       setIsLoading(true);
-      await getAllPersonal();
+      const dados = await getAllPersonal();
       toast.success("Personal GET!", {
         position: "bottom-right",
         theme: "dark",
       });
+      console.log("Personais: ", dados);
     } catch (err) {
       console.log(err);
     } finally {
