@@ -9,6 +9,8 @@ import { z } from "zod";
 import { createPersonal } from "../../api/personal/createPersonal";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { formatCPF, removeCPFFormatting } from "../../utils/cpf/format";
+import { formatPhoneNumber, unformatPhoneNumber } from "../../utils/celular/format";
 
 type PersonalFormData = z.infer<typeof CreatePersonal>;
 
@@ -18,6 +20,8 @@ export function RegisterPersonal() {
   const {
     register,
     handleSubmit,
+    setValue,
+    reset,
     formState: { errors },
   } = useForm<PersonalFormData>({
     resolver: zodResolver(CreatePersonal),
@@ -34,10 +38,10 @@ export function RegisterPersonal() {
         agencia: data.agencia,
       },
       nome: data.nome,
-      cpf: data.cpf,
+      cpf: removeCPFFormatting(data.cpf),
       data_de_nascimento: data.data_de_nascimento,
       email: data.email,
-      numero_de_celular: data.numero_de_celular,
+      numero_de_celular: unformatPhoneNumber(data.numero_de_celular),
       sexo: data.sexo,
       nome_social: data.nome_social || null,
       etnia: data.etnia,
@@ -57,6 +61,7 @@ export function RegisterPersonal() {
         position: "bottom-right",
         theme: "dark",
       });
+      reset();
     } catch (err) {
       console.log(err);
     } finally {
@@ -134,6 +139,10 @@ export function RegisterPersonal() {
                       type="text"
                       {...register("cpf")}
                       className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                      onChange={(e) => {
+                        const formattedCPF = formatCPF(e.target.value);
+                        setValue("cpf", formattedCPF);
+                      }}
                     />
                     {errors.cpf && (
                       <span className=" text-red-500">
@@ -214,6 +223,12 @@ export function RegisterPersonal() {
                       type="text"
                       {...register("numero_de_celular")}
                       className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                      onChange={(e) => {
+                        const formattedPhone = formatPhoneNumber(
+                          e.target.value
+                        );
+                        setValue("numero_de_celular", formattedPhone);
+                      }}
                     />
                     {errors.numero_de_celular && (
                       <span className="text-red-500">
