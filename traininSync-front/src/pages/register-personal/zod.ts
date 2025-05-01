@@ -38,7 +38,9 @@ export const CreatePersonal = z.object({
     { message: "Data de nascimento inválida ou no futuro" }
   ),
   email: z.string().email("E-mail inválido"),
-  numero_de_celular: z.string(),
+  numero_de_celular: z
+    .string()
+    .regex(/^\(?\d{2}\)?\s?9\d{4}-?\d{4}$/, "Número de celular inválido."),
   estado_civil: z.string(),
   cref: z.string(),
   numero_conta: z.coerce
