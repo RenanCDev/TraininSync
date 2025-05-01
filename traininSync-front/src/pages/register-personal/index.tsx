@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { createPersonal } from "../../api/personal/createPersonal";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 type PersonalFormData = z.infer<typeof CreatePersonal>;
 
@@ -51,11 +52,13 @@ export function RegisterPersonal() {
 
     try {
       setIsLoading(true);
-      const newPersonal = await createPersonal(cleanData);
-      console.log(newPersonal);
+      await createPersonal(cleanData);
+      toast.success("Personal cadastrado com sucesso!", {
+        position: "bottom-right",
+        theme: "dark",
+      });
     } catch (err) {
       console.log(err);
-      console.log("Dados submetidos:", cleanData);
     } finally {
       setIsLoading(false);
     }
@@ -64,8 +67,11 @@ export function RegisterPersonal() {
   async function getPersonais() {
     try {
       setIsLoading(true);
-      const dados = await getAllPersonal();
-      console.log("Personais: ", dados);
+      await getAllPersonal();
+      toast.success("Personal GET!", {
+        position: "bottom-right",
+        theme: "dark",
+      });
     } catch (err) {
       console.log(err);
     } finally {
