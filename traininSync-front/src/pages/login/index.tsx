@@ -1,12 +1,46 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowBack } from "../../components/arrow-back";
 import { Button } from "../../components/button";
+import { LoginZod } from "./zod";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
+
+type LoginFormData = z.infer<typeof LoginZod>;
 
 export function Login() {
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(LoginZod),
+  });
+
+  const onSubmit = async (data: LoginFormData) => {
+    setIsLoading(true);
+
+    const cleanData = {
+      user: data.usuario,
+      senha: data.senha,
+    };
+
+    console.log(cleanData);
+    setIsLoading(false);
+  };
 
   function handleRedirectToRegister() {
     navigate("/register");
+  }
+
+  function togglePasswordVisibility() {
+    setShowPassword((prev) => !prev);
   }
 
   return (
@@ -18,23 +52,54 @@ export function Login() {
           <ArrowBack />
         </div>
 
-        <div className="flex flex-col gap-5 w-full m-10 md:max-w-1/2">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-5 w-full m-10 md:max-w-1/2"
+        >
           <h1 className="text-5xl font-black">Login</h1>
           <div className="border border-midPurple rounded-3xl text-lowGray flex flex-col gap-4 p-5">
             <div className="flex flex-col gap-2">
               <h2>Usuário</h2>
-              <div className="h-11 bg-midGray rounded-xl"></div>
+              <input
+                type="text"
+                {...register("usuario")}
+                className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+              />
+              {errors.usuario && (
+                <span className="text-red-500">{errors.usuario.message}</span>
+              )}
             </div>
             <div className="flex flex-col gap-2">
               <h2>Senha</h2>
-              <div className="h-11 bg-midGray rounded-xl"></div>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  {...register("senha")}
+                  className="h-11 w-full bg-midGray rounded-xl p-2 pr-10 focus:border text-white focus:border-lowGray outline-none"
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute inset-y-0 right-3 flex items-center text-lowGray hover:text-darkPurple transition-colors duration-300 ease-in-out"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
+              {errors.senha && (
+                <span className="text-red-500">{errors.senha.message}</span>
+              )}
             </div>
             <p className="flex justify-end cursor-pointer hover:text-darkPurple transition-colors duration-300 ease-in-out">
               Esqueci minha senha
             </p>
           </div>
           <div className="flex flex-col justify-center items-center gap-5">
-            <Button title="Salvar" width="w-64" />
+            <Button
+              loading={isLoading}
+              type="submit"
+              width="w-64"
+              title="Salvar"
+            />
             <p
               className="text-lowGray cursor-pointer hover:text-darkPurple transition-colors duration-300 ease-in-out"
               onClick={handleRedirectToRegister}
@@ -42,7 +107,7 @@ export function Login() {
               Ainda não tenho uma conta
             </p>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
