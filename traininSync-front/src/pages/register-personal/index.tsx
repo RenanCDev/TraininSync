@@ -10,7 +10,10 @@ import { createPersonal } from "../../api/personal/createPersonal";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { formatCPF, removeCPFFormatting } from "../../utils/cpf/format";
-import { formatPhoneNumber, unformatPhoneNumber } from "../../utils/celular/format";
+import {
+  formatPhoneNumber,
+  unformatPhoneNumber,
+} from "../../utils/celular/format";
 
 type PersonalFormData = z.infer<typeof CreatePersonal>;
 
@@ -92,9 +95,9 @@ export function RegisterPersonal() {
       </NavBar>
 
       <form onSubmit={handleSubmit(onSubmit)} className="p-8">
-        <div className="flex justify-center gap-1.5 text-5xl font-black md:justify-start md:px-6 pb-6">
-          <h1>Personal</h1>
-          <h1 className="text-midPurple">List</h1>
+        <div className="flex justify-center gap-1.5 text-3xl sm:text-5xl font-black md:justify-start md:px-6 pb-6">
+          <h1>Cadastro de</h1>
+          <h1 className="text-midPurple">Personal</h1>
         </div>
 
         <div className="flex flex-col gap-6">
