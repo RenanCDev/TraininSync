@@ -56,7 +56,7 @@ class Pessoa(models.Model):
     ]
 
     nome = models.CharField(max_length=255)
-    cpf = models.CharField(unique=True, validators=[validar_cpf])
+    cpf = models.CharField(max_length=11, unique=True, validators=[validar_cpf])
     data_de_nascimento = models.DateField()
     email = models.EmailField(unique=True)
     numero_de_celular = models.CharField(max_length=11, validators=[celular_validator])
@@ -69,12 +69,12 @@ class Pessoa(models.Model):
         return self.nome
 
 class DadosBancarios(models.Model):
-    numero_conta = models.BigIntegerField()
-    agencia = models.BigIntegerField()
+    numero_conta = models.CharField(max_length=20)
+    agencia = models.CharField(max_length=10)
 
     def __str__(self):
         return f"Conta: {self.numero_conta} - Agência: {self.agencia}"
-
+    
 class Personal(Pessoa):
     status = models.BooleanField(default=True)
     cref = models.CharField(max_length=20, unique=True)
@@ -146,3 +146,71 @@ class Servico(models.Model):
     @classmethod
     def servicos_ativos(cls):
         return cls.objects.all()
+    
+    
+
+class Agenda(models.Model):
+    personal = models.ForeignKey('Personal', on_delete=models.CASCADE, related_name='agendas')
+    dia = models.DateField()
+    hora_inicio = models.TimeField()
+    hora_fim = models.TimeField()
+    local = models.CharField(max_length=150)
+    disponivel = models.BooleanField(default=True)
+    reserva = models.OneToOneField(
+        'ContratoDeServico',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='agenda_reservada'
+    )
+
+    class Meta:
+        unique_together = ('personal', 'dia', 'hora_inicio')
+        ordering = ['dia', 'hora_inicio']
+
+    def clean(self):
+        if self.hora_inicio >= self.hora_fim:
+            raise ValidationError("Hora de início deve ser menor que a hora de fim.")
+
+    def __str__(self):
+        return f"{self.personal.nome} - {self.dia} ({self.hora_inicio} às {self.hora_fim})"
+
+
+class ContratoDeServico(models.Model):
+    personal = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name='contratos')
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name='contratos')
+    horario = models.ForeignKey(Agenda, on_delete=models.SET_NULL, null=True, blank=True, related_name='contratos')
+    servicoDesejado = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='contratos')
+    status = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    localidadeDesejada = models.CharField(max_length=150)
+
+    def __str__(self):
+        return f"Contrato: {self.aluno.pessoa.nome} ⇄ {self.personal.nome} | {self.servicoDesejado}"
+
+    def suspender(self):
+        self.status = False
+        self.save()
+
+    def reativar(self):
+        self.status = True
+        self.save()
+
+class RegistroDeProgresso(models.Model):
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name='registros')
+    data = models.DateField()
+    massaGorda = models.FloatField(null=True, blank=True)
+    massaMagra = models.FloatField(null=True, blank=True)
+    massaMuscular = models.FloatField(null=True, blank=True)
+    hidratacao = models.FloatField(null=True, blank=True)
+    densidadeOssea = models.FloatField(null=True, blank=True)
+    gorduraVisceral = models.FloatField(null=True, blank=True)
+    taxaDeMetabolismoBasal = models.FloatField(null=True, blank=True)
+    altura = models.FloatField()
+    peso = models.FloatField()
+    reated_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.aluno.pessoa.nome} - {self.data}"
+
