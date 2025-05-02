@@ -74,17 +74,11 @@ class DadosBancarios(models.Model):
 
     def __str__(self):
         return f"Conta: {self.numero_conta} - Agência: {self.agencia}"
-
-class Especialidade(models.Model):
-    nome = models.CharField(max_length=100, unique=True)
-
-    def __str__(self):
-        return self.nome
     
 class Personal(Pessoa):
     status = models.BooleanField(default=True)
     cref = models.CharField(max_length=20, unique=True)
-    especialidades = models.ManyToManyField(Especialidade)
+    especialidades = models.TextField()
     experiencia_profissional = models.TextField()
     dados_bancarios = models.OneToOneField(DadosBancarios, on_delete=models.CASCADE, related_name='personal')
     horarios_disponiveis = models.FloatField()
@@ -162,6 +156,13 @@ class Agenda(models.Model):
     hora_fim = models.TimeField()
     local = models.CharField(max_length=150)
     disponivel = models.BooleanField(default=True)
+    reserva = models.OneToOneField(
+        'ContratoDeServico',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='agenda_reservada'
+    )
 
     class Meta:
         unique_together = ('personal', 'dia', 'hora_inicio')
@@ -173,4 +174,25 @@ class Agenda(models.Model):
 
     def __str__(self):
         return f"{self.personal.nome} - {self.dia} ({self.hora_inicio} às {self.hora_fim})"
-    
+
+
+class ContratoDeServico(models.Model):
+    personal = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name='contratos')
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name='contratos')
+    horario = models.ForeignKey(Agenda, on_delete=models.SET_NULL, null=True, blank=True, related_name='contratos')
+    servicoDesejado = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='contratos')
+    status = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    localidadeDesejada = models.CharField(max_length=150)
+
+    def __str__(self):
+        return f"Contrato: {self.aluno.pessoa.nome} ⇄ {self.personal.nome} | {self.servicoDesejado}"
+
+    def suspender(self):
+        self.status = False
+        self.save()
+
+    def reativar(self):
+        self.status = True
+        self.save()
