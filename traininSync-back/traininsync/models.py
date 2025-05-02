@@ -196,3 +196,21 @@ class ContratoDeServico(models.Model):
     def reativar(self):
         self.status = True
         self.save()
+
+class RegistroDeProgresso(models.Model):
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name='registros')
+    data = models.DateField()
+    massaGorda = models.FloatField(null=True, blank=True)
+    massaMagra = models.FloatField(null=True, blank=True)
+    massaMuscular = models.FloatField(null=True, blank=True)
+    hidratacao = models.FloatField(null=True, blank=True)
+    densidadeOssea = models.FloatField(null=True, blank=True)
+    gorduraVisceral = models.FloatField(null=True, blank=True)
+    taxaDeMetabolismoBasal = models.FloatField(null=True, blank=True)
+    altura = models.FloatField()
+    peso = models.FloatField()
+    reated_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.aluno.pessoa.nome} - {self.data}"
+
