@@ -56,7 +56,7 @@ class Pessoa(models.Model):
     ]
 
     nome = models.CharField(max_length=255)
-    cpf = models.CharField(unique=True, validators=[validar_cpf])
+    cpf = models.CharField(max_length=11, unique=True, validators=[validar_cpf])
     data_de_nascimento = models.DateField()
     email = models.EmailField(unique=True)
     numero_de_celular = models.CharField(max_length=11, validators=[celular_validator])
@@ -69,16 +69,22 @@ class Pessoa(models.Model):
         return self.nome
 
 class DadosBancarios(models.Model):
-    numero_conta = models.BigIntegerField()
-    agencia = models.BigIntegerField()
+    numero_conta = models.CharField(max_length=20)
+    agencia = models.CharField(max_length=10)
 
     def __str__(self):
         return f"Conta: {self.numero_conta} - Agência: {self.agencia}"
 
+class Especialidade(models.Model):
+    nome = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.nome
+    
 class Personal(Pessoa):
     status = models.BooleanField(default=True)
     cref = models.CharField(max_length=20, unique=True)
-    especialidades = models.TextField()
+    especialidades = models.ManyToManyField(Especialidade)
     experiencia_profissional = models.TextField()
     dados_bancarios = models.OneToOneField(DadosBancarios, on_delete=models.CASCADE, related_name='personal')
     horarios_disponiveis = models.FloatField()
@@ -146,3 +152,25 @@ class Servico(models.Model):
     @classmethod
     def servicos_ativos(cls):
         return cls.objects.all()
+    
+    
+
+class Agenda(models.Model):
+    personal = models.ForeignKey('Personal', on_delete=models.CASCADE, related_name='agendas')
+    dia = models.DateField()
+    hora_inicio = models.TimeField()
+    hora_fim = models.TimeField()
+    local = models.CharField(max_length=150)
+    disponivel = models.BooleanField(default=True)
+
+    class Meta:
+        unique_together = ('personal', 'dia', 'hora_inicio')
+        ordering = ['dia', 'hora_inicio']
+
+    def clean(self):
+        if self.hora_inicio >= self.hora_fim:
+            raise ValidationError("Hora de início deve ser menor que a hora de fim.")
+
+    def __str__(self):
+        return f"{self.personal.nome} - {self.dia} ({self.hora_inicio} às {self.hora_fim})"
+    
