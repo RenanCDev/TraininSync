@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Pessoa, Aluno
+from ..models import Pessoa, Aluno
 
 
 class AlunoSerializer(serializers.ModelSerializer):
