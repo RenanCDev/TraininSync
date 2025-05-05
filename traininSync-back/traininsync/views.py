@@ -1,8 +1,8 @@
 from rest_framework.viewsets import ModelViewSet
 from django.shortcuts import render
 
-from .models import Personal, Aluno, Servico
-from .serializers import PersonalSerializer, AlunoSerializer, ServicoSerializer
+from .models import Personal, Aluno, Servico, Agenda, ContratoDeServico, RegistroDeProgresso
+from .serializers import PersonalSerializer, AlunoSerializer, ServicoSerializer, AgendaSerializer, ContratoDeServicoSerializer, RegistroDeProgressoSerializer
 
 
 def api_home(request):
@@ -19,3 +19,15 @@ class AlunoViewSet(ModelViewSet):
 class ServicoViewSet(ModelViewSet):
     queryset = Servico.objects.all()
     serializer_class = ServicoSerializer
+
+class AgendaViewSet(ModelViewSet):
+    queryset = Agenda.objects.all()
+    serializer_class = AgendaSerializer
+
+class ContratoDeServicoViewSet(ModelViewSet):
+    queryset = ContratoDeServico.objects.all()
+    serializer_class = ContratoDeServicoSerializer
+
+class RegistroDeProgressoViewSet(ModelViewSet):
+    queryset = RegistroDeProgresso.objects.all()
+    serializer_class = RegistroDeProgressoSerializer

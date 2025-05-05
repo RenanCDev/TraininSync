@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Personal, DadosBancarios, Pessoa, Aluno, Servico
+from .models import Personal, DadosBancarios, Pessoa, Aluno, Servico, Agenda, ContratoDeServico, RegistroDeProgresso
 
 
 class DadosBancariosSerializer(serializers.ModelSerializer):
@@ -15,7 +15,6 @@ class PessoaSerializer(serializers.ModelSerializer):
 
 class PersonalSerializer(serializers.ModelSerializer):
     dados_bancarios = DadosBancariosSerializer()
-
     class Meta:
         model = Personal
         fields = '__all__'
@@ -79,3 +78,25 @@ class ServicoSerializer(serializers.ModelSerializer):
             setattr(instance, attr, value)
         instance.save()
         return instance
+    
+class AgendaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Agenda
+        fields = '__all__'
+
+    def validate(self, data):
+        if data['hora_inicio'] >= data['hora_fim']:
+            raise serializers.ValidationError("Hora de início deve ser menor que a hora de fim.")
+        return data
+    
+class ContratoDeServicoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContratoDeServico
+        fields = '__all__'
+        read_only_fields = ['created_at', 'updated_at']
+
+class RegistroDeProgressoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RegistroDeProgresso
+        fields = '__all__'
+        read_only_fields = ['created_at']
