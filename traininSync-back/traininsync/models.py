@@ -106,17 +106,17 @@ class Aluno(models.Model):
     altura = models.FloatField()
     idade = models.IntegerField()
     sexo = models.CharField(max_length=50)
-    dataDoExame = models.DateField()
-    horaDoExame = models.TimeField()
-    aguaCorporalTotal = models.FloatField(null=True, blank=True)
+    data_do_Exame = models.DateField()
+    hora_do_Exame = models.TimeField()
+    agua_corporal_total = models.FloatField(null=True, blank=True)
     proteinas = models.FloatField(null=True, blank=True)
     minerais = models.FloatField(null=True, blank=True)
-    massaGordura = models.FloatField(null=True, blank=True)
+    massa_gordura = models.FloatField(null=True, blank=True)
     peso = models.FloatField()
-    massaMusculaEsqueletica = models.FloatField(null=True, blank=True)
+    massa_muscular_esqueletica = models.FloatField(null=True, blank=True)
     imc = models.FloatField(null=True, blank=True)
     pgc = models.FloatField(null=True, blank=True)
-    taxaMetabolicaBasal = models.FloatField(null=True, blank=True)
+    taxa_metabolica_basal = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.pessoa.nome} - Bioimpedância: {self.bioimpedancia}"
@@ -136,9 +136,9 @@ class Aluno(models.Model):
     
 
 class Servico(models.Model):
-    tipoDeServico = models.CharField(max_length=150, unique=True, null=False)
-    descricaoDoServico = models.TextField(null=False)
-    valorDoServico = models.FloatField(null=False)
+    tipo_de_servico = models.CharField(max_length=150, unique=True, null=False)
+    descricao_do_servico = models.TextField(null=False)
+    valr_do_servico = models.FloatField(null=False)
 
     def __str__(self):
         return f"{self.tipoDeServico} - R${self.valorDoServico:.2f}"
@@ -180,11 +180,11 @@ class ContratoDeServico(models.Model):
     personal = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name='contratos')
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name='contratos')
     horario = models.ForeignKey(Agenda, on_delete=models.SET_NULL, null=True, blank=True, related_name='contratos')
-    servicoDesejado = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='contratos')
+    servico_desejado = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='contratos')
     status = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    localidadeDesejada = models.CharField(max_length=150)
+    localidade_desejada = models.CharField(max_length=150)
 
     def __str__(self):
         return f"Contrato: {self.aluno.pessoa.nome} ⇄ {self.personal.nome} | {self.servicoDesejado}"
@@ -200,13 +200,13 @@ class ContratoDeServico(models.Model):
 class RegistroDeProgresso(models.Model):
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name='registros')
     data = models.DateField()
-    massaGorda = models.FloatField(null=True, blank=True)
-    massaMagra = models.FloatField(null=True, blank=True)
-    massaMuscular = models.FloatField(null=True, blank=True)
+    massa_gorda = models.FloatField(null=True, blank=True)
+    massa_magra = models.FloatField(null=True, blank=True)
+    massa_muscular = models.FloatField(null=True, blank=True)
     hidratacao = models.FloatField(null=True, blank=True)
-    densidadeOssea = models.FloatField(null=True, blank=True)
-    gorduraVisceral = models.FloatField(null=True, blank=True)
-    taxaDeMetabolismoBasal = models.FloatField(null=True, blank=True)
+    densidade_ossea = models.FloatField(null=True, blank=True)
+    gordura_visceral = models.FloatField(null=True, blank=True)
+    taxa_de_metabolismo_basal = models.FloatField(null=True, blank=True)
     altura = models.FloatField()
     peso = models.FloatField()
     reated_at = models.DateTimeField(auto_now_add=True)
