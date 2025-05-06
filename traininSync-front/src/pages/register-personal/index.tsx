@@ -356,7 +356,6 @@ export function RegisterPersonal() {
                 <div className="flex flex-col gap-2 col-span-2 md:col-span-1 md:w-1/2">
                   <h2>Horários Disponíveis</h2>
                   <textarea
-                    typeof="number"
                     {...register("horarios_disponiveis")}
                     className="h-24 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none resize-none"
                   />

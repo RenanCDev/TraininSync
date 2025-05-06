@@ -8,7 +8,7 @@ npm run dev
 
 <br>
 
-Para fazer as alterações necessaras do Prettier
+Para fazer as alterações necessária do Prettier
 
 ```
 npm run prettier:fix
@@ -16,8 +16,24 @@ npm run prettier:fix
 
 <br>
 
-Para verificar as alterações necessaras do Prettier
+Para verificar as alterações necessária do Prettier
 
 ```
 npm run prettier
+```
+
+<br>
+
+Para verificar as alterações necessária do Lint
+
+```
+npm run prettier
+```
+
+<br>
+
+Para fazer as alterações necessária do Lint
+
+```
+npm run prettier:fix
 ```
