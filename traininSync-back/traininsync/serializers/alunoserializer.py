@@ -1,7 +1,8 @@
 from rest_framework import serializers
 
-from ..models import Pessoa, Aluno
+from .pessoaserializers import PessoaSerializer
 
+from ..models import Pessoa, Aluno
 
 class AlunoSerializer(serializers.ModelSerializer):
     pessoa = PessoaSerializer()

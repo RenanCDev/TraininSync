@@ -1,5 +1,7 @@
 from rest_framework import serializers
 
+from .dadosbancariosserializers import DadosBancariosSerializer
+
 from ..models import Personal, DadosBancarios
 
 class PersonalSerializer(serializers.ModelSerializer):
