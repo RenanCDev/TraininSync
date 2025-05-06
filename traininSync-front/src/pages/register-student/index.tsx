@@ -1,12 +1,12 @@
-import { useNavigate } from "react-router-dom";
-import { Button } from "../../components/button";
-import { NavBar } from "../../components/navbar";
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../../components/button';
+import { NavBar } from '../../components/navbar';
 
 export function RegisterStudent() {
   const navigate = useNavigate();
 
   function handleLoginClick() {
-    navigate("/login");
+    navigate('/login');
   }
 
   return (

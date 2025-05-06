@@ -1,5 +1,5 @@
 export const formatPhoneNumber = (phone: string) => {
-  const cleanedPhone = phone.replace(/\D/g, "");
+  const cleanedPhone = phone.replace(/\D/g, '');
 
   if (cleanedPhone.length <= 2) {
     return `(${cleanedPhone}`;
@@ -19,5 +19,5 @@ export const formatPhoneNumber = (phone: string) => {
 };
 
 export const unformatPhoneNumber = (formatted: string): string => {
-  return formatted.replace(/\D/g, "");
+  return formatted.replace(/\D/g, '');
 };

@@ -1,12 +1,12 @@
-import { useNavigate } from "react-router-dom";
-import { ArrowBack } from "../../components/arrow-back";
-import { Button } from "../../components/button";
-import { LoginZod } from "./zod";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
+import { ArrowBack } from '../../components/arrow-back';
+import { Button } from '../../components/button';
+import { LoginZod } from './zod';
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 
 type LoginFormData = z.infer<typeof LoginZod>;
 
@@ -36,7 +36,7 @@ export function Login() {
   };
 
   function handleRedirectToRegister() {
-    navigate("/register");
+    navigate('/register');
   }
 
   function togglePasswordVisibility() {
@@ -62,7 +62,7 @@ export function Login() {
               <h2>Usuário</h2>
               <input
                 type="text"
-                {...register("usuario")}
+                {...register('usuario')}
                 className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
               />
               {errors.usuario && (
@@ -73,8 +73,8 @@ export function Login() {
               <h2>Senha</h2>
               <div className="relative">
                 <input
-                  type={showPassword ? "text" : "password"}
-                  {...register("senha")}
+                  type={showPassword ? 'text' : 'password'}
+                  {...register('senha')}
                   className="h-11 w-full bg-midGray rounded-xl p-2 pr-10 focus:border text-white focus:border-lowGray outline-none"
                 />
                 <button

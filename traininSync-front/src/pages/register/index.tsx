@@ -1,12 +1,12 @@
-import { useNavigate } from "react-router-dom";
-import { ArrowBack } from "../../components/arrow-back";
-import { Button } from "../../components/button";
-import { useState } from "react";
-import { EyeOff, Eye } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { RegisterZod } from "./zod";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from 'react-router-dom';
+import { ArrowBack } from '../../components/arrow-back';
+import { Button } from '../../components/button';
+import { useState } from 'react';
+import { EyeOff, Eye } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { RegisterZod } from './zod';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 type RegisterFormData = z.infer<typeof RegisterZod>;
 
@@ -36,7 +36,7 @@ export function Register() {
   };
 
   function handleRedirectToLogin() {
-    navigate("/login");
+    navigate('/login');
   }
 
   function togglePasswordVisibility() {
@@ -62,7 +62,7 @@ export function Register() {
               <h2>Usuário</h2>
               <input
                 type="text"
-                {...register("usuario")}
+                {...register('usuario')}
                 className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
               />
               {errors.usuario && (
@@ -73,8 +73,8 @@ export function Register() {
               <h2>Senha</h2>
               <div className="relative">
                 <input
-                  type={showPassword ? "text" : "password"}
-                  {...register("senha")}
+                  type={showPassword ? 'text' : 'password'}
+                  {...register('senha')}
                   className="h-11 w-full bg-midGray rounded-xl p-2 pr-10 focus:border text-white focus:border-lowGray outline-none"
                 />
                 <button
@@ -93,8 +93,8 @@ export function Register() {
               <h2>Confirmar Senha</h2>
               <div className="relative">
                 <input
-                  type={showPassword ? "text" : "password"}
-                  {...register("confirmarSenha")}
+                  type={showPassword ? 'text' : 'password'}
+                  {...register('confirmarSenha')}
                   className="h-11 w-full bg-midGray rounded-xl p-2 pr-10 focus:border text-white focus:border-lowGray outline-none"
                 />
                 <button
