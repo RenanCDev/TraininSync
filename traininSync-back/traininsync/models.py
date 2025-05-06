@@ -214,3 +214,12 @@ class RegistroDeProgresso(models.Model):
     def __str__(self):
         return f"{self.aluno.pessoa.nome} - {self.data}"
 
+class Pagamento(models.Model):
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name="pagamentos")
+    valor = models.DecimalField(max_digits=8, decimal_places=2)
+    data_pagamento = models.DateField(auto_now_add=True)
+    descricao = models.CharField(max_length=255)  # Ex: "Mensalidade Maio/2025"
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Pagamento de {self.aluno} em {self.data_pagamento} - R$ {self.valor}"
