@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Personal, DadosBancarios, Pessoa, Aluno, Servico, Agenda, ContratoDeServico, RegistroDeProgresso
+from .models import Personal, DadosBancarios, Pessoa, Aluno, Servico, Agenda, ContratoDeServico, RegistroDeProgresso, Pagamento
 
 
 class DadosBancariosSerializer(serializers.ModelSerializer):
@@ -100,3 +100,9 @@ class RegistroDeProgressoSerializer(serializers.ModelSerializer):
         model = RegistroDeProgresso
         fields = '__all__'
         read_only_fields = ['created_at']
+
+class PagamentoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pagamento
+        fields = '__all__'
+        read_only_fields = ['data_pagamento', 'created_at']
