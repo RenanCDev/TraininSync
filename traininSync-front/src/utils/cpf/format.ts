@@ -1,5 +1,5 @@
 export const formatCPF = (cpf: string) => {
-  const cleanedCPF = cpf.replace(/\D/g, '');
+  const cleanedCPF = cpf.replace(/\D/g, "");
 
   if (cleanedCPF.length <= 3) {
     return cleanedCPF;
@@ -18,4 +18,4 @@ export const formatCPF = (cpf: string) => {
   }
 };
 
-export const removeCPFFormatting = (cpf: string) => cpf.replace(/\D/g, '');
+export const removeCPFFormatting = (cpf: string) => cpf.replace(/\D/g, "");

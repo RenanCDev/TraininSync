@@ -1,19 +1,19 @@
-import { useNavigate } from 'react-router-dom';
-import { Button } from '../../components/button';
-import { NavBar } from '../../components/navbar';
-import { getAllPersonal } from '../../api/personal/getPersonal';
-import { CreatePersonal } from './zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { createPersonal } from '../../api/personal/createPersonal';
-import { useState } from 'react';
-import { toast } from 'react-toastify';
-import { formatCPF, removeCPFFormatting } from '../../utils/cpf/format';
+import { useNavigate } from "react-router-dom";
+import { Button } from "../../components/button";
+import { NavBar } from "../../components/navbar";
+import { getAllPersonal } from "../../api/personal/getPersonal";
+import { CreatePersonal } from "./zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { createPersonal } from "../../api/personal/createPersonal";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { formatCPF, removeCPFFormatting } from "../../utils/cpf/format";
 import {
   formatPhoneNumber,
   unformatPhoneNumber,
-} from '../../utils/celular/format';
+} from "../../utils/celular/format";
 
 type PersonalFormData = z.infer<typeof CreatePersonal>;
 
@@ -31,7 +31,7 @@ export function RegisterPersonal() {
   });
 
   function handleLoginClick() {
-    navigate('/login');
+    navigate("/login");
   }
 
   const onSubmit = async (data: PersonalFormData) => {
@@ -60,9 +60,9 @@ export function RegisterPersonal() {
     try {
       setIsLoading(true);
       await createPersonal(cleanData);
-      toast.success('Personal cadastrado com sucesso!', {
-        position: 'bottom-right',
-        theme: 'dark',
+      toast.success("Personal cadastrado com sucesso!", {
+        position: "bottom-right",
+        theme: "dark",
       });
       reset();
     } catch (err) {
@@ -76,11 +76,11 @@ export function RegisterPersonal() {
     try {
       setIsLoading(true);
       const dados = await getAllPersonal();
-      toast.success('Personal GET!', {
-        position: 'bottom-right',
-        theme: 'dark',
+      toast.success("Personal GET!", {
+        position: "bottom-right",
+        theme: "dark",
       });
-      console.log('Personais: ', dados);
+      console.log("Personais: ", dados);
     } catch (err) {
       console.log(err);
     } finally {
@@ -112,7 +112,7 @@ export function RegisterPersonal() {
                 <h2>Nome completo</h2>
                 <input
                   type="text"
-                  {...register('nome')}
+                  {...register("nome")}
                   className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
                 />
                 {errors.nome && (
@@ -124,7 +124,7 @@ export function RegisterPersonal() {
                 <h2>Nome Social</h2>
                 <input
                   type="text"
-                  {...register('nome_social')}
+                  {...register("nome_social")}
                   className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
                 />
                 {errors.nome_social && (
@@ -140,11 +140,11 @@ export function RegisterPersonal() {
                     <h2>CPF</h2>
                     <input
                       type="text"
-                      {...register('cpf')}
+                      {...register("cpf")}
                       className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
                       onChange={(e) => {
                         const formattedCPF = formatCPF(e.target.value);
-                        setValue('cpf', formattedCPF);
+                        setValue("cpf", formattedCPF);
                       }}
                     />
                     {errors.cpf && (
@@ -156,7 +156,7 @@ export function RegisterPersonal() {
                   <div className="col-span-1 flex flex-col gap-2">
                     <h2>Etnia</h2>
                     <select
-                      {...register('etnia')}
+                      {...register("etnia")}
                       className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
                     >
                       <option value="nao_informado">Não informado</option>
@@ -175,7 +175,7 @@ export function RegisterPersonal() {
                   <div className="col-span-1 flex flex-col gap-2">
                     <h2>Sexo</h2>
                     <select
-                      {...register('sexo')}
+                      {...register("sexo")}
                       className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
                     >
                       <option value="N">Não informado</option>
@@ -193,7 +193,7 @@ export function RegisterPersonal() {
                     <h2>Data de nascimento</h2>
                     <input
                       type="date"
-                      {...register('data_de_nascimento')}
+                      {...register("data_de_nascimento")}
                       className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
                     />
                     {errors.data_de_nascimento && (
@@ -211,7 +211,7 @@ export function RegisterPersonal() {
                     <h2>E-mail</h2>
                     <input
                       type="text"
-                      {...register('email')}
+                      {...register("email")}
                       className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
                     />
                     {errors.email && (
@@ -224,13 +224,13 @@ export function RegisterPersonal() {
                     <h2>Celular</h2>
                     <input
                       type="text"
-                      {...register('numero_de_celular')}
+                      {...register("numero_de_celular")}
                       className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
                       onChange={(e) => {
                         const formattedPhone = formatPhoneNumber(
                           e.target.value
                         );
-                        setValue('numero_de_celular', formattedPhone);
+                        setValue("numero_de_celular", formattedPhone);
                       }}
                     />
                     {errors.numero_de_celular && (
@@ -247,7 +247,7 @@ export function RegisterPersonal() {
                   <div className="col-span-1 flex flex-col gap-2">
                     <h2>Estado Civil</h2>
                     <select
-                      {...register('estado_civil')}
+                      {...register("estado_civil")}
                       className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
                     >
                       <option value="casado">Casado</option>
@@ -266,7 +266,7 @@ export function RegisterPersonal() {
                     <h2>CREF</h2>
                     <input
                       type="text"
-                      {...register('cref')}
+                      {...register("cref")}
                       className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
                     />
                     {errors.cref && (
@@ -293,7 +293,7 @@ export function RegisterPersonal() {
                     <h2>Número da Conta</h2>
                     <input
                       type="number"
-                      {...register('numero_conta')}
+                      {...register("numero_conta")}
                       className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
                     />
                     {errors.numero_conta && (
@@ -306,7 +306,7 @@ export function RegisterPersonal() {
                     <h2>Agencia</h2>
                     <input
                       type="number"
-                      {...register('agencia')}
+                      {...register("agencia")}
                       className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
                     />
                     {errors.agencia && (
@@ -329,7 +329,7 @@ export function RegisterPersonal() {
               <div className="flex flex-col gap-2 col-span-2">
                 <h2>Especialidades</h2>
                 <textarea
-                  {...register('especialidades')}
+                  {...register("especialidades")}
                   className="h-24 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none resize-none"
                 />
                 {errors.especialidades && (
@@ -342,7 +342,7 @@ export function RegisterPersonal() {
               <div className="flex flex-col gap-2 col-span-2">
                 <h2>Experiencia Profissional</h2>
                 <textarea
-                  {...register('experiencia_profissional')}
+                  {...register("experiencia_profissional")}
                   className="h-24 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none resize-none"
                 />
                 {errors.experiencia_profissional && (
@@ -357,7 +357,7 @@ export function RegisterPersonal() {
                   <h2>Horários Disponíveis</h2>
                   <textarea
                     typeof="number"
-                    {...register('horarios_disponiveis')}
+                    {...register("horarios_disponiveis")}
                     className="h-24 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none resize-none"
                   />
                   {errors.horarios_disponiveis && (
@@ -370,7 +370,7 @@ export function RegisterPersonal() {
                 <div className="flex flex-col gap-2 col-span-2 md:col-span-1 md:w-1/2">
                   <h2>Locais Disponíveis</h2>
                   <textarea
-                    {...register('locais_disponiveis')}
+                    {...register("locais_disponiveis")}
                     className="h-24 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none resize-none"
                   />
                   {errors.locais_disponiveis && (

@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface NavBarProps {
   children?: ReactNode;
@@ -9,7 +9,7 @@ export function NavBar({ children }: NavBarProps) {
   const navigate = useNavigate();
 
   function handleLogoClick() {
-    navigate('/');
+    navigate("/");
   }
 
   return (

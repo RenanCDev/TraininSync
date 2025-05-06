@@ -1,9 +1,9 @@
 export const isValidCPF = (cpf: string): boolean => {
-  cpf = cpf.replace(/[^\d]/g, '');
+  cpf = cpf.replace(/[^\d]/g, "");
   if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
 
   const calcDigit = (slice: string) => {
-    const sum = slice.split('').reduce((acc, digit, index) => {
+    const sum = slice.split("").reduce((acc, digit, index) => {
       return acc + Number(digit) * (slice.length + 1 - index);
     }, 0);
     const remainder = (sum * 10) % 11;

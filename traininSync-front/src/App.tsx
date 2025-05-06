@@ -1,12 +1,12 @@
-import { useNavigate } from 'react-router-dom';
-import { Button } from './components/button';
-import { NavBar } from './components/navbar';
+import { useNavigate } from "react-router-dom";
+import { Button } from "./components/button";
+import { NavBar } from "./components/navbar";
 
 function App() {
   const navigate = useNavigate();
 
   function handleRegisterClick() {
-    navigate('/register/personal');
+    navigate("/register/personal");
   }
 
   return (

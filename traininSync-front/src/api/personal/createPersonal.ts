@@ -1,4 +1,4 @@
-import { api } from '../../services/api';
+import { api } from "../../services/api";
 
 interface CreatePersonalSchema {
   dados_bancarios: {
@@ -24,10 +24,10 @@ interface CreatePersonalSchema {
 
 export const createPersonal = async (personalBody: CreatePersonalSchema) => {
   try {
-    const response = await api.post('/personal/', personalBody);
+    const response = await api.post("/personal/", personalBody);
     return response.data;
   } catch (error) {
-    console.error('Erro ao Criar personal:', error);
+    console.error("Erro ao Criar personal:", error);
     throw error;
   }
 };

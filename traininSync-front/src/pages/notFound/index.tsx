@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Button } from '../../components/button';
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Button } from "../../components/button";
 
 export function NotFound() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export function NotFound() {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { delay: i * 0.2, type: 'spring', stiffness: 100 },
+      transition: { delay: i * 0.2, type: "spring", stiffness: 100 },
     }),
   };
 
@@ -30,14 +30,14 @@ export function NotFound() {
         className="w-full max-w-md bg-midGray rounded-2xl p-8 flex flex-col items-center"
         initial={{ scale: 0.9 }}
         animate={{ scale: 1 }}
-        transition={{ duration: 0.5, type: 'spring', stiffness: 120 }}
+        transition={{ duration: 0.5, type: "spring", stiffness: 120 }}
       >
         <div className="flex gap-2">
-          {['4', '0', '4'].map((digit, index) => (
+          {["4", "0", "4"].map((digit, index) => (
             <motion.h1
               key={index}
               className={`text-9xl font-extrabold ${
-                digit !== '0' ? 'text-midPurple' : 'text-white'
+                digit !== "0" ? "text-midPurple" : "text-white"
               }`}
               custom={index}
               variants={digitVariants}
