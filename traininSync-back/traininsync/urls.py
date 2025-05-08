@@ -5,7 +5,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-from .views import api_home, PersonalViewSet, AlunoViewSet, ServicoViewSet, AgendaViewSet, ContratoDeServicoViewSet, RegistroDeProgressoViewSet
+from .views import api_home, PersonalViewSet, AlunoViewSet, ServicoViewSet, AgendaViewSet, ContratoDeServicoViewSet, RegistroDeProgressoViewSet, PagamentoViewSet
 
 
 schema_view = get_schema_view(
@@ -30,6 +30,7 @@ router.register(r"servico", ServicoViewSet, basename="servico")
 router.register(r"agenda", AgendaViewSet, basename="agenda")
 router.register(r"contratodeservico", ContratoDeServicoViewSet, basename="contratodeservico")
 router.register(r"registrodeprogresso", RegistroDeProgressoViewSet, basename="registrodeprogresso")
+router.register(r"pagamento", PagamentoViewSet, basename="pagamento")
 
 
 urlpatterns = [
