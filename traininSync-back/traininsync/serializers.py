@@ -101,3 +101,8 @@ class RegistroDeProgressoSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ['created_at']
 
+class PagamentoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pagamento
+        fields = '__all__'
+        read_only_fields = ['data_pagamento', 'created_at']

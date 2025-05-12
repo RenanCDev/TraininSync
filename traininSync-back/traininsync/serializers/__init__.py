@@ -6,3 +6,4 @@ from .personalserializer import PersonalSerializer
 from .pessoaserializers import PessoaSerializer
 from .registrodeprogressoserializer import RegistroDeProgressoSerializer
 from .servicoserializer import ServicoSerializer
+from .pagamentoserializer import PagamentoSerializer
