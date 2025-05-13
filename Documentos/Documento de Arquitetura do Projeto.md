@@ -32,8 +32,8 @@ Imagem com a organização geral dos componentes da arquitetura do projeto. Segu
 
 | **Requisito**        | **Detalhes** |
 |----------------------|-------------|
-| **Desempenho**       | 1. A página principal deve carregar em no máximo **3 segundos**.<br /> 2. Consultas ao banco de dados devem responder em até **2 segundos**.<br /> 3. O sistema deve suportar múltiplas conexões simultâneas sem perda significativa de desempenho. |
-| **Interoperabilidade** | 1. O sistema deve rodar em **Linux** e ser distribuído via **Docker**.<br /> 2. O banco de dados será **PostgreSQL 16** ou **MySQL 8**. |
+| **Desempenho**       | 1. As páginas devem ter um carregamento rápido sem causar lentidão ao usuário.<br /> 2. Consultas ao banco de dados devem responder em até **1 segundo**.<br /> 3. O sistema deve suportar múltiplas conexões simultâneas sem perda significativa de desempenho. |
+| **Interoperabilidade** | 1. O sistema deve rodar em **Linux** e ser distribuído via **Docker**.<br /> 2. O banco de dados será **PostgreSQL 16**|
 | **Escalabilidade**   | 1. O sistema deve permitir expansão para suportar mais usuários quando necessário.<br /> 2. O backend deve permitir a adição de novos serviços sem grandes mudanças na arquitetura. |
 | **Disponibilidade**  | 1. O sistema deve ficar disponível **99% do tempo**, com possíveis manutenções agendadas.<br /> 2. Deve haver um **backup periódico** dos dados. |
 | **Usabilidade**      | 1. O frontend deve ser **responsivo**, funcionando bem em celulares, tablets e desktops.<br /> 2. A interface deve ser intuitiva e de fácil navegação. |
@@ -46,15 +46,15 @@ Nesta seção, listamos os principais mecanismos arquiteturais do sistema para g
 
 | **Mecanismo de Análise** | **Mecanismo de Design**         | **Mecanismo de Implementação**    |
 |-------------------------|--------------------------------|----------------------------------|
-| **Persistência**       | Banco de dados relacional      | PostgreSQL 16 / SQLite (para testes) |
+| **Persistência**       | Banco de dados relacional      | PostgreSQL 16 |
 | **Camada de Dados**    | Mapeamento OR                  | Django ORM |
-| **Frontend**          | Interface do Usuário           | React com TypeScript, CSS Modules |
+| **Frontend**          | Interface do Usuário           | React com TypeScript|
 | **Backend**           | API REST                       | Django REST Framework (DRF) |
 | **Autenticação**      | Login com senha                | Django Authentication padrão |
 | **Build**            | Execução local                  | Ambiente virtual com venv (Python) |
-| **Deploy**           | Hospedagem simples              | Render, Railway ou Heroku (gratuito) |
-| **Infraestrutura**   | Ambiente de desenvolvimento     | Docker (Opcional), rodando localmente |
-| **Cache**           | Melhorar desempenho              | Uso de cache básico com Django |
+| **Deploy**           | Hospedagem simples              | Render para a API e DataBase e Vercel para o front |
+| **Infraestrutura**   | Ambiente de desenvolvimento     |  |
+
 
 ## Implantação  
 
@@ -63,12 +63,12 @@ O sistema será implantado de forma simples, utilizando um serviço de hospedage
 ### **1. Ambiente de Desenvolvimento**  
 - O backend será executado usando **Django** com um servidor local (`python manage.py runserver`).  
 - O frontend será rodado com **React** via Vite (`npm run dev`).  
-- Banco de dados pode ser **PostgreSQL** ou **SQLite**, dependendo da necessidade.  
+- Banco de dados pode ser **PostgreSQL**.
 
 ### **2. Ambiente de Produção (Hospedagem Simples)**  
-- O backend será hospedado em plataformas como **Render, Railway ou Heroku**.  
-- O frontend será hospedado no **Vercel ou Netlify**.  
-- O banco de dados pode ser um serviço gratuito oferecido por esses provedores.  
+- O backend será hospedado na plataforma **Render**  
+- O frontend será hospedado no **Vercel**.  
+- O banco de dados está sendo hospedado no **Render** no momento, porém devido sua data de validade o mesmo deverá mudar
 
 ### **Fluxo de Deploy**  
 1. O código será versionado no **GitHub**.  
