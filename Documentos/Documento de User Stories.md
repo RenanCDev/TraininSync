@@ -278,3 +278,25 @@ Este documento fragmenta e detalha cada etapa das histórias de usuário, dividi
 | TA08.07                  | O personal tenta remover um horário e dia inexistente, e o sistema exibe a mensagem de erro: "Erro: Horário e dia não encontrado." |
 | TA08.08                  | O personal consulta a agenda e o sistema exibe os horários e dias disponíveis corretamente. |
 | TA08.09                  | O personal tenta consultar um horário e dia inexistente e o sistema exibe a mensagem de erro: "Erro: Horário e dia não encontrado." |
+
+## User Story US09 - Manter Pessoa
+
+|                               |                                                                                             |
+| ----------------------------- | ------------------------------------------------------------------------------------------- |
+| **Descrição** | O sistema deverá permitir o cadastro, visualização, edição e exclusão lógica de dados pessoais, servindo de base para entidades como Aluno e Personal. |
+| **Requisitos envolvidos** | RF09.01, RF09.02, RF09.03, RF09.04, RF09.05 |
+| **Prioridade** | Essencial |
+| **Analistas** | Luiz Miguel |
+| **Desenvolvedores** | José Alves |
+| **Revisores** | Renan Missias |
+| **Testadores** | Rael Araújo |
+
+| Testes de Aceitação (TA) | Descrição |
+| ------------------------ | --------- |
+| TA09.01 | O usuário informa dados válidos no formulário e o sistema exibe "Pessoa cadastrada com sucesso." |
+| TA09.02 | O usuário tenta salvar o formulário com dados inválidos (ex.: CPF duplicado) e o sistema exibe "Erro: dados inválidos." |
+| TA09.03 | O usuário edita uma pessoa e salva as alterações com sucesso. |
+| TA09.04 | O usuário tenta editar com dados inválidos e recebe uma mensagem de erro. |
+| TA09.05 | O usuário solicita a exclusão de uma pessoa não vinculada a outras entidades e o sistema exibe "Pessoa excluída com sucesso." |
+| TA09.06 | O sistema impede exclusão de pessoa associada a um Aluno ou Personal, exibindo: "Erro: vínculo ativo." |
+| TA09.07 | O usuário consulta a lista de pessoas e o sistema exibe os dados corretamente. |
