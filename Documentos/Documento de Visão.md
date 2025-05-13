@@ -131,6 +131,28 @@ O sistema deverá permitir a exclusão de um personal trainer, solicitando confi
 **Ator:** Personal Trainer  
 O sistema deverá fornecer métricas sobre o desempenho do personal trainer, como número de atendimentos realizados, feedbacks de alunos, etc.  
 
+### **RF01 – Manter Personal Trainer**
+
+- **RF01.01 – Cadastro de Personal Trainer**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir o cadastro de novos personal trainers, com campos obrigatórios para informações básicas (nome, email, etc.), e validação dos dados (ex.: email válido, campos não nulos).  
+
+- **RF01.02 – Visualizar Personal Trainer**  
+**Ator:** Personal Trainer  
+O sistema deverá listar os personal trainers cadastrados, com a possibilidade de exibir informações detalhadas sobre cada um deles, com filtros de busca para facilitar a visualização.  
+
+- **RF01.03 – Editar Dados do Personal Trainer**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir que o personal trainer edite seus dados, como informações de contato, especializações, etc., e atualize essas informações no banco de dados após validação.  
+
+- **RF01.04 – Excluir Personal Trainer**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir a exclusão de um personal trainer, solicitando confirmação antes da remoção e registrando essa ação no log de atividades.  
+
+- **RF01.05 – Monitorar Desempenho do Personal Trainer**  
+**Ator:** Personal Trainer  
+O sistema deverá fornecer métricas sobre o desempenho do personal trainer, como número de atendimentos realizados, feedbacks de alunos, etc. 
+
 ---
 
 ### **RF02 – Manter Aluno**
@@ -310,6 +332,30 @@ OO sistema deverá enviar notificações automáticas de confirmação e lembret
 - **RF08.10 – Sincronizar com Calendário Externo**  
 **Ator:** Sistema  
 O sistema deverá oferecer integração com serviços de calendário externo (ex.: Google Calendar) para sincronizar automaticamente os horários agendados.
+
+---
+
+### RF09 – Manter Pessoa
+
+- **RF09.01 – Cadastro de Pessoa**  
+  **Ator:** Aluno/PersonalTrainer  
+  O sistema deverá permitir o cadastro de uma pessoa com nome, CPF, data de nascimento, email, celular, sexo, nome social (opcional), etnia e estado civil. Todos os campos obrigatórios deverão ser validados conforme restrições aplicáveis.
+
+- **RF09.02 – Visualizar Pessoa**  
+  **Ator:** Aluno/PersonalTrainer  
+  O sistema deverá listar as pessoas cadastradas com possibilidade de busca por nome, CPF ou email, exibindo as informações essenciais.
+
+- **RF09.03 – Editar Pessoa**  
+  **Ator:** Aluno/PersonalTrainer 
+  O sistema deverá permitir a edição dos dados da pessoa, com revalidação dos dados modificados antes de persistência.
+
+- **RF09.04 – Excluir Pessoa**  
+  **Ator:** Aluno/PersonalTrainer
+  O sistema deverá permitir a exclusão lógica de um registro de pessoa, desde que não esteja vinculado a entidades dependentes (como Aluno ou Personal).
+
+- **RF09.05 – Monitorar Dados Pessoais**  
+  **Ator:** Aluno/PersonalTrainer 
+  O sistema deverá rastrear alterações nos dados cadastrais de Pessoa e registrar logs de modificação para controle de integridade e auditoria.
 
 
 ---
