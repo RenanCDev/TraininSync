@@ -27,7 +27,7 @@ A estrutura do projeto permite futuras migrações para um modelo **baseado em m
 Imagem com a organização geral dos componentes da arquitetura do projeto. Segue um exemplo da **Arquitetura Geral** de um Projeto usando **Django Framework** Integrado a um Frontend com **React e TypeScript**:
 
 
-![Arquitetura Django Projeto](../Imagens/arquiteturaproj1.png)
+![Arquitetura Django Projeto](../Imagens/arquiteturaprojatualizada.png)
 
 ## Requisitos Não-Funcionais  
 
