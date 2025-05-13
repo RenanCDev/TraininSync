@@ -10,11 +10,11 @@ A arquitetura do projeto segue um **modelo monolítico** baseado no **Django Fra
 **Estrutura Geral:**  
 - **Frontend:** Implementado com **React e TypeScript**, responsável por consumir as APIs REST e fornecer a interface do usuário.  
 - **Backend:** Construído em **Django**, utilizando um padrão **MVC (Model-View-Controller)**, com **Serializers do Django Rest Framework (DRF)** para transformar os dados em JSON.  
-- **Banco de Dados:** Suporte para **PostgreSQL e MySQL**, utilizando o **ORM do Django** para abstração do banco.  
+- **Banco de Dados:** Suporte para **PostgreSQL**, utilizando o **ORM do Django** para abstração do banco.  
 - **Serviços:** Camada intermediária que centraliza a lógica de negócio e orquestra a comunicação entre as views e o ORM.  
 
 **Cloud e Infraestrutura:**  
-   - Pode ser hospedado em provedores como **AWS, Azure ou Google Cloud**, utilizando serviços como **Elastic Beanstalk ou Kubernetes** para gerenciar a escalabilidade.  
+   - Até o momento está sendo hospedado no serviço gratuito **Render** a API e a DataBase e no **Vercel** para o front.
 
 **Conexão com outros módulos e sistemas:**  
    - A API REST pode ser consumida por diferentes clientes, incluindo aplicações web e móveis.  
@@ -26,7 +26,8 @@ A estrutura do projeto permite futuras migrações para um modelo **baseado em m
 
 Imagem com a organização geral dos componentes da arquitetura do projeto. Segue um exemplo da **Arquitetura Geral** de um Projeto usando **Django Framework** Integrado a um Frontend com **React e TypeScript**:
 
-![Arquitetura Django Projeto](../Imagens/arquiteturaproj.png)
+
+![Arquitetura Django Projeto](../Imagens/arquiteturaproj1.png)
 
 ## Requisitos Não-Funcionais  
 
