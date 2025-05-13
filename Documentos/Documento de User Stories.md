@@ -284,7 +284,7 @@ Este documento fragmenta e detalha cada etapa das histórias de usuário, dividi
 |                               |                                                                                             |
 | ----------------------------- | ------------------------------------------------------------------------------------------- |
 | **Descrição** | O sistema deverá permitir o cadastro, visualização, edição e exclusão lógica de dados pessoais, servindo de base para entidades como Aluno e Personal. |
-| **Requisitos envolvidos** | RF09.01, RF09.02, RF09.03, RF09.04, RF09.05 |
+| **Requisitos envolvidos** | RF09.01 Cadastrara Pesosa, RF09.02 Visualizar Pessoa, RF09.03 Editar pessoa, RF09.04 Excluir Pessoa, RF09.05 Monitorar Pessoa |
 | **Prioridade** | Essencial |
 | **Analistas** | Luiz Miguel |
 | **Desenvolvedores** | José Alves |
