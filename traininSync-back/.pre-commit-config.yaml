@@ -31,6 +31,6 @@ repos:
 
     - id: lint
       name: PyLint
-      entry: pylint
+      entry: pylint --fail-under=9.0
       language: system
       types: [python]
