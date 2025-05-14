@@ -57,7 +57,7 @@ class Pessoa(models.Model):
 
     nome = models.CharField(max_length=255)
     cpf = models.CharField(max_length=11, unique=True, validators=[validar_cpf])
-    data_de_nascimento = models.DateField()
+    data_de_nascimento = models.DateField(blank=True, null=True)
     email = models.EmailField(unique=True)
     numero_de_celular = models.CharField(max_length=11, validators=[celular_validator])
     sexo = models.CharField(max_length=1, choices=SEXO_CHOICES)
@@ -98,6 +98,7 @@ class Personal(Pessoa):
     @classmethod
     def consultar_por_cpf(cls, cpf):
         return cls.objects.filter(cpf=cpf).first()
+    
     
 class Aluno(models.Model):
     pessoa = models.OneToOneField(Pessoa, on_delete=models.CASCADE, related_name='aluno')
