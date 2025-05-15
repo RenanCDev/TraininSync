@@ -17,7 +17,7 @@ from .models_agenda_test import AgendaTestCase
 from .models_aluno_test import AlunoModelTestCase
 from .models_contrato_de_servico_test import ContratoDeServicoTestCase
 from .models_dados_bancarios_test import DadosBancariosTestCase
-from .models_pagamento_test import PagamentoTestCase
+from .models_pagamento_test import PagamentoModelTestCase
 from .models_personal_test import PersonalModelTestCase
 from .models_pessoa_test import PessoaTestCase
 from .models_registro_de_progresso_test import RegistroDeProgressoTestCase
