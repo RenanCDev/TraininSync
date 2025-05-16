@@ -14,6 +14,7 @@ import { createAluno } from "../../api/aluno/createAluno";
 import { toast } from "react-toastify";
 import { getAllAluno } from "../../api/aluno/getAluno";
 import { useState } from "react";
+import { inputNumber } from "../../utils/inputNumero";
 
 type AlunoFormData = z.infer<typeof CreateAluno>;
 
@@ -287,6 +288,7 @@ export function RegisterStudent() {
                   type="text"
                   {...register("altura")}
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  onKeyDown={inputNumber}
                 />
                 {errors.altura && (
                   <span className="text-red-500">{errors.altura.message}</span>
@@ -295,9 +297,10 @@ export function RegisterStudent() {
               <div className="col-span-1 flex flex-col gap-2">
                 <h2>Peso</h2>
                 <input
-                  type="number"
+                  type="text"
                   {...register("peso")}
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  onKeyDown={inputNumber}
                 />
                 {errors.peso && (
                   <span className="text-red-500">{errors.peso.message}</span>
@@ -322,6 +325,7 @@ export function RegisterStudent() {
                   type="text"
                   {...register("imc")}
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  onKeyDown={inputNumber}
                 />
                 {errors.imc && (
                   <span className="text-red-500">{errors.imc.message}</span>
@@ -361,6 +365,7 @@ export function RegisterStudent() {
                   type="text"
                   {...register("agua_corporal_total")}
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  onKeyDown={inputNumber}
                 />
                 {errors.agua_corporal_total && (
                   <span className="text-red-500">
@@ -374,6 +379,7 @@ export function RegisterStudent() {
                   type="text"
                   {...register("gordura_corporal")}
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  onKeyDown={inputNumber}
                 />
                 {errors.gordura_corporal && (
                   <span className="text-red-500">
@@ -387,6 +393,7 @@ export function RegisterStudent() {
                   type="text"
                   {...register("massa_muscular_esqueletica")}
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  onKeyDown={inputNumber}
                 />
                 {errors.massa_muscular_esqueletica && (
                   <span className="text-red-500">
@@ -400,6 +407,7 @@ export function RegisterStudent() {
                   type="text"
                   {...register("taxa_metabolica_basal")}
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  onKeyDown={inputNumber}
                 />
                 {errors.taxa_metabolica_basal && (
                   <span className="text-red-500">
@@ -413,6 +421,7 @@ export function RegisterStudent() {
                   type="text"
                   {...register("pgc")}
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  onKeyDown={inputNumber}
                 />
                 {errors.pgc && (
                   <span className="text-red-500">{errors.pgc.message}</span>
@@ -424,6 +433,7 @@ export function RegisterStudent() {
                   type="text"
                   {...register("proteinas")}
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  onKeyDown={inputNumber}
                 />
                 {errors.proteinas && (
                   <span className="text-red-500">
@@ -437,6 +447,7 @@ export function RegisterStudent() {
                   type="text"
                   {...register("minerais")}
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  onKeyDown={inputNumber}
                 />
                 {errors.minerais && (
                   <span className="text-red-500">
