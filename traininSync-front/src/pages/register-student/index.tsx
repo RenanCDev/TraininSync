@@ -13,11 +13,13 @@ import {
 import { createAluno } from "../../api/aluno/createAluno";
 import { toast } from "react-toastify";
 import { getAllAluno } from "../../api/aluno/getAluno";
+import { useState } from "react";
 
 type AlunoFormData = z.infer<typeof CreateAluno>;
 
 export function RegisterStudent() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -63,6 +65,7 @@ export function RegisterStudent() {
     };
 
     try {
+      setIsLoading(true);
       await createAluno(cleanData);
       toast.success("Aluno cadastrado com sucesso!", {
         position: "bottom-right",
@@ -71,11 +74,18 @@ export function RegisterStudent() {
       reset();
     } catch (err) {
       console.log(err);
+      toast.error("Aluno não cadastrado!", {
+        position: "bottom-right",
+        theme: "dark",
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   async function getAlunos() {
     try {
+      setIsLoading(true);
       const dados = await getAllAluno();
       toast.success("Aluno GET!", {
         position: "bottom-right",
@@ -84,6 +94,8 @@ export function RegisterStudent() {
       console.log("Alunos: ", dados);
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -438,6 +450,7 @@ export function RegisterStudent() {
 
         <div className="mt-7">
           <Button
+            loading={isLoading}
             type="submit"
             width="w-full md:max-w-[342px]"
             title="Salvar"
@@ -446,6 +459,7 @@ export function RegisterStudent() {
 
         <div className="mt-7">
           <Button
+            loading={isLoading}
             onClick={getAlunos}
             width="w-full md:max-w-[342px]"
             title="log Alunos teste"
