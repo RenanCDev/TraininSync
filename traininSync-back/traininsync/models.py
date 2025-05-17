@@ -155,6 +155,10 @@ class Aluno(models.Model):
     def __str__(self):
         return f"{self.pessoa.nome} - Bioimpedância: {self.bioimpedancia}"
 
+    def delete(self, *args, **kwargs):
+        self.pessoa.delete()  # isso deleta Pessoa e, por cascata, Aluno
+        super().delete(*args, **kwargs)
+        
     def desativar_aluno(self):
         """Desativa o aluno."""
         self.status = False
