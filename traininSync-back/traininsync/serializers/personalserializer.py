@@ -1,10 +1,11 @@
 from rest_framework import serializers
 
 from .dadosbancariosserializers import DadosBancariosSerializer
+from .serializers_base import StringNormalizerSerializer
 
 from ..models import Personal, DadosBancarios
 
-class PersonalSerializer(serializers.ModelSerializer):
+class PersonalSerializer(StringNormalizerSerializer):
     dados_bancarios = DadosBancariosSerializer()
     class Meta:
         model = Personal

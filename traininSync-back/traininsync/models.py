@@ -105,8 +105,8 @@ class Personal(Pessoa):
 
     status = models.BooleanField(default=True)
     cref = models.CharField(max_length=20, unique=True)
-    especialidades = models.TextField()
-    experiencia_profissional = models.TextField()
+    especialidades = models.TextField(null=True, blank=True)
+    experiencia_profissional = models.TextField(null=True, blank=True)
     dados_bancarios = models.OneToOneField(
         DadosBancarios, on_delete=models.CASCADE, related_name="personal"
     )
@@ -139,10 +139,10 @@ class Aluno(models.Model):
         Pessoa, on_delete=models.CASCADE, related_name="aluno"
     )
     status = models.BooleanField(default=True)
-    bioimpedancia = models.CharField(max_length=15, unique=True)
+    bioimpedancia = models.CharField(null=True, blank=True)
     altura = models.FloatField()
-    data_do_exame = models.DateField()
-    hora_do_exame = models.TimeField()
+    data_do_exame = models.DateField(null=True, blank=True)
+    hora_do_exame = models.TimeField(null=True, blank=True)
     agua_corporal_total = models.FloatField(null=True, blank=True)
     proteinas = models.FloatField(null=True, blank=True)
     minerais = models.FloatField(null=True, blank=True)
@@ -150,12 +150,15 @@ class Aluno(models.Model):
     peso = models.FloatField()
     massa_muscular_esqueletica = models.FloatField(null=True, blank=True)
     imc = models.FloatField(null=True, blank=True)
-    pgc = models.FloatField(null=True, blank=True)
     taxa_metabolica_basal = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.pessoa.nome} - Bioimpedância: {self.bioimpedancia}"
 
+    def delete(self, *args, **kwargs):
+        self.pessoa.delete()  # isso deleta Pessoa e, por cascata, Aluno
+        super().delete(*args, **kwargs)
+        
     def desativar_aluno(self):
         """Desativa o aluno."""
         self.status = False

@@ -1,10 +1,11 @@
 from rest_framework import serializers
 
 from .pessoaserializers import PessoaSerializer
+from .serializers_base import StringNormalizerSerializer
 
 from ..models import Pessoa, Aluno
 
-class AlunoSerializer(serializers.ModelSerializer):
+class AlunoSerializer(StringNormalizerSerializer):
     pessoa = PessoaSerializer()
 
     class Meta:
