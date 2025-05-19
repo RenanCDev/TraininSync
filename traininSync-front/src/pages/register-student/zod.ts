@@ -24,24 +24,25 @@ export const CreateAluno = z.object({
     },
     { message: "Data de nascimento inválida ou no futuro" }
   ),
+
   email: z.string().email("E-mail inválido"),
+
   numero_de_celular: z
     .string()
     .regex(/^\(?\d{2}\)?\s?9\d{4}-?\d{4}$/, "Número de celular inválido."),
+
   sexo: z.string(),
-  nome_social: z
-    .string()
-    .min(5, "Deve ter no mínimo 5 letras.")
-    .max(50, "Deve ter no máximo 50 letras.")
-    .regex(
-      /^[A-Za-zÀ-ÿ\s]+$/,
-      "O nome não pode conter números ou caracteres especiais."
-    )
-    .optional(),
+
+  nome_social: z.string().max(50, "Deve ter no máximo 50 letras.").optional(),
+
   etnia: z.string(),
+
   estado_civil: z.string(),
+
   bioimpedancia: z.string(),
-  altura: z.coerce.number(),
+
+  altura: z.string().min(1, "Altura é obrigatória").max(4, "Altura inválida"),
+
   data_do_exame: z.string().refine(
     (val) => {
       const date = new Date(val);
@@ -51,13 +52,22 @@ export const CreateAluno = z.object({
     { message: "Data inválida ou no futuro" }
   ),
   hora_do_exame: z.string(),
+
   agua_corporal_total: z.coerce.number(),
+
   proteinas: z.coerce.number(),
+
   minerais: z.coerce.number(),
+
   gordura_corporal: z.coerce.number(),
-  peso: z.coerce.number(),
+
+  peso: z.string().min(1, "Peso é obrigatório").max(5, "Peso inválido"),
+
   massa_muscular_esqueletica: z.coerce.number(),
+
   imc: z.coerce.number(),
+
   pgc: z.coerce.number(),
+
   taxa_metabolica_basal: z.coerce.number(),
 });
