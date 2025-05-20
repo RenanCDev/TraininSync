@@ -16,8 +16,8 @@ interface CreatePersonalSchema {
   estado_civil: string;
   status: boolean;
   cref: string;
-  especialidades: string;
-  experiencia_profissional: string;
+  especialidades?: string;
+  experiencia_profissional?: string;
   horarios_disponiveis: number;
   locais_disponiveis: string;
 }
