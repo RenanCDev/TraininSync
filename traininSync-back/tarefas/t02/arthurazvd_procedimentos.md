@@ -1,7 +1,7 @@
 ## Procedimentos
 
 ### 1. Procedimento agendarAula
-**Descrição:** Agenda uma aula para um aluno com um personal trainer em uma data e horário específicos.  
+**Descrição:** Agenda uma aula para um aluno com um personal trainer em uma data e horário específicos.
 **Parâmetros:**
 - `p_aluno_id` INT: ID do aluno.
 - `p_personal_id` INT: ID do personal trainer.
@@ -25,7 +25,7 @@ $$;
 ```
 
 ### 2. Procedimento gerarRelatorioAlunosAtivos
-**Descrição:** Gera um relatório com a quantidade de alunos ativos cadastrados no sistema.  
+**Descrição:** Gera um relatório com a quantidade de alunos ativos cadastrados no sistema.
 **Parâmetros:** Nenhum parâmetro.
 
 ```sql
