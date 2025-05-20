@@ -1,7 +1,7 @@
 ## Funções
 
 ### 1. Função calcularIdade
-**Descrição:** Calcula a idade atual de um cliente com base na data de nascimento informada. Essa função é útil para personal trainers ajustarem treinos e planos alimentares conforme a faixa etária do aluno.  
+**Descrição:** Calcula a idade atual de um cliente com base na data de nascimento informada. Essa função é útil para personal trainers ajustarem treinos e planos alimentares conforme a faixa etária do aluno.
 **Parâmetros:**
 - `p_data_nascimento` DATE: data de nascimento do cliente.
 
@@ -21,7 +21,7 @@ $$ LANGUAGE plpgsql;
 ---
 
 ### 2. Função calcularTMB
-**Descrição:** Calcula a Taxa de Metabolismo Basal (TMB) com base no sexo, peso, altura e idade. Isso ajuda o personal a entender quantas calorias o cliente gasta em repouso.  
+**Descrição:** Calcula a Taxa de Metabolismo Basal (TMB) com base no sexo, peso, altura e idade. Isso ajuda o personal a entender quantas calorias o cliente gasta em repouso.
 **Parâmetros:**
 - `p_sexo` CHAR: 'M' para masculino, 'F' para feminino.
 - `p_peso` NUMERIC: peso em kg.
