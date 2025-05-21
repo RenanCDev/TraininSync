@@ -17,13 +17,29 @@ export const CreateAluno = z.object({
     .refine(isValidCPF, { message: "CPF inválido" }),
 
   data_de_nascimento: z.string().refine(
-    (val) => {
-      const date = new Date(val);
-      const today = new Date();
-      return !isNaN(date.getTime()) && date < today;
-    },
-    { message: "Data de nascimento inválida ou no futuro" }
-  ),
+  (val) => {
+    const date = new Date(val);
+    const today = new Date();
+
+    if (isNaN(date.getTime()) || date >= today) {
+      return false;
+    }
+
+    const diffInYears = today.getFullYear() - date.getFullYear();
+    const monthDiff = today.getMonth() - date.getMonth();
+    const dayDiff = today.getDate() - date.getDate();
+
+    const isInvalidYears =
+      diffInYears > 150 ||
+      (diffInYears === 150 && (monthDiff > 0 || (monthDiff === 0 && dayDiff > 0)));
+
+    return !isInvalidYears;
+  },
+  {
+    message: "Data de nascimento inválida",
+  }
+),
+
 
   email: z.string().email("E-mail inválido"),
 
@@ -55,7 +71,7 @@ export const CreateAluno = z.object({
   altura: z.coerce
     .number({ invalid_type_error: "Digite no padrao 1.70" })
     .nonnegative("Altura inválida")
-    .min(1, "Altura é obrigatória")
+    .min(0.5, "Altura é obrigatória")
     .max(3, "Altura inválida"),
 
   agua_corporal_total: z.coerce
@@ -81,8 +97,8 @@ export const CreateAluno = z.object({
   peso: z.coerce
     .number({ invalid_type_error: "Digite no padrao 100.500" })
     .nonnegative("Peso inválido")
-    .min(1, "Peso é obrigatório")
-    .max(700, "Peso inválido"),
+    .min(20, "Peso é obrigatório")
+    .max(400, "Peso inválido"),
 
   massa_muscular_esqueletica: z.coerce
     .number()
