@@ -281,13 +281,6 @@ export function RegisterStudent() {
               <h1 className="text-midPurple">Saúde</h1>
             </div>
 
-            <div className="flex gap-1 font-bold">
-              <p className="text-midPurple">Obs: </p>
-              <h2 className="text-lowGray">
-                utilize pontos em vez de vírgulas.
-              </h2>
-            </div>
-
             <div className="grid grid-cols-1 md:grid-cols-4 gap-2 text-lowGray">
               <div className="col-span-1 md:col-span-2 flex flex-col gap-2">
                 <h2>Altura</h2>
