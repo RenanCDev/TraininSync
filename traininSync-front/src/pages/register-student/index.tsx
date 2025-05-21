@@ -60,7 +60,6 @@ export function RegisterStudent() {
       peso: data.peso,
       massa_muscular_esqueletica: data.massa_muscular_esqueletica,
       imc: data.imc,
-      pgc: data.pgc,
       taxa_metabolica_basal: data.taxa_metabolica_basal,
     };
 
@@ -282,13 +281,28 @@ export function RegisterStudent() {
               <h1 className="text-midPurple">Saúde</h1>
             </div>
 
+            <div className="flex gap-1 font-bold">
+              <p className="text-midPurple">Obs: </p>
+              <h2 className="text-lowGray">
+                utilize pontos em vez de vírgulas.
+              </h2>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-4 gap-2 text-lowGray">
-              <div className="col-span-1 flex flex-col gap-2">
+              <div className="col-span-1 md:col-span-2 flex flex-col gap-2">
                 <h2>Altura</h2>
                 <input
-                  type="text"
-                  {...register("altura")}
+                  type="number"
+                  {...register("altura", {
+                    required: "Altura é obrigatória",
+                    pattern: {
+                      value: /^\d+(\.\d{1,2})?$/,
+                      message: "Use apenas ponto e até duas casas decimais",
+                    },
+                  })}
+                  placeholder="M"
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  step="0.01"
                 />
                 {errors.altura && (
                   <span className="text-red-500">{errors.altura.message}</span>
@@ -297,9 +311,11 @@ export function RegisterStudent() {
               <div className="col-span-1 flex flex-col gap-2">
                 <h2>Peso</h2>
                 <input
-                  type="text"
+                  type="number"
                   {...register("peso")}
+                  placeholder="Kg"
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  step="000.001"
                 />
                 {errors.peso && (
                   <span className="text-red-500">{errors.peso.message}</span>
@@ -310,7 +326,9 @@ export function RegisterStudent() {
                 <input
                   type="number"
                   {...register("bioimpedancia")}
+                  max={1500}
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  step="0.01"
                 />
                 {errors.bioimpedancia && (
                   <span className="text-red-500">
@@ -321,9 +339,10 @@ export function RegisterStudent() {
               <div className="col-span-1 flex flex-col gap-2">
                 <h2>IMC</h2>
                 <input
-                  type="text"
+                  type="number"
                   {...register("imc")}
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  step="0.01"
                 />
                 {errors.imc && (
                   <span className="text-red-500">{errors.imc.message}</span>
@@ -360,9 +379,11 @@ export function RegisterStudent() {
               <div className="col-span-1 flex flex-col gap-2">
                 <h2>Água Corporal Total</h2>
                 <input
-                  type="text"
+                  type="number"
                   {...register("agua_corporal_total")}
+                  placeholder="L"
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  step="0.01"
                 />
                 {errors.agua_corporal_total && (
                   <span className="text-red-500">
@@ -373,9 +394,11 @@ export function RegisterStudent() {
               <div className="col-span-1 flex flex-col gap-2">
                 <h2>Gordura Corporal</h2>
                 <input
-                  type="text"
+                  type="number"
                   {...register("gordura_corporal")}
+                  placeholder="Kg"
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  step="0.01"
                 />
                 {errors.gordura_corporal && (
                   <span className="text-red-500">
@@ -383,12 +406,14 @@ export function RegisterStudent() {
                   </span>
                 )}
               </div>
-              <div className="col-span-1 flex flex-col gap-2">
+              <div className="col-span-1 md:col-span-2 flex flex-col gap-2">
                 <h2>Massa Muscular Esqueletica</h2>
                 <input
-                  type="text"
+                  type="number"
                   {...register("massa_muscular_esqueletica")}
+                  placeholder="Kg"
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  step="0.01"
                 />
                 {errors.massa_muscular_esqueletica && (
                   <span className="text-red-500">
@@ -399,9 +424,11 @@ export function RegisterStudent() {
               <div className="col-span-1 flex flex-col gap-2">
                 <h2>Taxa Metabolica Basal</h2>
                 <input
-                  type="text"
+                  type="number"
                   {...register("taxa_metabolica_basal")}
+                  placeholder="Kcal/dia"
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  step="0.01"
                 />
                 {errors.taxa_metabolica_basal && (
                   <span className="text-red-500">
@@ -410,22 +437,13 @@ export function RegisterStudent() {
                 )}
               </div>
               <div className="md:col-span-2 flex flex-col gap-2">
-                <h2>PGC</h2>
-                <input
-                  type="text"
-                  {...register("pgc")}
-                  className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
-                />
-                {errors.pgc && (
-                  <span className="text-red-500">{errors.pgc.message}</span>
-                )}
-              </div>
-              <div className="md:col-span-2 flex flex-col gap-2">
                 <h2>Proteina</h2>
                 <input
-                  type="text"
+                  type="number"
                   {...register("proteinas")}
+                  placeholder="Kg"
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  step="0.01"
                 />
                 {errors.proteinas && (
                   <span className="text-red-500">
@@ -436,9 +454,11 @@ export function RegisterStudent() {
               <div className="md:col-span-2 flex flex-col gap-2">
                 <h2>Minerais</h2>
                 <input
-                  type="text"
+                  type="number"
                   {...register("minerais")}
+                  placeholder="Kg"
                   className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                  step="0.01"
                 />
                 {errors.minerais && (
                   <span className="text-red-500">

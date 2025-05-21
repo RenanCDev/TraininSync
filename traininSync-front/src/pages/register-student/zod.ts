@@ -41,8 +41,6 @@ export const CreateAluno = z.object({
 
   bioimpedancia: z.string(),
 
-  altura: z.string().min(1, "Altura é obrigatória").max(4, "Altura inválida"),
-
   data_do_exame: z.string().refine(
     (val) => {
       const date = new Date(val);
@@ -51,23 +49,50 @@ export const CreateAluno = z.object({
     },
     { message: "Data inválida ou no futuro" }
   ),
-  hora_do_exame: z.string(),
 
-  agua_corporal_total: z.coerce.number(),
+  hora_do_exame: z.string().min(1, "Hora do exame é obrigatória"),
 
-  proteinas: z.coerce.number(),
+  altura: z.coerce
+    .number({ invalid_type_error: "Digite no padrao 1.70" })
+    .nonnegative("Altura inválida")
+    .min(1, "Altura é obrigatória")
+    .max(3, "Altura inválida"),
 
-  minerais: z.coerce.number(),
+  agua_corporal_total: z.coerce
+    .number()
+    .nonnegative("Água corporal inválida")
+    .max(80, "Água corporal inválida"),
 
-  gordura_corporal: z.coerce.number(),
+  proteinas: z.coerce
+    .number()
+    .nonnegative("Proteinas inválidas")
+    .max(50, "Proteinas inválidas"),
 
-  peso: z.string().min(1, "Peso é obrigatório").max(5, "Peso inválido"),
+  minerais: z.coerce
+    .number()
+    .nonnegative("Minerais inválidos")
+    .max(10, "Minerais inválidos"),
 
-  massa_muscular_esqueletica: z.coerce.number(),
+  gordura_corporal: z.coerce
+    .number()
+    .nonnegative("Gordura corporal inválida")
+    .max(100, "Gordura corporal inválida"),
 
-  imc: z.coerce.number(),
+  peso: z.coerce
+    .number({ invalid_type_error: "Digite no padrao 100.500" })
+    .nonnegative("Peso inválido")
+    .min(1, "Peso é obrigatório")
+    .max(700, "Peso inválido"),
 
-  pgc: z.coerce.number(),
+  massa_muscular_esqueletica: z.coerce
+    .number()
+    .nonnegative("Massa muscular esqueletica inválida")
+    .max(70, "Massa muscular esqueletica inválida"),
 
-  taxa_metabolica_basal: z.coerce.number(),
+  imc: z.coerce.number().nonnegative("IMC inválida").max(60, "IMC inválido"),
+
+  taxa_metabolica_basal: z.coerce
+    .number()
+    .nonnegative("Taxa metabolica basal inválida")
+    .max(15000, "Taxa metabolica basal inválida "),
 });
