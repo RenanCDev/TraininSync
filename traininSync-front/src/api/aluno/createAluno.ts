@@ -13,10 +13,10 @@ interface CreateAlunoSchema {
     estado_civil: string;
   };
   status?: boolean;
-  bioimpedancia: string;
+  bioimpedancia?: string;
   altura: number;
-  data_do_exame: string;
-  hora_do_exame: string;
+  data_do_exame?: string;
+  hora_do_exame?: string;
   agua_corporal_total?: number;
   proteinas?: number;
   minerais?: number;
@@ -24,7 +24,6 @@ interface CreateAlunoSchema {
   peso: number;
   massa_muscular_esqueletica?: number;
   imc?: number;
-  pgc?: number;
   taxa_metabolica_basal?: number;
 }
 
