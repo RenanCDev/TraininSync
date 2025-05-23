@@ -17,29 +17,29 @@ export const CreateAluno = z.object({
     .refine(isValidCPF, { message: "CPF inválido" }),
 
   data_de_nascimento: z.string().refine(
-  (val) => {
-    const date = new Date(val);
-    const today = new Date();
+    (val) => {
+      const date = new Date(val);
+      const today = new Date();
 
-    if (isNaN(date.getTime()) || date >= today) {
-      return false;
+      if (isNaN(date.getTime()) || date >= today) {
+        return false;
+      }
+
+      const diffInYears = today.getFullYear() - date.getFullYear();
+      const monthDiff = today.getMonth() - date.getMonth();
+      const dayDiff = today.getDate() - date.getDate();
+
+      const isInvalidYears =
+        diffInYears > 150 ||
+        (diffInYears === 150 &&
+          (monthDiff > 0 || (monthDiff === 0 && dayDiff > 0)));
+
+      return !isInvalidYears;
+    },
+    {
+      message: "Data de nascimento inválida",
     }
-
-    const diffInYears = today.getFullYear() - date.getFullYear();
-    const monthDiff = today.getMonth() - date.getMonth();
-    const dayDiff = today.getDate() - date.getDate();
-
-    const isInvalidYears =
-      diffInYears > 150 ||
-      (diffInYears === 150 && (monthDiff > 0 || (monthDiff === 0 && dayDiff > 0)));
-
-    return !isInvalidYears;
-  },
-  {
-    message: "Data de nascimento inválida",
-  }
-),
-
+  ),
 
   email: z.string().email("E-mail inválido"),
 
@@ -105,7 +105,7 @@ export const CreateAluno = z.object({
     .nonnegative("Massa muscular esqueletica inválida")
     .max(70, "Massa muscular esqueletica inválida"),
 
-  imc: z.coerce.number().nonnegative("IMC inválida").max(60, "IMC inválido"),
+  imc: z.coerce.number().nonnegative("IMC inválida").max(150, "IMC inválido"),
 
   taxa_metabolica_basal: z.coerce
     .number()

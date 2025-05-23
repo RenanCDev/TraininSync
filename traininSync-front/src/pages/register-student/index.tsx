@@ -3,7 +3,7 @@ import { Button } from "../../components/button";
 import { NavBar } from "../../components/navbar";
 import { CreateAluno } from "./zod";
 import { z } from "zod";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formatCPF, removeCPFFormatting } from "../../utils/cpf/format";
 import {
@@ -13,7 +13,7 @@ import {
 import { createAluno } from "../../api/aluno/createAluno";
 import { toast } from "react-toastify";
 import { getAllAluno } from "../../api/aluno/getAluno";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type AlunoFormData = z.infer<typeof CreateAluno>;
 
@@ -26,10 +26,28 @@ export function RegisterStudent() {
     handleSubmit,
     setValue,
     reset,
+    control,
     formState: { errors },
   } = useForm<AlunoFormData>({
     resolver: zodResolver(CreateAluno),
   });
+
+  const altura = useWatch({ control, name: "altura" });
+  const peso = useWatch({ control, name: "peso" });
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const altNum = parseFloat(String(altura || 0));
+      const pesoNum = parseFloat(String(peso || 0));
+      if (altNum > 0 && pesoNum > 0) {
+        const imcValue = pesoNum / (altNum * altNum);
+        const rounded = Number(imcValue.toFixed(2));
+        setValue("imc", rounded);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [altura, peso, setValue]);
 
   function handleLoginClick() {
     navigate("/login");
