@@ -36,23 +36,25 @@ export const CreatePersonal = z.object({
 
   estado_civil: z.string(),
 
-  cref: z.string(),
+  cref: z.string().max(10, "Máximo de 10 caracteres"),
 
   numero_conta: z.coerce
     .number()
     .positive({ message: "Digite uma conta valida" })
-    .min(1, "Número da conta é obrigatório"),
+    .min(1, "Número da conta é obrigatório")
+    .max(9999999999, "Número da conta deve ter no máximo 10 dígitos"),
 
   agencia: z.coerce
     .number()
     .positive({ message: "Digite uma agência valida" })
-    .min(1, "Agencia é obrigatória"),
+    .min(1, "Agencia é obrigatória")
+    .max(200, "Agencia da conta Inválido"),
 
   especialidades: z.string().max(500, "Especialidades muito longas").optional(),
 
   experiencia_profissional: z
     .string()
-    .max(1000, "Descrição muito longa")
+    .max(500, "Descrição muito longa")
     .optional(),
 
   horarios_disponiveis: z.coerce
