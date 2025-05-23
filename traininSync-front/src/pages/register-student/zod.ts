@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { isValidCPF } from "../../utils/cpf/cpf-validation";
+import { isValidBirthDate } from "../../utils/data-nascimento";
 
 export const CreateAluno = z.object({
   nome: z
@@ -16,30 +17,9 @@ export const CreateAluno = z.object({
     .max(14, "CPF deve ter no máximo 14 caracteres")
     .refine(isValidCPF, { message: "CPF inválido" }),
 
-  data_de_nascimento: z.string().refine(
-    (val) => {
-      const date = new Date(val);
-      const today = new Date();
-
-      if (isNaN(date.getTime()) || date >= today) {
-        return false;
-      }
-
-      const diffInYears = today.getFullYear() - date.getFullYear();
-      const monthDiff = today.getMonth() - date.getMonth();
-      const dayDiff = today.getDate() - date.getDate();
-
-      const isInvalidYears =
-        diffInYears > 150 ||
-        (diffInYears === 150 &&
-          (monthDiff > 0 || (monthDiff === 0 && dayDiff > 0)));
-
-      return !isInvalidYears;
-    },
-    {
-      message: "Data de nascimento inválida",
-    }
-  ),
+  data_de_nascimento: z.string().refine(isValidBirthDate, {
+    message: "Data de nascimento inválida",
+  }),
 
   email: z.string().email("E-mail inválido"),
 

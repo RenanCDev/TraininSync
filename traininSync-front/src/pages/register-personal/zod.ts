@@ -1,5 +1,6 @@
 import * as z from "zod";
 import { isValidCPF } from "../../utils/cpf/cpf-validation";
+import { isValidBirthDate } from "../../utils/data-nascimento";
 
 export const CreatePersonal = z.object({
   nome: z
@@ -23,14 +24,9 @@ export const CreatePersonal = z.object({
 
   sexo: z.string(),
 
-  data_de_nascimento: z.string().refine(
-    (val) => {
-      const date = new Date(val);
-      const today = new Date();
-      return !isNaN(date.getTime()) && date < today;
-    },
-    { message: "Data de nascimento inválida ou no futuro" }
-  ),
+  data_de_nascimento: z.string().refine(isValidBirthDate, {
+    message: "Data de nascimento inválida",
+  }),
 
   email: z.string().email("E-mail inválido"),
 
