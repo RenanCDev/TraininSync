@@ -14,6 +14,7 @@ import { createAluno } from "../../api/aluno/createAluno";
 import { toast } from "react-toastify";
 import { getAllAluno } from "../../api/aluno/getAluno";
 import { useEffect, useState } from "react";
+import { DataAtual } from "../../utils/dia-atual";
 
 type AlunoFormData = z.infer<typeof CreateAluno>;
 
@@ -30,6 +31,9 @@ export function RegisterStudent() {
     formState: { errors },
   } = useForm<AlunoFormData>({
     resolver: zodResolver(CreateAluno),
+    defaultValues: {
+      data_do_exame: DataAtual,
+    },
   });
 
   const altura = useWatch({ control, name: "altura" });
