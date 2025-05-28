@@ -5,6 +5,8 @@ interface ButtonProps {
   height?: string;
   width?: string;
   loading?: boolean;
+  bgColor?: string;
+  hover?: string;
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
 }
@@ -15,13 +17,15 @@ export function Button({
   type = "button",
   height = "h-auto",
   width = "w-auto",
+  bgColor = "bg-midPurple ",
+  hover = "hover:bg-darkPurple",
   onClick,
 }: ButtonProps) {
   return (
     <button
       disabled={loading}
       onClick={onClick}
-      className={`bg-midPurple cursor-pointer flex justify-center items-center p-3 text-2xl rounded-2xl transition duration-300 ease-in-out hover:scale-105 hover:bg-darkPurple z-20 ${
+      className={` ${bgColor} ${hover} cursor-pointer flex justify-center items-center p-3 text-2xl rounded-2xl transition duration-300 ease-in-out hover:scale-105 z-20 ${
         loading ? "cursor-not-allowed opacity-50" : "cursor-pointer"
       } ${height} ${width}`}
       type={type}

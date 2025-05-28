@@ -57,6 +57,11 @@ export function RegisterStudent() {
     navigate("/login");
   }
 
+  function resetForm() {
+    reset();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   const onSubmit = async (data: AlunoFormData) => {
     const cleanData = {
       pessoa: {
@@ -491,6 +496,17 @@ export function RegisterStudent() {
             type="submit"
             width="w-full md:max-w-[342px]"
             title="Salvar"
+          />
+        </div>
+
+        <div className="mt-7">
+          <Button
+            loading={isLoading}
+            width="w-full md:max-w-[342px]"
+            title="Descartar"
+            bgColor="bg-midGray"
+            hover="hover:bg-midGray"
+            onClick={resetForm}
           />
         </div>
 
