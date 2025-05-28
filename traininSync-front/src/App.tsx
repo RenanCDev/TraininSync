@@ -38,7 +38,7 @@ function App() {
 
       <div
         id="Sobre"
-        className="h-screen bg-darkGray flex flex-col justify-center p-11 md:p-44 "
+        className="h-screen bg-darkGray flex flex-col justify-center p-11 md:p-24 "
       >
         <h1 className="font-extrabold mb-3 text-4xl md:text-9xl">Sobre</h1>
         <p className="md:text-2xl">
@@ -52,6 +52,58 @@ function App() {
           prazo. Ainda em constante evolução, o projeto segue sendo ajustado com
           base nas necessidades reais de quem treina e de quem orienta.
         </p>
+      </div>
+
+      <div
+        id="Contato"
+        className="h-screen flex flex-col gap-7 xl:flex-row xl:justify-center bg-darkGray px-11 md:px-24"
+      >
+        <div className="flex flex-col justify-center xl:w-1/2">
+          <h1 className="font-extrabold text-4xl md:text-9xl">Entrar em</h1>
+          <h1 className="font-extrabold text-midPurple text-4xl mb-3 md:text-9xl">
+            Contato
+          </h1>
+          <p className="md:text-2xl">
+            Se você tem dúvidas, sugestões ou gostaria de saber mais sobre a
+            plataforma, este é o espaço para isso. O canal de contato está
+            disponível para quem deseja conversar, entender melhor como funciona
+            o sistema ou simplesmente deixar uma mensagem. Seja você um personal
+            trainer, aluno ou interessado no projeto, ficamos à disposição para
+            ouvir e responder dentro do possível.
+          </p>
+        </div>
+
+        <div className="flex flex-col justify-center xl:w-1/2">
+          <div className="border border-midPurple rounded-3xl text-lowGray flex flex-col gap-4 p-5 mb-8">
+            <div className="">
+              <h1>Nome *</h1>
+              <div className="grid md:grid-cols-2 gap-4">
+                <input
+                  placeholder="Primeiro nome"
+                  className="h-11 w-full bg-midGray rounded-xl p-2 pr-10 focus:border text-white focus:border-lowGray outline-none"
+                />
+                <input
+                  placeholder="Último nome"
+                  className="h-11 w-full bg-midGray rounded-xl p-2 pr-10 focus:border text-white focus:border-lowGray outline-none"
+                />
+              </div>
+            </div>
+
+            <div>
+              <h1>Email *</h1>
+              <input
+                placeholder="Email"
+                className="h-11 w-full bg-midGray rounded-xl p-2 pr-10 focus:border text-white focus:border-lowGray outline-none"
+              />
+            </div>
+
+            <div>
+              <h1>Mensagem *</h1>
+              <textarea className="h-44 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none resize-none" />
+            </div>
+          </div>
+          <Button type="submit" width="w-full md:w-64" title="Enviar" />
+        </div>
       </div>
     </>
   );

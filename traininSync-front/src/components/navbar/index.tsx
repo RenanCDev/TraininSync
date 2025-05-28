@@ -44,7 +44,15 @@ export function NavBar({ children }: NavBarProps) {
         >
           Sobre
         </p>
-        <p className="cursor-pointer transition-colors duration-300 hover:text-midPurple animate-fade-in-up">
+        <p
+          onClick={() => {
+            const element = document.getElementById("Contato");
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+          className="cursor-pointer transition-colors duration-300 hover:text-midPurple animate-fade-in-up"
+        >
           Contato
         </p>
       </div>
