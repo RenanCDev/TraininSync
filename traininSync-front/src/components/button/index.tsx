@@ -5,7 +5,7 @@ interface ButtonProps {
   height?: string;
   width?: string;
   loading?: boolean;
-  type?: "button" | "submit" | "reset" | undefined;
+  type?: "button" | "submit" | "reset";
   onClick?: () => void;
 }
 
