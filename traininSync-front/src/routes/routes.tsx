@@ -7,6 +7,7 @@ import { Register } from "../pages/register";
 import { RegisterStudent } from "../pages/register-student";
 import { RegisterSchedule } from "../pages/schedule/register-schedule";
 import { RegisterService } from "../pages/service/register-service";
+import { RegisterPayment } from "../pages/payment/register-payment";
 
 export function AppRoutes() {
   return (
@@ -19,6 +20,7 @@ export function AppRoutes() {
       <Route path="/register/student" element={<RegisterStudent />} />
       <Route path="/register/schedule" element={<RegisterSchedule />} />
       <Route path="/register/service" element={<RegisterService />} />
+      <Route path="/register/payment" element={<RegisterPayment />} />
     </Routes>
   );
 }
