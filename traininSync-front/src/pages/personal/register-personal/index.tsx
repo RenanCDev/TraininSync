@@ -1,19 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../components/button";
-import { NavBar } from "../../components/navbar";
-import { getAllPersonal } from "../../api/personal/getPersonal";
 import { CreatePersonal } from "./zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { createPersonal } from "../../api/personal/createPersonal";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { formatCPF, removeCPFFormatting } from "../../utils/cpf/format";
+
+import { Button } from "../../../components/button";
+import { NavBar } from "../../../components/navbar";
+import { createPersonal } from "../../../api/personal/createPersonal";
+import { formatCPF, removeCPFFormatting } from "../../../utils/cpf/format";
+import { getAllPersonal } from "../../../api/personal/getPersonal";
 import {
   formatPhoneNumber,
   unformatPhoneNumber,
-} from "../../utils/celular/format";
+} from "../../../utils/celular/format";
 
 type PersonalFormData = z.infer<typeof CreatePersonal>;
 
@@ -32,6 +33,11 @@ export function RegisterPersonal() {
 
   function handleLoginClick() {
     navigate("/login");
+  }
+
+  function resetForm() {
+    reset();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   const onSubmit = async (data: PersonalFormData) => {
@@ -390,6 +396,17 @@ export function RegisterPersonal() {
             type="submit"
             width="w-full md:max-w-[342px]"
             title="Salvar"
+          />
+        </div>
+
+        <div className="mt-7">
+          <Button
+            loading={isLoading}
+            width="w-full md:max-w-[342px]"
+            title="Descartar"
+            bgColor="bg-midGray"
+            hover="hover:bg-midGray"
+            onClick={resetForm}
           />
         </div>
 
