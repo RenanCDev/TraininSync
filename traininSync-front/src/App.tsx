@@ -105,6 +105,14 @@ function App() {
           <Button type="submit" width="w-full md:w-64" title="Enviar" />
         </div>
       </div>
+
+      <div className="bottom-0 h-20 w-full bg-[url('/landing-page-bg.png')] bg-[position:20%_bottom] flex flex-col py-14 md:flex-row justify-center items-center gap-6 mt-56 md:bg-cover">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent pointer-events-none"></div>
+        <h1 className="text-3xl font-extrabold">TraininSync</h1>
+        <p className="text-center">
+          © Copyright 2025 . Todos os direitos reservados.
+        </p>
+      </div>
     </>
   );
 }
