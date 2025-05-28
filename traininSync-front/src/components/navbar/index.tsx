@@ -21,14 +21,38 @@ export function NavBar({ children }: NavBarProps) {
       >
         TraininSync
       </div>
-      <div className="hidden gap-7 text-2xl md:flex">
+      <div
+        onClick={() => {
+          const element = document.getElementById("Home");
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }}
+        className="hidden gap-7 text-2xl md:flex"
+      >
         <p className="cursor-pointer transition-colors duration-300 hover:text-midPurple animate-fade-in-up">
           Home
         </p>
-        <p className="cursor-pointer transition-colors duration-300 hover:text-midPurple animate-fade-in-up">
+        <p
+          onClick={() => {
+            const element = document.getElementById("Sobre");
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+          className="cursor-pointer transition-colors duration-300 hover:text-midPurple animate-fade-in-up"
+        >
           Sobre
         </p>
-        <p className="cursor-pointer transition-colors duration-300 hover:text-midPurple animate-fade-in-up">
+        <p
+          onClick={() => {
+            const element = document.getElementById("Contato");
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+          className="cursor-pointer transition-colors duration-300 hover:text-midPurple animate-fade-in-up"
+        >
           Contato
         </p>
       </div>

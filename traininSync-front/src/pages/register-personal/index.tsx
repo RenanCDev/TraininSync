@@ -250,6 +250,7 @@ export function RegisterPersonal() {
                       {...register("estado_civil")}
                       className="h-11 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
                     >
+                      <option value="nao_informado">Não informado</option>
                       <option value="casado">Casado</option>
                       <option value="divorciado">Divorciado</option>
                       <option value="solteiro">Solteiro</option>
