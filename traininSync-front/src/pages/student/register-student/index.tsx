@@ -1,20 +1,21 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../components/button";
-import { NavBar } from "../../components/navbar";
+import { Button } from "../../../components/button";
+import { NavBar } from "../../../components/navbar";
 import { CreateAluno } from "./zod";
 import { z } from "zod";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { formatCPF, removeCPFFormatting } from "../../utils/cpf/format";
+import { formatCPF, removeCPFFormatting } from "../../../utils/cpf/format";
+
+import { createAluno } from "../../../api/aluno/createAluno";
+import { toast } from "react-toastify";
+import { getAllAluno } from "../../../api/aluno/getAluno";
+import { useEffect, useState } from "react";
+import { DataAtual } from "../../../utils/dia-atual";
 import {
   formatPhoneNumber,
   unformatPhoneNumber,
-} from "../../utils/celular/format";
-import { createAluno } from "../../api/aluno/createAluno";
-import { toast } from "react-toastify";
-import { getAllAluno } from "../../api/aluno/getAluno";
-import { useEffect, useState } from "react";
-import { DataAtual } from "../../utils/dia-atual";
+} from "../../../utils/celular/format";
 
 type AlunoFormData = z.infer<typeof CreateAluno>;
 

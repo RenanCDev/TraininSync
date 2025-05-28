@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { isValidCPF } from "../../utils/cpf/cpf-validation";
-import { isValidBirthDate } from "../../utils/data-nascimento";
+import { isValidCPF } from "../../../utils/cpf/cpf-validation";
+import { isValidBirthDate } from "../../../utils/data-nascimento";
 
 export const CreateAluno = z.object({
   nome: z

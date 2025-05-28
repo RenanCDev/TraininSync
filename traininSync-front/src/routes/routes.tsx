@@ -3,7 +3,7 @@ import App from "../App";
 import { NotFound } from "../pages/notFound";
 import { Login } from "../pages/login";
 import { Register } from "../pages/register";
-import { RegisterStudent } from "../pages/register-student";
+import { RegisterStudent } from "../pages/student/register-student";
 import { RegisterSchedule } from "../pages/schedule/register-schedule";
 import { RegisterService } from "../pages/service/register-service";
 import { RegisterPayment } from "../pages/payment/register-payment";
