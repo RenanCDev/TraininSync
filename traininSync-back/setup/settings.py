@@ -11,9 +11,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import os
-import dj_database_url
 from pathlib import Path
 
+import dj_database_url
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework.authtoken",
     "traininsync",
     "drf_yasg",
     "corsheaders",
@@ -110,9 +111,14 @@ WSGI_APPLICATION = "setup.wsgi.application"
 
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv("DATABASE_URL")
-    )
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "traininsync",
+        "USER": "rael",
+        "PASSWORD": "senha",
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
 }
 
 
@@ -165,5 +171,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.AllowAny",
     ],
-    "DEFAULT_AUTHENTICATION_CLASSES": [],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ],
 }
