@@ -13,7 +13,7 @@ export function NavBar({ children }: NavBarProps) {
   }
 
   return (
-    <div className="flex justify-center items-center py-8 px-14 border-b border-midGray top-0 sm:justify-between relative z-10">
+    <nav className="flex justify-center items-center py-8 px-14 border-b border-midGray top-0 sm:justify-between relative z-10">
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent pointer-events-none"></div>
       <div
         className="text-4xl font-extrabold cursor-pointer"
@@ -57,6 +57,6 @@ export function NavBar({ children }: NavBarProps) {
         </p>
       </div>
       <div className="hidden sm:flex">{children}</div>
-    </div>
+    </nav>
   );
 }
