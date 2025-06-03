@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { X, Menu } from "lucide-react"; // Ícones do lucide-react (ou substitua por SVGs próprios)
+import { X, Menu } from "lucide-react";
 
 interface NavBarProps {
   children?: ReactNode;
