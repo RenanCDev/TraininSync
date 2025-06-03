@@ -10,3 +10,4 @@ from .pessoaserializers import PessoaSerializer
 from .register_serializer import RegisterSerializer
 from .registrodeprogressoserializer import RegistroDeProgressoSerializer
 from .servicoserializer import ServicoSerializer
+from .usermeserializer import UserMeSerializer

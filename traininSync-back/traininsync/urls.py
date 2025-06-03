@@ -15,6 +15,7 @@ from .views import (
     RegisterView,
     RegistroDeProgressoViewSet,
     ServicoViewSet,
+    UserMeView,
     api_home,
 )
 
@@ -46,10 +47,10 @@ router.register(
 )
 router.register(r"pagamento", PagamentoViewSet, basename="pagamento")
 
-
 urlpatterns = [
     path("", api_home, name="api_home"),
-    path("api/register/", RegisterView.as_view(), name="register"),
+    path("register/", RegisterView.as_view(), name="register"),
+    path("me/", UserMeView.as_view(), name="me"),
     path(
         "swagger/",
         schema_view.with_ui("swagger", cache_timeout=0),

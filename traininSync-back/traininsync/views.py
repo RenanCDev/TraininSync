@@ -3,7 +3,9 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from rest_framework import generics
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
 from .models import (
@@ -24,6 +26,7 @@ from .serializers import (
     RegisterSerializer,
     RegistroDeProgressoSerializer,
     ServicoSerializer,
+    UserMeSerializer,
 )
 
 
@@ -87,3 +90,12 @@ class RegisterView(generics.CreateAPIView):  # pylint: disable=too-many-ancestor
     queryset = User.objects.all()  # pylint: disable=no-member
     permission_classes = [AllowAny]
     serializer_class = RegisterSerializer
+
+
+class UserMeView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserMeSerializer(request.user)
+        return Response(serializer.data)
