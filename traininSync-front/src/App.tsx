@@ -6,7 +6,7 @@ function App() {
   const navigate = useNavigate();
 
   function handleRegisterClick() {
-    navigate("/register/personal");
+    navigate("/register");
   }
 
   return (
