@@ -3,10 +3,37 @@ import { useNavigate } from "react-router-dom";
 
 interface NavBarProps {
   children?: ReactNode;
+  variant?: "home" | "secondary" | "clean";
 }
 
-export function NavBar({ children }: NavBarProps) {
+interface NavBarItem {
+  label: string;
+  path: string;
+}
+
+export function NavBar({ children, variant = "clean" }: NavBarProps) {
   const navigate = useNavigate();
+
+  const homeNavItems: NavBarItem[] = [
+    { label: "Home", path: "#Home" },
+    { label: "Sobre", path: "#Sobre" },
+    { label: "Contato", path: "#Contato" },
+  ];
+
+  const secondaryNavItems: NavBarItem[] = [
+    { label: "Contratar Serviço ", path: "/services" },
+    { label: "Pagamentos", path: "/pagamentos" },
+    { label: "Contatos", path: "/contatos" },
+    { label: "Agendamento", path: "/agendamento" },
+    { label: "Serviços", path: "/servicos" },
+  ];
+
+  const navItems =
+    variant === "home"
+      ? homeNavItems
+      : variant === "secondary"
+        ? secondaryNavItems
+        : [];
 
   function handleLogoClick() {
     navigate("/");
@@ -21,41 +48,28 @@ export function NavBar({ children }: NavBarProps) {
       >
         TraininSync
       </div>
-      <div
-        onClick={() => {
-          const element = document.getElementById("Home");
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-          }
-        }}
-        className="hidden gap-7 text-2xl md:flex"
-      >
-        <p className="cursor-pointer transition-colors duration-300 hover:text-midPurple animate-fade-in-up">
-          Home
-        </p>
-        <p
-          onClick={() => {
-            const element = document.getElementById("Sobre");
-            if (element) {
-              element.scrollIntoView({ behavior: "smooth" });
-            }
-          }}
-          className="cursor-pointer transition-colors duration-300 hover:text-midPurple animate-fade-in-up"
-        >
-          Sobre
-        </p>
-        <p
-          onClick={() => {
-            const element = document.getElementById("Contato");
-            if (element) {
-              element.scrollIntoView({ behavior: "smooth" });
-            }
-          }}
-          className="cursor-pointer transition-colors duration-300 hover:text-midPurple animate-fade-in-up"
-        >
-          Contato
-        </p>
+
+      <div className="hidden gap-7 text-2xl md:flex">
+        {navItems.map(({ label, path }) => (
+          <p
+            key={path}
+            onClick={() => {
+              if (variant === "home" && path.startsWith("#")) {
+                const element = document.querySelector(path);
+                if (element) {
+                  element.scrollIntoView({ behavior: "smooth" });
+                }
+              } else {
+                navigate(path);
+              }
+            }}
+            className="cursor-pointer transition-colors duration-300 hover:text-midPurple animate-fade-in-up"
+          >
+            {label}
+          </p>
+        ))}
       </div>
+
       <div className="hidden sm:flex">{children}</div>
     </nav>
   );
