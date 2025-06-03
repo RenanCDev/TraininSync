@@ -15,6 +15,7 @@ interface NavBarItem {
 export function NavBar({ children, variant = "clean" }: NavBarProps) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedPath, setSelectedPath] = useState<string>("");
 
   const homeNavItems: NavBarItem[] = [
     { label: "Home", path: "#Home" },
@@ -40,9 +41,11 @@ export function NavBar({ children, variant = "clean" }: NavBarProps) {
   function handleLogoClick() {
     navigate("/");
     setIsOpen(false);
+    setSelectedPath("");
   }
 
   function handleItemClick(path: string) {
+    setSelectedPath(path);
     if (variant === "home" && path.startsWith("#")) {
       const element = document.querySelector(path);
       if (element) {
@@ -78,19 +81,21 @@ export function NavBar({ children, variant = "clean" }: NavBarProps) {
           TraininSync
         </div>
 
-        <div className="hidden md:flex gap-7 text-2xl">
+        <div className="hidden lg:flex gap-7 md:text-lg md:font-black">
           {navItems.map(({ label, path }) => (
             <p
               key={path}
               onClick={() => handleItemClick(path)}
-              className="cursor-pointer transition-colors duration-300 hover:text-midPurple animate-fade-in-up"
+              className={`cursor-pointer hover:text-midPurple ${
+                selectedPath === path ? "text-midPurple font-extrabold" : ""
+              }`}
             >
               {label}
             </p>
           ))}
         </div>
 
-        <div className="hidden sm:flex">{children}</div>
+        <div className="hidden md:flex">{children}</div>
 
         <button
           className="md:hidden z-50 text-white"
