@@ -158,7 +158,7 @@ class Aluno(models.Model):
     def delete(self, *args, **kwargs):
         self.pessoa.delete()  # isso deleta Pessoa e, por cascata, Aluno
         super().delete(*args, **kwargs)
-        
+
     def desativar_aluno(self):
         """Desativa o aluno."""
         self.status = False
@@ -178,7 +178,7 @@ class Aluno(models.Model):
 class Servico(models.Model):
     """Serviços prestados pelos profissionais."""
 
-    tipo_de_servico = models.CharField(max_length=150, unique=True, null=False)
+    tipo_de_servico = models.CharField(max_length=150, null=False)
     descricao_do_servico = models.TextField(null=False)
     valor_do_servico = models.FloatField(null=False)
 
