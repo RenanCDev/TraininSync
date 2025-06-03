@@ -5,13 +5,20 @@ import { CreateServico } from "./zod";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { formatToRealMoney } from "../../../utils/dinheiro";
+import { useState } from "react";
+import { createServico } from "../../../api/service/createService";
+import { toast } from "react-toastify";
 
 type ServiceFormData = z.infer<typeof CreateServico>;
 
 export function RegisterService() {
   const navigate = useNavigate();
-  const { register, setValue } = useForm<ServiceFormData>({
+  const [isLoading, setIsLoading] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ServiceFormData>({
     resolver: zodResolver(CreateServico),
   });
 
@@ -19,13 +26,36 @@ export function RegisterService() {
     navigate("/login");
   }
 
+  const onSubmit = async (data: ServiceFormData) => {
+    console.log("aqui");
+
+    const cleanData = {
+      tipo_de_servico: data.tipo_de_servico,
+      descricao_do_servico: data.descricao_do_servico,
+      valor_do_servico: data.valor_do_servico,
+    };
+
+    try {
+      setIsLoading(true);
+      await createServico(cleanData);
+      toast.success("Serviço cadastrado com sucesso!", {
+        position: "bottom-right",
+        theme: "dark",
+      });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="flex flex-col">
       <NavBar>
         <Button onClick={handleLoginClick} title="Login" />
       </NavBar>
 
-      <form className="p-8">
+      <form onSubmit={handleSubmit(onSubmit)} className="p-8">
         <div className="flex justify-center gap-1.5 text-3xl sm:text-5xl font-black md:justify-start md:px-6 pb-6">
           <h1>Serviço</h1>
         </div>
@@ -40,6 +70,11 @@ export function RegisterService() {
                   {...register("tipo_de_servico")}
                   className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
                 />
+                {errors.tipo_de_servico && (
+                  <span className="text-red-500">
+                    {errors.tipo_de_servico.message}
+                  </span>
+                )}
               </div>
               <div className="flex flex-col gap-2 col-span-1 md:col-span-2">
                 <h2>Descrição</h2>
@@ -47,6 +82,11 @@ export function RegisterService() {
                   {...register("descricao_do_servico")}
                   className="h-36 w-full bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none resize-none"
                 />
+                {errors.descricao_do_servico && (
+                  <span className="text-red-500">
+                    {errors.descricao_do_servico.message}
+                  </span>
+                )}
               </div>
               <div className="flex flex-col gap-2 col-span-1">
                 <h2>Valor</h2>
@@ -55,11 +95,12 @@ export function RegisterService() {
                   {...register("valor_do_servico")}
                   placeholder="R$"
                   className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
-                  onChange={(e) => {
-                    const formattedCPF = formatToRealMoney(e.target.value);
-                    setValue("valor_do_servico", formattedCPF);
-                  }}
                 />
+                {errors.valor_do_servico && (
+                  <span className="text-red-500">
+                    {errors.valor_do_servico.message}
+                  </span>
+                )}
               </div>
             </div>
           </div>
@@ -68,6 +109,7 @@ export function RegisterService() {
         <div className="flex flex-col md:gap-5 md:flex-row">
           <div className="mt-7">
             <Button
+              loading={isLoading}
               type="submit"
               width="w-full md:min-w-[342px]"
               title="Salvar"
@@ -76,6 +118,7 @@ export function RegisterService() {
 
           <div className="mt-7">
             <Button
+              loading={isLoading}
               width="w-full md:min-w-[342px]"
               title="Descartar"
               bgColor="bg-midGray"
