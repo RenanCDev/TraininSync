@@ -259,13 +259,11 @@ class ContratoDeServico(models.Model):
         self.save()
 
     def reativar(self):
-        """Reativa o contrato."""
         self.status = True
         self.save()
 
 
 class RegistroDeProgresso(models.Model):
-    """Registros periódicos do progresso do aluno."""
 
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name="registros")
     data = models.DateField()
