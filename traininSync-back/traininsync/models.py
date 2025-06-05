@@ -278,6 +278,7 @@ class RegistroDeProgresso(models.Model):
     taxa_de_metabolismo_basal = models.FloatField(null=True, blank=True)
     altura = models.FloatField()
     peso = models.FloatField()
+    imc = models.FloatField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
