@@ -3,11 +3,29 @@ import { Button } from "../../../components/button";
 import { NavBar } from "../../../components/navbar";
 import { CreateServico } from "./zod";
 import { z } from "zod";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { createServico } from "../../../api/service/createService";
 import { toast } from "react-toastify";
+
+function formatCurrency(value: number | string): string {
+  const num =
+    typeof value === "number"
+      ? value
+      : parseFloat(value.replace(/\D/g, "")) / 100;
+  return isNaN(num)
+    ? ""
+    : num.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+}
+
+function parseCurrency(value: string): number {
+  const clean = value.replace(/\D/g, "");
+  return parseFloat(clean) / 100 || 0;
+}
 
 type ServiceFormData = z.infer<typeof CreateServico>;
 
@@ -16,10 +34,15 @@ export function RegisterService() {
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
+    control,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<ServiceFormData>({
     resolver: zodResolver(CreateServico),
+    defaultValues: {
+      valor_do_servico: 0,
+    },
   });
 
   function handleLoginClick() {
@@ -27,11 +50,9 @@ export function RegisterService() {
   }
 
   const onSubmit = async (data: ServiceFormData) => {
-    console.log("aqui");
-
     const cleanData = {
-      tipo_de_servico: data.tipo_de_servico,
       descricao_do_servico: data.descricao_do_servico,
+      tipo_de_servico: data.tipo_de_servico,
       valor_do_servico: data.valor_do_servico,
     };
 
@@ -42,12 +63,18 @@ export function RegisterService() {
         position: "bottom-right",
         theme: "dark",
       });
+      reset();
     } catch (err) {
       console.log(err);
     } finally {
       setIsLoading(false);
     }
   };
+
+  function resetForm() {
+    reset();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   return (
     <div className="flex flex-col">
@@ -90,11 +117,21 @@ export function RegisterService() {
               </div>
               <div className="flex flex-col gap-2 col-span-1">
                 <h2>Valor</h2>
-                <input
-                  type="text"
-                  {...register("valor_do_servico")}
-                  placeholder="R$"
-                  className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                <Controller
+                  control={control}
+                  name="valor_do_servico"
+                  render={({ field }) => (
+                    <input
+                      type="text"
+                      value={formatCurrency(field.value)}
+                      onChange={(e) => {
+                        const parsed = parseCurrency(e.target.value);
+                        field.onChange(parsed);
+                      }}
+                      placeholder="R$"
+                      className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                    />
+                  )}
                 />
                 {errors.valor_do_servico && (
                   <span className="text-red-500">
@@ -119,6 +156,7 @@ export function RegisterService() {
           <div className="mt-7">
             <Button
               loading={isLoading}
+              onClick={resetForm}
               width="w-full md:min-w-[342px]"
               title="Descartar"
               bgColor="bg-midGray"
