@@ -1,13 +1,17 @@
 export function formatCurrency(value: number | string): string {
-  const number =
-    typeof value === "string"
-      ? parseFloat(value.replace(/[^\d,]/g, "").replace(",", "."))
-      : value;
-  if (isNaN(number)) return "";
-  return number.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  const num =
+    typeof value === "number"
+      ? value
+      : parseFloat(value.replace(/\D/g, "")) / 100;
+  return isNaN(num)
+    ? ""
+    : num.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
 }
 
-export function unformatCurrency(value: string): number {
-  const numeric = value.replace(/[^\d,]/g, "").replace(",", ".");
-  return parseFloat(numeric);
+export function parseCurrency(value: string): number {
+  const clean = value.replace(/\D/g, "");
+  return parseFloat(clean) / 100 || 0;
 }

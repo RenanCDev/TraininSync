@@ -8,24 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { createServico } from "../../../api/service/createService";
 import { toast } from "react-toastify";
-
-function formatCurrency(value: number | string): string {
-  const num =
-    typeof value === "number"
-      ? value
-      : parseFloat(value.replace(/\D/g, "")) / 100;
-  return isNaN(num)
-    ? ""
-    : num.toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-      });
-}
-
-function parseCurrency(value: string): number {
-  const clean = value.replace(/\D/g, "");
-  return parseFloat(clean) / 100 || 0;
-}
+import { formatCurrency, parseCurrency } from "../../../utils/dinheiro";
 
 type ServiceFormData = z.infer<typeof CreateServico>;
 
