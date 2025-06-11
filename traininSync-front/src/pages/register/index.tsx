@@ -59,6 +59,17 @@ export function Register() {
           <h1 className="text-5xl font-black">Cadastro</h1>
           <div className="border border-midPurple rounded-3xl text-lowGray flex flex-col gap-4 p-5">
             <div className="flex flex-col gap-2">
+              <h2>Email</h2>
+              <input
+                type="text"
+                {...register("email")}
+                className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+              />
+              {errors.email && (
+                <span className="text-red-500">{errors.email.message}</span>
+              )}
+            </div>
+            <div className="flex flex-col gap-2">
               <h2>Usuário</h2>
               <input
                 type="text"
