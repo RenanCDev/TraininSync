@@ -139,7 +139,7 @@ class Aluno(models.Model):
         Pessoa, on_delete=models.CASCADE, related_name="aluno"
     )
     status = models.BooleanField(default=True)
-    bioimpedancia = models.CharField(null=True, blank=True)
+    bioimpedancia = models.CharField(max_length=100, null=True, blank=True)
     altura = models.FloatField()
     data_do_exame = models.DateField(null=True, blank=True)
     hora_do_exame = models.TimeField(null=True, blank=True)
@@ -259,13 +259,11 @@ class ContratoDeServico(models.Model):
         self.save()
 
     def reativar(self):
-        """Reativa o contrato."""
         self.status = True
         self.save()
 
 
 class RegistroDeProgresso(models.Model):
-    """Registros periódicos do progresso do aluno."""
 
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name="registros")
     data = models.DateField()

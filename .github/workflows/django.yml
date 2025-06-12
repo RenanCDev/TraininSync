@@ -2,9 +2,9 @@ name: Django CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "dev" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "dev" ]
 
 jobs:
   build:
@@ -32,20 +32,23 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r traininSync-back/requirements.txt
         pip install coverage
     - name: Copying configurations
       run: |
         cp .env.example .env
+    - name: Export env vars
+      run: |
+        echo "DATABASE_URL=postgresql://admin:senha-traininsync@localhost:5432/bdtraininsync" >> $GITHUB_ENV
     - name: Run migrations
       run: |
-        python manage.py migrate
+        python traininSync-back/manage.py migrate
     - name: Run Tests
       run: |
-        python manage.py test
+        python traininSync-back/manage.py test traininsync.tests
     - name: Run tests with coverage
       run: |
-        coverage run manage.py test
+        coverage run traininSync-back/manage.py test traininsync.tests
         coverage xml
     - name: Install SonarScanner CLI
       run: |
