@@ -1,10 +1,11 @@
 [run]
-source = traininSync-back
+source = .
 omit =
     */migrations/*
     */tests/*
     */__init__.py
     */settings.py
+    ../traininSync-front/*
     manage.py
 
 [report]
