@@ -40,8 +40,6 @@ jobs:
     - name: Export env vars
       run: |
         echo "DATABASE_URL=postgresql://admin:senha-traininsync@localhost:5432/bdtraininsync" >> $GITHUB_ENV
-        echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
-
     - name: Run migrations
       run: |
         python traininSync-back/manage.py migrate
@@ -50,8 +48,9 @@ jobs:
         python traininSync-back/manage.py test traininsync.tests
     - name: Run tests with coverage
       run: |
-        coverage run traininSync-back/manage.py test traininsync.tests
-        coverage xml
+        coverage run --rcfile=.coveragerc manage.py test
+        coverage xml --rcfile=.coveragerc
+      working-directory: traininSync-back
     - name: Install SonarScanner CLI
       run: |
         curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip

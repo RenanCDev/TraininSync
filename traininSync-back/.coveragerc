@@ -1,0 +1,15 @@
+[run]
+source = traininSync-back
+omit =
+    */migrations/*
+    */tests/*
+    */__init__.py
+    */settings.py
+    manage.py
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def __str__
+    if self\.debug
+    if __name__ == .__main__.:
