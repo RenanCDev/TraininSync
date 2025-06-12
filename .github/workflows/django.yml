@@ -45,10 +45,10 @@ jobs:
         python traininSync-back/manage.py migrate
     - name: Run Tests
       run: |
-        python traininSync-back/manage.py test
+        python traininSync-back/manage.py test traininsync.tests
     - name: Run tests with coverage
       run: |
-        coverage traininSync-back/manage.py test
+        coverage run traininSync-back/manage.py test
         coverage xml
     - name: Install SonarScanner CLI
       run: |
