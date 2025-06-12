@@ -39,13 +39,13 @@ jobs:
         cp .env.example .env
     - name: Run migrations
       run: |
-        python Traininsync/traininsync-backend/manage.py migrate
+        python traininSync-back/manage.py migrate
     - name: Run Tests
       run: |
-        python Traininsync/traininsync-backend/manage.py test
+        python traininSync-back/manage.py test
     - name: Run tests with coverage
       run: |
-        coverage Traininsync/traininsync-backend/manage.py test
+        coverage traininSync-back/manage.py test
         coverage xml
     - name: Install SonarScanner CLI
       run: |
