@@ -5,5 +5,5 @@ omit =
     */tests/*
     */__init__.py
     */settings.py
-    ../traininSync-front/*
+    */traininSync-front/*
     manage.py
