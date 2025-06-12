@@ -48,7 +48,7 @@ jobs:
         python traininSync-back/manage.py test traininsync.tests
     - name: Run tests with coverage
       run: |
-        coverage run traininSync-back/manage.py test
+        coverage run traininSync-back/manage.py test traininsync.tests
         coverage xml
     - name: Install SonarScanner CLI
       run: |
