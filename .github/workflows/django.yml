@@ -37,6 +37,9 @@ jobs:
     - name: Copying configurations
       run: |
         cp .env.example .env
+    - name: Export DATABASE_URL
+      run: |
+        echo "DATABASE_URL=postgresql://admin:senha-traininsync@localhost:5432/bdtraininsync" >> $GITHUB_ENV
     - name: Run migrations
       run: |
         python traininSync-back/manage.py migrate
