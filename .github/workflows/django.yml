@@ -48,7 +48,7 @@ jobs:
         python traininSync-back/manage.py test traininsync.tests
     - name: Run tests with coverage
       run: |
-        coverage run --rcfile=.coveragerc manage.py test
+        coverage run --rcfile=.coveragerc manage.py test traininsync.tests
         coverage xml --rcfile=.coveragerc
       working-directory: traininSync-back
     - name: Install SonarScanner CLI
