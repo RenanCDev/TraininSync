@@ -77,8 +77,8 @@ class ContratoDeServicoTestCase(TestCase):
         self.agenda = Agenda.objects.create(
             personal=self.personal,
             dia=date.today(),
-            hora_inicio=time(8, 0),
-            hora_fim=time(9, 0),
+            hora_inicio=time(6, 0),
+            hora_fim=time(7, 0),
             local="Academia Central",
         )
 
