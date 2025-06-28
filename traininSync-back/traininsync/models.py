@@ -202,13 +202,6 @@ class Agenda(models.Model):
     hora_fim = models.TimeField()
     local = models.CharField(max_length=150)
     disponivel = models.BooleanField(default=True)
-    reserva = models.OneToOneField(
-        "ContratoDeServico",
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name="agenda_reservada",
-    )
 
     class Meta:
         unique_together = ("personal", "dia", "hora_inicio")
@@ -231,14 +224,15 @@ class ContratoDeServico(models.Model):
     personal = models.ForeignKey(
         Personal, on_delete=models.CASCADE, related_name="contratos"
     )
+
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name="contratos")
-    horario = models.ForeignKey(
+
+    horario = models.OneToOneField(
         Agenda,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
+        on_delete=models.CASCADE,
         related_name="contratos",
     )
+
     servico_desejado = models.ForeignKey(
         Servico, on_delete=models.CASCADE, related_name="contratos"
     )

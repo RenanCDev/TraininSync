@@ -7,7 +7,15 @@ from datetime import date, time
 
 from django.test import TestCase
 
-from ..models import Aluno, ContratoDeServico, DadosBancarios, Personal, Pessoa, Servico
+from ..models import (
+    Agenda,
+    Aluno,
+    ContratoDeServico,
+    DadosBancarios,
+    Personal,
+    Pessoa,
+    Servico,
+)
 
 
 class ContratoDeServicoTestCase(TestCase):
@@ -19,11 +27,11 @@ class ContratoDeServicoTestCase(TestCase):
         """
         Configura objetos Pessoa, Aluno, Personal, Servico e ContratoDeServico para uso nos testes.
         """
-        dados_bancarios = DadosBancarios.objects.create(
+        self.dados_bancarios = DadosBancarios.objects.create(
             numero_conta="123456", agencia="0001"
         )
 
-        personal = Personal.objects.create(
+        self.personal = Personal.objects.create(
             nome="Personal Teste",
             cpf="98765432100",
             data_de_nascimento=date(1985, 5, 20),
@@ -35,12 +43,12 @@ class ContratoDeServicoTestCase(TestCase):
             cref="CREF54321",
             especialidades="Musculação",
             experiencia_profissional="10 anos",
-            dados_bancarios=dados_bancarios,
+            dados_bancarios=self.dados_bancarios,
             horarios_disponiveis=20.0,
             locais_disponiveis="Academia Central",
         )
 
-        pessoa = Pessoa.objects.create(
+        self.pessoa = Pessoa.objects.create(
             nome="Aluno Teste",
             cpf="12345678909",
             data_de_nascimento=date(1995, 1, 1),
@@ -51,8 +59,8 @@ class ContratoDeServicoTestCase(TestCase):
             estado_civil="solteiro",
         )
 
-        aluno = Aluno.objects.create(
-            pessoa=pessoa,
+        self.aluno = Aluno.objects.create(
+            pessoa=self.pessoa,
             bioimpedancia="BIO1234567890",
             altura=1.75,
             data_do_exame=date.today(),
@@ -60,16 +68,25 @@ class ContratoDeServicoTestCase(TestCase):
             peso=70.0,
         )
 
-        servico = Servico.objects.create(
+        self.servico = Servico.objects.create(
             tipo_de_servico="Treino Avançado",
             descricao_do_servico="Treino focado em hipertrofia",
             valor_do_servico=200.0,
         )
 
+        self.agenda = Agenda.objects.create(
+            personal=self.personal,
+            dia=date.today(),
+            hora_inicio=time(8, 0),
+            hora_fim=time(9, 0),
+            local="Academia Central",
+        )
+
         self.contrato = ContratoDeServico.objects.create(
-            personal=personal,
-            aluno=aluno,
-            servico_desejado=servico,
+            personal=self.personal,
+            aluno=self.aluno,
+            horario=self.agenda,
+            servico_desejado=self.servico,
             localidade_desejada="Academia Central",
         )
 
@@ -106,10 +123,19 @@ class ContratoDeServicoTestCase(TestCase):
         """
         Verifica se um contrato pode ser ativado corretamente.
         """
+        nova_agenda = Agenda.objects.create(
+            personal=self.personal,
+            dia=date.today(),
+            hora_inicio=time(10, 0),
+            hora_fim=time(11, 0),
+            local="Academia B",
+        )
+
         novo_contrato = ContratoDeServico.objects.create(
-            personal=self.contrato.personal,
-            aluno=self.contrato.aluno,
-            servico_desejado=self.contrato.servico_desejado,
+            personal=self.personal,
+            aluno=self.aluno,
+            horario=nova_agenda,  # campo obrigatório corrigido
+            servico_desejado=self.servico,
             localidade_desejada="Academia B",
         )
         self.assertIsNotNone(novo_contrato)

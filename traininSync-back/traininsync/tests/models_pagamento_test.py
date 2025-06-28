@@ -2,11 +2,11 @@
 """
 Testes para o modelo Pagamento.
 """
-
 from datetime import date, time
 
 from django.test import TestCase
 
+from ..models import Agenda  # <-- Import necessário!
 from ..models import (
     Aluno,
     ContratoDeServico,
@@ -24,10 +24,6 @@ class PagamentoModelTestCase(TestCase):
     """
 
     def setUp(self):
-        """
-        Configura os objetos Pessoa, Aluno, Personal, DadosBancarios, Servico,
-        ContratoDeServico e Pagamento para uso nos testes.
-        """
         pessoa = Pessoa.objects.create(
             nome="João Silva",
             cpf="12345678901",
@@ -76,9 +72,18 @@ class PagamentoModelTestCase(TestCase):
             valor_do_servico=200.0,
         )
 
+        horario = Agenda.objects.create(
+            personal=personal,
+            dia=date.today(),
+            hora_inicio=time(9, 0),
+            hora_fim=time(10, 0),
+            local="Academia Central",
+        )
+
         self.contrato = ContratoDeServico.objects.create(
             personal=personal,
             aluno=aluno,
+            horario=horario,  # <-- ESSENCIAL!
             servico_desejado=servico,
             localidade_desejada="Academia Central",
         )
