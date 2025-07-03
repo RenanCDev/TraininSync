@@ -1,37 +1,101 @@
-from rest_framework.viewsets import ModelViewSet
-from django.shortcuts import render
+"""Views da API REST para os modelos do sistema TraininSync."""
 
-from .models import Personal, Aluno, Servico, Agenda, ContratoDeServico, RegistroDeProgresso, Pagamento
-from .serializers import PersonalSerializer, AlunoSerializer, ServicoSerializer, AgendaSerializer, ContratoDeServicoSerializer, RegistroDeProgressoSerializer, PagamentoSerializer
+from django.contrib.auth.models import User
+from django.shortcuts import render
+from rest_framework import generics
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
+
+from .models import (
+    Agenda,
+    Aluno,
+    ContratoDeServico,
+    Pagamento,
+    Personal,
+    RegistroDeProgresso,
+    Servico,
+)
+from .serializers import (
+    AgendaSerializer,
+    AlunoSerializer,
+    ContratoDeServicoSerializer,
+    PagamentoSerializer,
+    PersonalSerializer,
+    RegisterSerializer,
+    RegistroDeProgressoSerializer,
+    ServicoSerializer,
+    UserMeSerializer,
+)
 
 
 def api_home(request):
-    return render(request, 'api_home.html')
+    """Renderiza a página inicial da API."""
+    return render(request, "api_home.html")
 
-class PersonalViewSet(ModelViewSet):
-    queryset = Personal.objects.all()
+
+class PersonalViewSet(ModelViewSet):  # pylint: disable=too-many-ancestors
+    """ViewSet para o modelo Personal."""
+
+    queryset = Personal.objects.all()  # pylint: disable=no-member
     serializer_class = PersonalSerializer
 
-class AlunoViewSet(ModelViewSet):
-    queryset = Aluno.objects.all()
+
+class AlunoViewSet(ModelViewSet):  # pylint: disable=too-many-ancestors
+    """ViewSet para o modelo Aluno."""
+
+    queryset = Aluno.objects.all()  # pylint: disable=no-member
     serializer_class = AlunoSerializer
 
-class ServicoViewSet(ModelViewSet):
-    queryset = Servico.objects.all()
+
+class ServicoViewSet(ModelViewSet):  # pylint: disable=too-many-ancestors
+    """ViewSet para o modelo Servico."""
+
+    queryset = Servico.objects.all()  # pylint: disable=no-member
     serializer_class = ServicoSerializer
 
-class AgendaViewSet(ModelViewSet):
-    queryset = Agenda.objects.all()
+
+class AgendaViewSet(ModelViewSet):  # pylint: disable=too-many-ancestors
+    """ViewSet para o modelo Agenda."""
+
+    queryset = Agenda.objects.all()  # pylint: disable=no-member
     serializer_class = AgendaSerializer
 
-class ContratoDeServicoViewSet(ModelViewSet):
-    queryset = ContratoDeServico.objects.all()
+
+class ContratoDeServicoViewSet(ModelViewSet):  # pylint: disable=too-many-ancestors
+    """ViewSet para o modelo ContratoDeServico."""
+
+    queryset = ContratoDeServico.objects.all()  # pylint: disable=no-member
     serializer_class = ContratoDeServicoSerializer
 
-class RegistroDeProgressoViewSet(ModelViewSet):
-    queryset = RegistroDeProgresso.objects.all()
+
+class RegistroDeProgressoViewSet(ModelViewSet):  # pylint: disable=too-many-ancestors
+    """ViewSet para o modelo RegistroDeProgresso."""
+
+    queryset = RegistroDeProgresso.objects.all()  # pylint: disable=no-member
     serializer_class = RegistroDeProgressoSerializer
 
-class PagamentoViewSet(ModelViewSet):
-    queryset = Pagamento.objects.all()
+
+class PagamentoViewSet(ModelViewSet):  # pylint: disable=too-many-ancestors
+    """ViewSet para o modelo Pagamento."""
+
+    queryset = Pagamento.objects.all()  # pylint: disable=no-member
     serializer_class = PagamentoSerializer
+
+
+class RegisterView(generics.CreateAPIView):  # pylint: disable=too-many-ancestors
+    """View para registro de novos usuários."""
+
+    queryset = User.objects.all()  # pylint: disable=no-member
+    permission_classes = [AllowAny]
+    serializer_class = RegisterSerializer
+
+
+class UserMeView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserMeSerializer(request.user)
+        return Response(serializer.data)
