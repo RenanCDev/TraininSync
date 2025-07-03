@@ -139,7 +139,7 @@ class Aluno(models.Model):
         Pessoa, on_delete=models.CASCADE, related_name="aluno"
     )
     status = models.BooleanField(default=True)
-    bioimpedancia = models.CharField(null=True, blank=True)
+    bioimpedancia = models.CharField(max_length=100, null=True, blank=True)
     altura = models.FloatField()
     data_do_exame = models.DateField(null=True, blank=True)
     hora_do_exame = models.TimeField(null=True, blank=True)
@@ -178,7 +178,7 @@ class Aluno(models.Model):
 class Servico(models.Model):
     """Serviços prestados pelos profissionais."""
 
-    tipo_de_servico = models.CharField(max_length=150, unique=True, null=False)
+    tipo_de_servico = models.CharField(max_length=150, null=False)
     descricao_do_servico = models.TextField(null=False)
     valor_do_servico = models.FloatField(null=False)
 
@@ -259,13 +259,11 @@ class ContratoDeServico(models.Model):
         self.save()
 
     def reativar(self):
-        """Reativa o contrato."""
         self.status = True
         self.save()
 
 
 class RegistroDeProgresso(models.Model):
-    """Registros periódicos do progresso do aluno."""
 
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name="registros")
     data = models.DateField()
@@ -278,6 +276,7 @@ class RegistroDeProgresso(models.Model):
     taxa_de_metabolismo_basal = models.FloatField(null=True, blank=True)
     altura = models.FloatField()
     peso = models.FloatField()
+    imc = models.FloatField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -303,3 +302,4 @@ class Pagamento(models.Model):
             f"Pagamento de {self.aluno.pessoa.nome} referente ao contrato "
             f"{self.contrato} na data {self.data_pagamento} - R$ {self.valor}"
         )
+      

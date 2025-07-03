@@ -6,16 +6,16 @@ function App() {
   const navigate = useNavigate();
 
   function handleRegisterClick() {
-    navigate("/register/personal");
+    navigate("/register");
   }
 
   return (
     <>
-      <div
+      <section
         id="Home"
         className="bg-[url('/landing-page-bg.png')] bg-[position:38%_center] bg-cover h-screen text-white sm:bg-center"
       >
-        <NavBar>
+        <NavBar variant="home">
           <Button onClick={handleRegisterClick} title="Cadastre-se" />
         </NavBar>
 
@@ -34,9 +34,9 @@ function App() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div
+      <section
         id="Sobre"
         className="h-screen bg-darkGray flex flex-col justify-center p-11 md:p-24 "
       >
@@ -52,9 +52,9 @@ function App() {
           prazo. Ainda em constante evolução, o projeto segue sendo ajustado com
           base nas necessidades reais de quem treina e de quem orienta.
         </p>
-      </div>
+      </section>
 
-      <div
+      <section
         id="Contato"
         className="h-screen flex flex-col gap-7 xl:flex-row xl:justify-center bg-darkGray px-11 md:px-24"
       >
@@ -104,7 +104,7 @@ function App() {
           </div>
           <Button type="submit" width="w-full md:w-64" title="Enviar" />
         </div>
-      </div>
+      </section>
 
       <div className="bottom-0 h-20 w-full bg-[url('/landing-page-bg.png')] bg-[position:20%_bottom] flex flex-col py-14 md:flex-row justify-center items-center gap-6 mt-56 md:bg-cover">
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent pointer-events-none"></div>
