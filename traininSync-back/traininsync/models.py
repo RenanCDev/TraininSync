@@ -1,5 +1,7 @@
 # pylint: disable=no-member, too-few-public-methods
 
+"""Arquivo Models para modelagem do banco de dados"""
+
 import re
 from datetime import date
 
@@ -132,12 +134,9 @@ class Personal(Pessoa):
         return cls.objects.filter(cpf=cpf).first()
 
 
-class Aluno(models.Model):
+class Aluno(Pessoa):
     """Modelo que representa um aluno com dados de exame."""
 
-    pessoa = models.OneToOneField(
-        Pessoa, on_delete=models.CASCADE, related_name="aluno"
-    )
     status = models.BooleanField(default=True)
     bioimpedancia = models.CharField(max_length=100, null=True, blank=True)
     altura = models.FloatField()
@@ -156,7 +155,8 @@ class Aluno(models.Model):
         return f"{self.pessoa.nome} - Bioimpedância: {self.bioimpedancia}"
 
     def delete(self, *args, **kwargs):
-        self.pessoa.delete()  # isso deleta Pessoa e, por cascata, Aluno
+        """Deleta a pessoa associada ao aluno."""
+
         super().delete(*args, **kwargs)
 
     def desativar_aluno(self):
@@ -202,19 +202,16 @@ class Agenda(models.Model):
     hora_fim = models.TimeField()
     local = models.CharField(max_length=150)
     disponivel = models.BooleanField(default=True)
-    reserva = models.OneToOneField(
-        "ContratoDeServico",
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name="agenda_reservada",
-    )
 
     class Meta:
+        """Agenda de horários de um personal."""
+
         unique_together = ("personal", "dia", "hora_inicio")
         ordering = ["dia", "hora_inicio"]
 
     def clean(self):
+        """Verificação"""
+
         if self.hora_inicio >= self.hora_fim:
             raise ValidationError("Hora de início deve ser menor que a hora de fim.")
 
@@ -231,14 +228,15 @@ class ContratoDeServico(models.Model):
     personal = models.ForeignKey(
         Personal, on_delete=models.CASCADE, related_name="contratos"
     )
+
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name="contratos")
-    horario = models.ForeignKey(
+
+    horario = models.OneToOneField(
         Agenda,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
+        on_delete=models.CASCADE,
         related_name="contratos",
     )
+
     servico_desejado = models.ForeignKey(
         Servico, on_delete=models.CASCADE, related_name="contratos"
     )
@@ -259,11 +257,14 @@ class ContratoDeServico(models.Model):
         self.save()
 
     def reativar(self):
+        """Reativa o contrato."""
+
         self.status = True
         self.save()
 
 
 class RegistroDeProgresso(models.Model):
+    """Modulo do Resgistro de Progresso de um aluno."""
 
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name="registros")
     data = models.DateField()
@@ -302,4 +303,3 @@ class Pagamento(models.Model):
             f"Pagamento de {self.aluno.pessoa.nome} referente ao contrato "
             f"{self.contrato} na data {self.data_pagamento} - R$ {self.valor}"
         )
-      

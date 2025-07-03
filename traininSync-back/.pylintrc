@@ -1,6 +1,6 @@
 [MASTER]
 load-plugins = pylint_django
-ignore=migrations
+ignore-patterns= traininsync/migrations/*
 
 [MESSAGES CONTROL]
 disable =

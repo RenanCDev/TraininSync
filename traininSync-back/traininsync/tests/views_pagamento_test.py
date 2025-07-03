@@ -1,6 +1,4 @@
-# pylint: disable=missing-module-docstring, missing-class-docstring, missing-function-docstring, no-member
-
-"""Testes para as views de Pagamento da API."""
+# pylint: disable=missing-module-docstring, missing-class-docstring, missing-function-docstring, no-member, too-many-instance-attributes
 
 from datetime import date
 
@@ -16,16 +14,12 @@ from traininsync.models import (
     DadosBancarios,
     Pagamento,
     Personal,
-    Pessoa,
     Servico,
 )
 
 
 class PagamentoViewSetTestCase(TestCase):
-    """Testa as operações CRUD da view de Pagamento."""
-
     def setUp(self):
-        """Cria os dados necessários para os testes."""
         self.client = APIClient()
 
         self.dados_bancarios = DadosBancarios.objects.create(
@@ -47,7 +41,7 @@ class PagamentoViewSetTestCase(TestCase):
             dados_bancarios=self.dados_bancarios,
         )
 
-        self.pessoa_aluno = Pessoa.objects.create(
+        self.aluno = Aluno.objects.create(
             nome="Aluno Teste",
             cpf="52998224725",
             data_de_nascimento="1995-01-01",
@@ -56,10 +50,9 @@ class PagamentoViewSetTestCase(TestCase):
             sexo="F",
             etnia="parda",
             estado_civil="solteiro",
-        )
-
-        self.aluno = Aluno.objects.create(
-            pessoa=self.pessoa_aluno, altura=1.70, peso=65.0, status=True
+            altura=1.70,
+            peso=65.0,
+            status=True,
         )
 
         self.servico = Servico.objects.create(
@@ -99,19 +92,16 @@ class PagamentoViewSetTestCase(TestCase):
         )
 
     def test_list_pagamentos(self):
-        """Testa listagem de pagamentos."""
         response = self.client.get(self.url_list)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
 
     def test_retrieve_pagamento(self):
-        """Testa recuperação de um pagamento específico."""
         response = self.client.get(self.url_detail)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(float(response.data["valor"]), 150.00)
 
     def test_create_pagamento(self):
-        """Testa criação de um novo pagamento."""
         data = {
             "aluno": self.aluno.id,
             "contrato": self.contrato.id,
@@ -125,7 +115,6 @@ class PagamentoViewSetTestCase(TestCase):
         self.assertEqual(Pagamento.objects.count(), 2)
 
     def test_update_pagamento(self):
-        """Testa atualização de um pagamento existente."""
         data = {
             "aluno": self.aluno.id,
             "contrato": self.contrato.id,
@@ -140,7 +129,6 @@ class PagamentoViewSetTestCase(TestCase):
         self.assertEqual(self.pagamento.valor, 300.00)
 
     def test_delete_pagamento(self):
-        """Testa remoção de um pagamento."""
         response = self.client.delete(self.url_detail)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Pagamento.objects.count(), 0)

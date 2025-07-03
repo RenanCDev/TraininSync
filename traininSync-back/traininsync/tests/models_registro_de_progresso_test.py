@@ -3,11 +3,11 @@
 Testes para o modelo Registro de Progresso.
 """
 
-from datetime import date
+from datetime import date, time
 
 from django.test import TestCase
 
-from ..models import Aluno, Pessoa, RegistroDeProgresso
+from ..models import Aluno, RegistroDeProgresso
 
 
 class RegistroDeProgressoTestCase(TestCase):
@@ -19,7 +19,7 @@ class RegistroDeProgressoTestCase(TestCase):
         """
         Configura os objetos necessários para os testes.
         """
-        self.pessoa = Pessoa.objects.create(
+        self.aluno = Aluno.objects.create(
             nome="Carlos Souza",
             cpf="12345678909",
             data_de_nascimento=date(1985, 5, 20),
@@ -28,14 +28,10 @@ class RegistroDeProgressoTestCase(TestCase):
             sexo="M",
             etnia="branca",
             estado_civil="casado",
-        )
-
-        self.aluno = Aluno.objects.create(
-            pessoa=self.pessoa,
             bioimpedancia="BIO1234567890",
             altura=1.75,
             data_do_exame=date.today(),
-            hora_do_exame="08:00",
+            hora_do_exame=time(8, 0),
             peso=75.0,
             status=True,
         )
@@ -51,7 +47,7 @@ class RegistroDeProgressoTestCase(TestCase):
         """
         Verifica se o registro de progresso foi criado corretamente.
         """
-        self.assertEqual(self.registro.aluno.pessoa.nome, "Carlos Souza")
+        self.assertEqual(self.registro.aluno.nome, "Carlos Souza")
         self.assertEqual(self.registro.altura, 1.75)
         self.assertEqual(self.registro.peso, 75.0)
 
