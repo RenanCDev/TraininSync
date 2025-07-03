@@ -302,3 +302,4 @@ class Pagamento(models.Model):
             f"Pagamento de {self.aluno.pessoa.nome} referente ao contrato "
             f"{self.contrato} na data {self.data_pagamento} - R$ {self.valor}"
         )
+      
