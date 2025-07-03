@@ -9,7 +9,7 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from traininsync.models import Aluno, Pessoa
+from traininsync.models import Aluno
 
 
 def gerar_cpf_valido():
@@ -40,8 +40,8 @@ class AlunoViewSetTestCase(TestCase):
         self.cpf_valido2 = gerar_cpf_valido()
         self.cpf_valido3 = gerar_cpf_valido()
 
-        # Criar Pessoa
-        self.pessoa = Pessoa.objects.create(
+        # Criar Aluno
+        self.aluno = Aluno.objects.create(
             nome="Test Aluno",
             cpf=self.cpf_valido1,
             data_de_nascimento="1995-01-01",
@@ -50,11 +50,9 @@ class AlunoViewSetTestCase(TestCase):
             sexo="M",
             etnia="branca",
             estado_civil="solteiro",
-        )
-
-        # Criar Aluno
-        self.aluno = Aluno.objects.create(
-            pessoa=self.pessoa, altura=1.75, peso=70.0, status=True
+            altura=1.75,
+            peso=70.0,
+            status=True,
         )
 
         self.url_list = reverse("traininsync:aluno-list")
@@ -77,16 +75,14 @@ class AlunoViewSetTestCase(TestCase):
     def test_create_aluno(self):
         """Testa criação de um novo aluno."""
         data = {
-            "pessoa": {
-                "nome": "New Aluno",
-                "cpf": self.cpf_valido2,
-                "data_de_nascimento": "1998-01-01",
-                "email": "newaluno@test.com",
-                "numero_de_celular": "11988888888",
-                "sexo": "F",
-                "etnia": "parda",
-                "estado_civil": "casado",
-            },
+            "nome": "New Aluno",
+            "cpf": self.cpf_valido2,
+            "data_de_nascimento": "1998-01-01",
+            "email": "newaluno@test.com",
+            "numero_de_celular": "11988888888",
+            "sexo": "F",
+            "etnia": "parda",
+            "estado_civil": "casado",
             "altura": 1.65,
             "peso": 60.0,
             "status": True,
@@ -100,16 +96,14 @@ class AlunoViewSetTestCase(TestCase):
     def test_update_aluno(self):
         """Testa atualização dos dados do aluno."""
         data = {
-            "pessoa": {
-                "nome": "Updated Aluno",
-                "cpf": self.cpf_valido3,
-                "data_de_nascimento": "1995-01-01",
-                "email": "updated@test.com",
-                "numero_de_celular": "11999999999",
-                "sexo": "M",
-                "etnia": "branca",
-                "estado_civil": "solteiro",
-            },
+            "nome": "Updated Aluno",
+            "cpf": self.cpf_valido3,
+            "data_de_nascimento": "1995-01-01",
+            "email": "updated@test.com",
+            "numero_de_celular": "11999999999",
+            "sexo": "M",
+            "etnia": "branca",
+            "estado_civil": "solteiro",
             "altura": 1.80,
             "peso": 75.0,
             "status": True,

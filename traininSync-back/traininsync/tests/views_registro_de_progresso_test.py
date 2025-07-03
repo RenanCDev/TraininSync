@@ -2,14 +2,14 @@
 
 """Testes para o ViewSet de RegistroDeProgresso."""
 
-from datetime import date
+from datetime import date, time
 
 from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from traininsync.models import Aluno, Pessoa, RegistroDeProgresso
+from traininsync.models import Aluno, RegistroDeProgresso
 
 
 class RegistroDeProgressoViewSetTestCase(TestCase):
@@ -19,8 +19,8 @@ class RegistroDeProgressoViewSetTestCase(TestCase):
         """Configuração inicial antes de cada teste."""
         self.client = APIClient()
 
-        # Criar Pessoa e Aluno
-        self.pessoa = Pessoa.objects.create(  # pylint: disable=no-member
+        # Criar Aluno diretamente
+        self.aluno = Aluno.objects.create(
             nome="Aluno Teste",
             cpf="52998224725",  # CPF válido
             data_de_nascimento="1995-01-01",
@@ -29,14 +29,15 @@ class RegistroDeProgressoViewSetTestCase(TestCase):
             sexo="M",
             etnia="branca",
             estado_civil="solteiro",
-        )
-
-        self.aluno = Aluno.objects.create(  # pylint: disable=no-member
-            pessoa=self.pessoa, altura=1.75, peso=70.0, status=True
+            altura=1.75,
+            peso=70.0,
+            status=True,
+            data_do_exame=date.today(),
+            hora_do_exame=time(8, 0),
         )
 
         # Criar Registro de Progresso
-        self.registro = RegistroDeProgresso.objects.create(  # pylint: disable=no-member
+        self.registro = RegistroDeProgresso.objects.create(
             aluno=self.aluno,
             data=date.today(),
             altura=1.75,
@@ -78,9 +79,7 @@ class RegistroDeProgressoViewSetTestCase(TestCase):
         if response.status_code != status.HTTP_201_CREATED:
             print("Erro na criação:", response.data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(
-            RegistroDeProgresso.objects.count(), 2
-        )  # pylint: disable=no-member
+        self.assertEqual(RegistroDeProgresso.objects.count(), 2)
 
     def test_update_registro(self):
         """Testa a atualização de um registro de progresso existente."""
@@ -103,6 +102,4 @@ class RegistroDeProgressoViewSetTestCase(TestCase):
         """Testa a exclusão de um registro de progresso."""
         response = self.client.delete(self.url_detail)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEqual(
-            RegistroDeProgresso.objects.count(), 0
-        )  # pylint: disable=no-member
+        self.assertEqual(RegistroDeProgresso.objects.count(), 0)
