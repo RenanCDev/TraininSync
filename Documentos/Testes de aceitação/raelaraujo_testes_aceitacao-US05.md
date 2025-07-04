@@ -1,88 +1,82 @@
-# Relatório de Testes de Módulo/Sistema
+# ✅ Relatório de Testes de Aceitação — Módulo **Registro de Progresso**
 
-## Responsabilidade do Testador
+## 📅 Data de Teste: 04/07/2025
 
----
-
-### Legenda
-
-- **Teste**: Código ou identificação do Teste.
-- **Descrição**: Descrição dos passos e detalhes do teste a ser executado.
-- **Especificação**: Informações sobre a função testada e se ela está de acordo com a especificação do caso de uso.
-- **Resultado**: Resultado do teste, modificações sugeridas ou resultados do teste. No caso de erro ou problema na execução do teste, descrever o erro em detalhes e adicionar prints das telas.
+## 👤 Responsável: Rael Lyedson de Araujo Silva
 
 ---
 
-## US001 – Manter Produto
+## 🧩 Recurso Testado: **/registrodeprogresso/**
 
-### Teste 01: Incluir Produto
+### Descrição Geral:
 
-**Descrição**
-A1 - Incluir Produto
-- A1.1. O ator preenche os dados;
-- A1.2. O ator seleciona a opção Cadastrar;
-- A1.3. O sistema salva os dados;
-- A1.4. O sistema exibe uma mensagem de acordo com a [MSG001];
-- A1.5. Fim do fluxo.
-
-**Especificação**
-A função implementada não segue os passos A1.4.
-A implementação não está de acordo com a especificação do User Story.
-
-**Resultado**
-O produto é inserido, contudo a mensagem [MSG001] não foi exibida.
+Este módulo fornece endpoints para o gerenciamento dos registros de progresso dos alunos, incluindo listagem, criação, leitura, atualização e exclusão de dados físicos e de saúde.
 
 ---
 
-### Teste 02: Excluir Produto
+## 🔍 Endpoints Testados Detalhadamente:
 
-**Descrição**
-A3 – Excluir Produto
-- A3.1. O ator executa o fluxo de Listar Produtos
-- A3.2. O ator seleciona o Produto e os dados referentes ao mesmo são carregados na tela;
-- A3.3. O ator clica no botão Excluir;
-- A3.3. O sistema solicita confirmação para exclusão [MSG05];
-- A3.4. O ator confirma a exclusão;
-- A3.5. O sistema exclui o registro e exibe uma mensagem de acordo com a [MSG03]; (E2)
-- A3.6. Fim do fluxo. (P2)
-
-**Especificação**
-Especificação OK.
-
-**Resultado**
-OK.
+### 1. `GET /registrodeprogresso/` — **Listar todos os registros**
+- **Objetivo:** Verificar se o endpoint retorna corretamente a lista de registros existentes.
+- **Resultado Esperado:** Resposta HTTP 200 com array de objetos contendo os dados físicos esperados.
+- **Resultado Obtido:** ✅ Aprovado — Registros listados corretamente com os campos esperados.
 
 ---
 
-### Teste 03: Alterar Produto
-
-**Descrição**
-A2 – Alterar Produto
-- A2.1. O ator executa o fluxo. (A4)
-- A2.2. O ator seleciona o Produto e os dados referentes ao mesmo são carregados nos campos para edição;
-- A2.3. O ator edita os campos e clica no botão Editar;
-- A2.4. O sistema salva os dados alterados no banco de dados;
-- A2.5. O sistema exibe uma mensagem de acordo com a [MSG04];
-- A2.6. Fim do fluxo. (P2)
-
-**Especificação**
-A função não implementa o passo A2.4, ou seja, não altera o Produto.
-Na execução da função aparece uma mensagem sobre a regra de negócio RN001 que não aparece na especificação.
-
-**Resultado**
-O Produto não é alterado mesmo preenchendo e seguindo todos os passos.
-Não é apresentada nenhuma mensagem de erro referente à alteração.
-Ao tentar alterar um produto que tem compras (RN001), é exibida a mensagem MSG002:
-**“Produto não pode ser alterado.”**
+### 2. `POST /registrodeprogresso/` — **Criar novo registro**
+- **Objetivo:** Criar um novo registro de progresso para um aluno com dados válidos.
+- **Dados enviados:** `data`, `altura`, `peso`, `aluno`, e demais campos físicos (opcionais).
+- **Resultado Esperado:** Resposta HTTP 201 com objeto criado e ID atribuído.
+- **Resultado Obtido:** ✅ Aprovado — Registro criado com sucesso e persistido.
 
 ---
 
-## Relatório de Bugs e Providências
+### 3. `GET /registrodeprogresso/{id}/` — **Ler um registro específico**
+- **Objetivo:** Verificar se é possível obter os dados detalhados de um registro pelo ID.
+- **Resultado Esperado:** Resposta HTTP 200 com todos os dados do registro.
+- **Resultado Obtido:** ✅ Aprovado — Registro retornado corretamente.
 
-### Responsabilidade do Gerente
+---
 
-| Teste                      | Providência                                                                 | Tarefas/Tipo                          |
-|---------------------------|-----------------------------------------------------------------------------|---------------------------------------|
-| Teste 01 – Incluir Produto | Corrigir a implementação do fluxo do user story.                            | Tarefa: Bug de Implementação.         |
-| Teste 03 – Alterar Produto | Corrigir a especificação do fluxo do US e sua implementação.               | Tarefa: Corrigir a análise do US.     |
-|                           |                                                                             | Tarefa: Bug de Implementação.         |
+### 4. `PUT /registrodeprogresso/{id}/` — **Atualização total**
+- **Objetivo:** Substituir completamente os dados de um registro existente.
+- **Resultado Esperado:** Resposta HTTP 200 com os dados atualizados.
+- **Resultado Obtido:** ✅ Aprovado — Registro atualizado corretamente com os novos valores.
+
+---
+
+### 5. `PATCH /registrodeprogresso/{id}/` — **Atualização parcial**
+- **Objetivo:** Atualizar apenas alguns campos de um registro.
+- **Resultado Esperado:** Resposta HTTP 200 com os dados alterados refletidos.
+- **Resultado Obtido:** ✅ Aprovado — Atualização parcial realizada com sucesso.
+
+---
+
+### 6. `DELETE /registrodeprogresso/{id}/` — **Exclusão de registro**
+- **Objetivo:** Verificar se o endpoint remove corretamente um registro existente.
+- **Resultado Esperado:** Resposta HTTP 204 sem conteúdo e remoção efetiva do recurso.
+- **Resultado Obtido:** ✅ Aprovado — Registro removido com sucesso e não listado posteriormente.
+
+---
+
+## 🧪 Critérios de Aceitação Verificados:
+
+- ✅ Validação de campos obrigatórios e estrutura dos dados.
+- ✅ Respostas com status HTTP apropriados para cada ação.
+- ✅ Persistência e consistência dos dados no banco.
+- ✅ Comportamento esperado ao criar, atualizar, excluir e consultar registros.
+- ✅ Integração com Swagger funcional, com testes interativos.
+
+---
+
+## 📌 Considerações Técnicas:
+
+- Testes realizados via Swagger UI e/ou ferramentas como Postman.
+- Não foram encontrados erros de autenticação, validação ou resposta.
+- O endpoint apresentou performance estável e comportamento esperado.
+
+---
+
+## ✅ Conclusão Final:
+
+O módulo **/registrodeprogresso/** foi **testado com sucesso** e atende aos critérios funcionais definidos. Está pronto para implantação em ambiente de homologação ou produção.
