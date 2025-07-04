@@ -1,88 +1,112 @@
-# Relatório de Testes de Módulo/Sistema
+# ✅ Relatório de Testes de Aceitação — Módulo **Aluno**
 
-## Responsabilidade do Testador
+## 📅 Data de Teste: 03/07/2025
 
----
-
-### Legenda
-
-- **Teste**: Código ou identificação do Teste.
-- **Descrição**: Descrição dos passos e detalhes do teste a ser executado.
-- **Especificação**: Informações sobre a função testada e se ela está de acordo com a especificação do caso de uso.
-- **Resultado**: Resultado do teste, modificações sugeridas ou resultados do teste. No caso de erro ou problema na execução do teste, descrever o erro em detalhes e adicionar prints das telas.
+## 👤 Responsável: Renan Missias
 
 ---
 
-## US001 – Manter Produto
+## 🧩 Recurso Testado: **/aluno/**
 
-### Teste 01: Incluir Produto
+### Descrição Geral:
 
-**Descrição**
-A1 - Incluir Produto
-- A1.1. O ator preenche os dados;
-- A1.2. O ator seleciona a opção Cadastrar;
-- A1.3. O sistema salva os dados;
-- A1.4. O sistema exibe uma mensagem de acordo com a [MSG001];
-- A1.5. Fim do fluxo.
-
-**Especificação**
-A função implementada não segue os passos A1.4.
-A implementação não está de acordo com a especificação do User Story.
-
-**Resultado**
-O produto é inserido, contudo a mensagem [MSG001] não foi exibida.
+Este módulo expõe um conjunto de endpoints para gerenciamento de registros do recurso **Aluno**, incluindo listagem, criação, leitura, atualização e exclusão lógica de dados.
 
 ---
 
-### Teste 02: Excluir Produto
+## 🔍 Endpoints Testados Detalhadamente:
 
-**Descrição**
-A3 – Excluir Produto
-- A3.1. O ator executa o fluxo de Listar Produtos
-- A3.2. O ator seleciona o Produto e os dados referentes ao mesmo são carregados na tela;
-- A3.3. O ator clica no botão Excluir;
-- A3.3. O sistema solicita confirmação para exclusão [MSG05];
-- A3.4. O ator confirma a exclusão;
-- A3.5. O sistema exclui o registro e exibe uma mensagem de acordo com a [MSG03]; (E2)
-- A3.6. Fim do fluxo. (P2)
+### 1. `GET /aluno/` — **Listar todos os alunos**
 
-**Especificação**
-Especificação OK.
-
-**Resultado**
-OK.
+- **Objetivo:** Verificar se o endpoint retorna corretamente a lista de alunos cadastrados.
+- **Resultado Esperado:** Resposta HTTP 200 com um array de objetos no formato correto.
+- **Resultado Obtido:** ✅ Aprovado — Lista retornada corretamente com dados consistentes.
 
 ---
 
-### Teste 03: Alterar Produto
+### 2. `POST /aluno/` — **Criar novo aluno**
 
-**Descrição**
-A2 – Alterar Produto
-- A2.1. O ator executa o fluxo. (A4)
-- A2.2. O ator seleciona o Produto e os dados referentes ao mesmo são carregados nos campos para edição;
-- A2.3. O ator edita os campos e clica no botão Editar;
-- A2.4. O sistema salva os dados alterados no banco de dados;
-- A2.5. O sistema exibe uma mensagem de acordo com a [MSG04];
-- A2.6. Fim do fluxo. (P2)
-
-**Especificação**
-A função não implementa o passo A2.4, ou seja, não altera o Produto.
-Na execução da função aparece uma mensagem sobre a regra de negócio RN001 que não aparece na especificação.
-
-**Resultado**
-O Produto não é alterado mesmo preenchendo e seguindo todos os passos.
-Não é apresentada nenhuma mensagem de erro referente à alteração.
-Ao tentar alterar um produto que tem compras (RN001), é exibida a mensagem MSG002:
-**“Produto não pode ser alterado.”**
+- **Objetivo:** Verificar se é possível cadastrar um novo aluno com dados válidos.
+- **Dados enviados:** JSON com campos obrigatórios (ex.: nome, matrícula, curso, etc.).
+- **Resultado Esperado:** Resposta HTTP 201 com os dados criados e ID atribuído.
+- **Resultado Obtido:** ✅ Aprovado — Aluno cadastrado com sucesso.
 
 ---
 
-## Relatório de Bugs e Providências
+### 3. `POST /aluno/` — **Cadastro com dados incompletos**
 
-### Responsabilidade do Gerente
+- **Objetivo:** Testar a validação de campos obrigatórios ao tentar cadastrar com dados ausentes.
+- **Resultado Esperado:** Resposta HTTP 400 com mensagem: “Erro: Campos obrigatórios não preenchidos.”
+- **Resultado Obtido:** ✅ Aprovado — Mensagem de erro exibida corretamente.
 
-| Teste                      | Providência                                                                 | Tarefas/Tipo                          |
-|---------------------------|-----------------------------------------------------------------------------|---------------------------------------|
-| Teste 01 – Incluir Produto | Corrigir a implementação do fluxo do user story.                            | Tarefa: Bug de Implementação.         |
-| Teste 03 – Alterar Produto | Corrigir a especificação do fluxo do US e sua implementação.               | Tarefa: Corrigir a análise do US.     |
-|                           |                                                                             | Tarefa: Bug de Implementação.         |
+---
+
+### 4. `GET /aluno/{id}/` — **Consultar aluno específico**
+
+- **Objetivo:** Verificar se é possível recuperar os dados de um aluno pelo ID.
+- **Resultado Esperado:** Resposta HTTP 200 com os dados do aluno.
+- **Resultado Obtido:** ✅ Aprovado — Dados retornados corretamente.
+
+---
+
+### 5. `PUT /aluno/{id}/` — **Atualização total dos dados**
+
+- **Objetivo:** Testar se é possível substituir todos os dados de um aluno.
+- **Resultado Esperado:** Resposta HTTP 200 com os dados atualizados.
+- **Resultado Obtido:** ✅ Aprovado — Alterações salvas com sucesso.
+
+---
+
+### 6. `PATCH /aluno/{id}/` — **Atualização parcial dos dados**
+
+- **Objetivo:** Verificar se é possível atualizar um ou mais campos individualmente.
+- **Resultado Esperado:** Resposta HTTP 200 com os dados modificados.
+- **Resultado Obtido:** ✅ Aprovado — Campos atualizados com sucesso.
+
+---
+
+### 7. `PATCH /aluno/{id}/` — **Atualização com dados incompletos**
+
+- **Objetivo:** Validar o sistema ao tentar atualizar com dados ausentes.
+- **Resultado Esperado:** Resposta HTTP 400 com mensagem: “Erro: Campos obrigatórios não preenchidos.”
+- **Resultado Obtido:** ✅ Aprovado — Validação funcionando corretamente.
+
+---
+
+### 8. `DELETE /aluno/{id}/` — **Exclusão lógica de aluno**
+
+- **Objetivo:** Verificar se o sistema realiza a exclusão lógica do registro.
+- **Resultado Esperado:** Resposta HTTP 204 e remoção do aluno das listagens.
+- **Resultado Obtido:** ✅ Aprovado — Aluno excluído com sucesso.
+
+---
+
+### 9. `DELETE /aluno/{id}/` — **Exclusão com pendências ativas**
+
+- **Objetivo:** Impedir exclusão de aluno com vínculos pendentes.
+- **Resultado Esperado:** Resposta HTTP 400 com mensagem: “Erro: Não é possível excluir, existem pendências associadas.”
+- **Resultado Obtido:** ✅ Aprovado — Restrição aplicada corretamente.
+
+---
+
+## 🧪 Critérios de Aceitação Verificados:
+
+- ✅ Validação de campos obrigatórios e estrutura dos dados.
+- ✅ Tratamento adequado de erros e respostas com mensagens claras.
+- ✅ Respostas com status HTTP apropriados para cada ação.
+- ✅ Funcionalidade completa dos endpoints em ambiente controlado.
+- ✅ Coerência entre os dados persistidos e os exibidos.
+
+---
+
+## 📌 Considerações Técnicas:
+
+- Os testes foram realizados via Swagger, Postman e Front-end com autenticação válida.
+- Não foram detectadas falhas de fluxo ou inconsistência de dados.
+- A performance dos endpoints foi considerada satisfatória.
+
+---
+
+## ✅ Conclusão Final:
+
+O módulo **/aluno/** foi **testado com sucesso** e cumpre todos os critérios de aceitação estabelecidos. Está apto para implantação em ambiente de homologação ou produção.
