@@ -1,88 +1,89 @@
-# Relatório de Testes de Módulo/Sistema
+# ✅ Relatório de Testes de Aceitação — Módulo **Personal**
 
-## Responsabilidade do Testador
+## 📅 Data de Teste: 04/07/2025
 
----
-
-### Legenda
-
-- **Teste**: Código ou identificação do Teste.
-- **Descrição**: Descrição dos passos e detalhes do teste a ser executado.
-- **Especificação**: Informações sobre a função testada e se ela está de acordo com a especificação do caso de uso.
-- **Resultado**: Resultado do teste, modificações sugeridas ou resultados do teste. No caso de erro ou problema na execução do teste, descrever o erro em detalhes e adicionar prints das telas.
+## 👤 Responsável: Gabriel Ygor Canuto
 
 ---
 
-## US001 – Manter Produto
+## 🧩 Recurso Testado: **/personal/**
 
-### Teste 01: Incluir Produto
+### Descrição Geral:
 
-**Descrição**
-A1 - Incluir Produto
-- A1.1. O ator preenche os dados;
-- A1.2. O ator seleciona a opção Cadastrar;
-- A1.3. O sistema salva os dados;
-- A1.4. O sistema exibe uma mensagem de acordo com a [MSG001];
-- A1.5. Fim do fluxo.
-
-**Especificação**
-A função implementada não segue os passos A1.4.
-A implementação não está de acordo com a especificação do User Story.
-
-**Resultado**
-O produto é inserido, contudo a mensagem [MSG001] não foi exibida.
+Este módulo expõe um conjunto de endpoints para gerenciamento de registros do recurso **Personal**, incluindo listagem, criação, leitura, atualização e exclusão de dados.
 
 ---
 
-### Teste 02: Excluir Produto
+## 🔍 Endpoints Testados Detalhadamente:
 
-**Descrição**
-A3 – Excluir Produto
-- A3.1. O ator executa o fluxo de Listar Produtos
-- A3.2. O ator seleciona o Produto e os dados referentes ao mesmo são carregados na tela;
-- A3.3. O ator clica no botão Excluir;
-- A3.3. O sistema solicita confirmação para exclusão [MSG05];
-- A3.4. O ator confirma a exclusão;
-- A3.5. O sistema exclui o registro e exibe uma mensagem de acordo com a [MSG03]; (E2)
-- A3.6. Fim do fluxo. (P2)
+### 1. `GET /personal/` — **Listar todos os registros**
 
-**Especificação**
-Especificação OK.
-
-**Resultado**
-OK.
+- **Objetivo:** Verificar se o endpoint retorna corretamente a lista de registros existentes.
+- **Resultado Esperado:** Resposta HTTP 200 com um array de objetos no formato correto.
+- **Resultado Obtido:** ✅ Aprovado — Lista retornada corretamente com dados consistentes.
 
 ---
 
-### Teste 03: Alterar Produto
+### 2. `POST /personal/` — **Criar novo registro**
 
-**Descrição**
-A2 – Alterar Produto
-- A2.1. O ator executa o fluxo. (A4)
-- A2.2. O ator seleciona o Produto e os dados referentes ao mesmo são carregados nos campos para edição;
-- A2.3. O ator edita os campos e clica no botão Editar;
-- A2.4. O sistema salva os dados alterados no banco de dados;
-- A2.5. O sistema exibe uma mensagem de acordo com a [MSG04];
-- A2.6. Fim do fluxo. (P2)
-
-**Especificação**
-A função não implementa o passo A2.4, ou seja, não altera o Produto.
-Na execução da função aparece uma mensagem sobre a regra de negócio RN001 que não aparece na especificação.
-
-**Resultado**
-O Produto não é alterado mesmo preenchendo e seguindo todos os passos.
-Não é apresentada nenhuma mensagem de erro referente à alteração.
-Ao tentar alterar um produto que tem compras (RN001), é exibida a mensagem MSG002:
-**“Produto não pode ser alterado.”**
+- **Objetivo:** Verificar se é possível criar um novo registro com dados válidos.
+- **Dados enviados:** JSON com campos obrigatórios (ex.: nome, cargo, etc.).
+- **Resultado Esperado:** Resposta HTTP 201 com os dados criados e ID atribuído.
+- **Resultado Obtido:** ✅ Aprovado — Registro criado com sucesso e persistido.
 
 ---
 
-## Relatório de Bugs e Providências
+### 3. `GET /personal/{id}/` — **Ler detalhes de um registro**
 
-### Responsabilidade do Gerente
+- **Objetivo:** Verificar se é possível recuperar os dados de um registro específico pelo ID.
+- **Resultado Esperado:** Resposta HTTP 200 com os dados corretos do registro.
+- **Resultado Obtido:** ✅ Aprovado — Dados retornados conforme esperado.
 
-| Teste                      | Providência                                                                 | Tarefas/Tipo                          |
-|---------------------------|-----------------------------------------------------------------------------|---------------------------------------|
-| Teste 01 – Incluir Produto | Corrigir a implementação do fluxo do user story.                            | Tarefa: Bug de Implementação.         |
-| Teste 03 – Alterar Produto | Corrigir a especificação do fluxo do US e sua implementação.               | Tarefa: Corrigir a análise do US.     |
-|                           |                                                                             | Tarefa: Bug de Implementação.         |
+---
+
+### 4. `PUT /personal/{id}/` — **Atualização total**
+
+- **Objetivo:** Testar a substituição completa dos dados de um registro existente.
+- **Resultado Esperado:** Resposta HTTP 200 ou 204 com os dados atualizados no banco.
+- **Resultado Obtido:** ✅ Aprovado — Atualização total realizada com sucesso.
+
+---
+
+### 5. `PATCH /personal/{id}/` — **Atualização parcial**
+
+- **Objetivo:** Testar se é possível atualizar parcialmente um ou mais campos do registro.
+- **Resultado Esperado:** Resposta HTTP 200 com os dados alterados refletidos corretamente.
+- **Resultado Obtido:** ✅ Aprovado — Atualização parcial executada com sucesso.
+
+---
+
+### 6. `DELETE /personal/{id}/` — **Exclusão de registro**
+
+- **Objetivo:** Verificar se o endpoint remove corretamente um registro existente.
+- **Resultado Esperado:** Resposta HTTP 204 e remoção do recurso.
+- **Resultado Obtido:** ✅ Aprovado — Registro removido com sucesso e não retornado em listagens.
+
+---
+
+## 🧪 Critérios de Aceitação Verificados:
+
+- ✅ Validação de campos obrigatórios e estrutura dos dados.
+- ✅ Tratamento adequado de erros e respostas com mensagens claras.
+- ✅ Respostas com status HTTP apropriados para cada ação.
+- ✅ Funcionalidade completa dos endpoints em ambiente controlado.
+- ✅ Coerência entre os dados persistidos e os exibidos.
+- ✅ Integração com Swagger funcional, com autenticação e testes interativos.
+
+---
+
+## 📌 Considerações Técnicas:
+
+- Os testes foram realizados diretamente via Swagger, Postman e Front-end com autenticação válida.
+- Não foram detectadas falhas de segurança ou inconsistência de dados.
+- A performance dos endpoints foi considerada satisfatória.
+
+---
+
+## ✅ Conclusão Final:
+
+O módulo **/personal/** foi **testado com sucesso** e cumpre todos os critérios de aceitação estabelecidos. Está apto para implantação em ambiente de homologação ou produção.
