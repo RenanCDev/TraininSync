@@ -1,88 +1,117 @@
-# Relatório de Testes de Módulo/Sistema
+# ✅ Relatório de Testes de Aceitação — Módulo **Pessoa**
 
-## Responsabilidade do Testador
+## 📅 Data de Teste: 04/07/2025
 
----
-
-### Legenda
-
-- **Teste**: Código ou identificação do Teste.
-- **Descrição**: Descrição dos passos e detalhes do teste a ser executado.
-- **Especificação**: Informações sobre a função testada e se ela está de acordo com a especificação do caso de uso.
-- **Resultado**: Resultado do teste, modificações sugeridas ou resultados do teste. No caso de erro ou problema na execução do teste, descrever o erro em detalhes e adicionar prints das telas.
+## 👤 Responsável: José Alves
 
 ---
 
-## US001 – Manter Produto
+## 🧩 Recurso Testado: **/pessoa/**
 
-### Teste 01: Incluir Produto
+### Descrição Geral:
 
-**Descrição**
-A1 - Incluir Produto
-- A1.1. O ator preenche os dados;
-- A1.2. O ator seleciona a opção Cadastrar;
-- A1.3. O sistema salva os dados;
-- A1.4. O sistema exibe uma mensagem de acordo com a [MSG001];
-- A1.5. Fim do fluxo.
-
-**Especificação**
-A função implementada não segue os passos A1.4.
-A implementação não está de acordo com a especificação do User Story.
-
-**Resultado**
-O produto é inserido, contudo a mensagem [MSG001] não foi exibida.
+Este módulo é responsável por manter os dados de pessoas que podem representar alunos, personal trainers ou outras entidades relacionadas. Os endpoints permitem cadastrar, visualizar, editar e excluir dados pessoais, com validações de unicidade e integridade dos dados sensíveis como CPF e email.
 
 ---
 
-### Teste 02: Excluir Produto
+## 🔍 Endpoints Testados Detalhadamente:
 
-**Descrição**
-A3 – Excluir Produto
-- A3.1. O ator executa o fluxo de Listar Produtos
-- A3.2. O ator seleciona o Produto e os dados referentes ao mesmo são carregados na tela;
-- A3.3. O ator clica no botão Excluir;
-- A3.3. O sistema solicita confirmação para exclusão [MSG05];
-- A3.4. O ator confirma a exclusão;
-- A3.5. O sistema exclui o registro e exibe uma mensagem de acordo com a [MSG03]; (E2)
-- A3.6. Fim do fluxo. (P2)
+### 1. `GET /pessoa/` — **Listar todas as pessoas**
 
-**Especificação**
-Especificação OK.
-
-**Resultado**
-OK.
+- **Objetivo:** Verificar se a listagem de pessoas retorna todos os registros corretamente.
+- **Resultado Esperado:** HTTP 200 com lista de objetos.
+- **Resultado Obtido:** ✅ Aprovado — Lista retornada com sucesso.
 
 ---
 
-### Teste 03: Alterar Produto
+### 2. `POST /pessoa/` — **Criar nova pessoa**
 
-**Descrição**
-A2 – Alterar Produto
-- A2.1. O ator executa o fluxo. (A4)
-- A2.2. O ator seleciona o Produto e os dados referentes ao mesmo são carregados nos campos para edição;
-- A2.3. O ator edita os campos e clica no botão Editar;
-- A2.4. O sistema salva os dados alterados no banco de dados;
-- A2.5. O sistema exibe uma mensagem de acordo com a [MSG04];
-- A2.6. Fim do fluxo. (P2)
-
-**Especificação**
-A função não implementa o passo A2.4, ou seja, não altera o Produto.
-Na execução da função aparece uma mensagem sobre a regra de negócio RN001 que não aparece na especificação.
-
-**Resultado**
-O Produto não é alterado mesmo preenchendo e seguindo todos os passos.
-Não é apresentada nenhuma mensagem de erro referente à alteração.
-Ao tentar alterar um produto que tem compras (RN001), é exibida a mensagem MSG002:
-**“Produto não pode ser alterado.”**
+- **Objetivo:** Validar o cadastro de uma nova pessoa com dados válidos.
+- **Dados Enviados:** nome, CPF, email, data de nascimento, sexo, estado civil, etnia, etc.
+- **Resultado Esperado:** HTTP 201 com o objeto criado.
+- **Resultado Obtido:** ✅ Aprovado — Pessoa cadastrada com sucesso.
 
 ---
 
-## Relatório de Bugs e Providências
+### 3. `POST /pessoa/` com CPF ou Email duplicado — **Erro de validação**
 
-### Responsabilidade do Gerente
+- **Objetivo:** Testar se o sistema rejeita CPF e email duplicados.
+- **Resultado Esperado:** HTTP 400 com mensagens de erro informativas.
+- **Resultado Obtido:** ✅ Aprovado — Erro retornado com mensagem: *"Pessoa com este CPF/email já existe."*
 
-| Teste                      | Providência                                                                 | Tarefas/Tipo                          |
-|---------------------------|-----------------------------------------------------------------------------|---------------------------------------|
-| Teste 01 – Incluir Produto | Corrigir a implementação do fluxo do user story.                            | Tarefa: Bug de Implementação.         |
-| Teste 03 – Alterar Produto | Corrigir a especificação do fluxo do US e sua implementação.               | Tarefa: Corrigir a análise do US.     |
-|                           |                                                                             | Tarefa: Bug de Implementação.         |
+---
+
+### 4. `GET /pessoa/{id}/` — **Consultar pessoa específica**
+
+- **Objetivo:** Verificar se os dados de uma pessoa específica podem ser recuperados.
+- **Resultado Esperado:** HTTP 200 com dados corretos.
+- **Resultado Obtido:** ✅ Aprovado — Dados retornados com sucesso.
+
+---
+
+### 5. `PUT /pessoa/{id}/` — **Atualização total**
+
+- **Objetivo:** Verificar se é possível substituir todos os dados de uma pessoa.
+- **Resultado Esperado:** HTTP 200 com os dados atualizados.
+- **Resultado Obtido:** ✅ Aprovado — Atualização completa realizada com sucesso.
+
+---
+
+### 6. `PATCH /pessoa/{id}/` — **Atualização parcial**
+
+- **Objetivo:** Testar atualizações parciais (ex.: alteração apenas do número de celular).
+- **Resultado Esperado:** HTTP 200 com alteração refletida.
+- **Resultado Obtido:** ✅ Aprovado — Atualização parcial concluída com sucesso.
+
+---
+
+### 7. `PATCH /pessoa/{id}/` com CPF/Email de outro usuário — **Erro de validação**
+
+- **Objetivo:** Garantir que CPF e email permaneçam únicos durante edição.
+- **Resultado Esperado:** HTTP 400 com mensagens de erro.
+- **Resultado Obtido:** ✅ Aprovado — Violação de unicidade detectada e rejeitada.
+
+---
+
+### 8. `DELETE /pessoa/{id}/` — **Excluir pessoa**
+
+- **Objetivo:** Testar se é possível excluir uma pessoa sem vínculos ativos.
+- **Resultado Esperado:** HTTP 204 sem conteúdo.
+- **Resultado Obtido:** ✅ Aprovado — Pessoa removida com sucesso.
+
+---
+
+### 9. `DELETE /pessoa/{id}/` com vínculos ativos (Aluno ou Personal) — **Bloqueio**
+
+- **Objetivo:** Validar que o sistema impede exclusão de pessoas com vínculos.
+- **Resultado Esperado:** HTTP 400 com mensagem de erro.
+- **Resultado Obtido:** ✅ Aprovado — Exclusão bloqueada por vínculo ativo.
+
+---
+
+## 🧪 Critérios de Aceitação Verificados:
+
+| Código     | Descrição                                                                                   | Status   |
+|------------|---------------------------------------------------------------------------------------------|----------|
+| TA09.01    | Cadastro com dados válidos                                                                  | ✅ Aprovado |
+| TA09.02    | Cadastro com dados inválidos (ex.: CPF duplicado)                                           | ✅ Aprovado |
+| TA09.03    | Edição com dados válidos                                                                    | ✅ Aprovado |
+| TA09.04    | Edição com dados inválidos                                                                  | ✅ Aprovado |
+| TA09.05    | Exclusão de pessoa sem vínculos                                                              | ✅ Aprovado |
+| TA09.06    | Tentativa de exclusão de pessoa com vínculo (Aluno ou Personal)                              | ✅ Aprovado |
+| TA09.07    | Listagem correta de pessoas                                                                 | ✅ Aprovado |
+
+---
+
+## 📌 Considerações Técnicas:
+
+- Os testes foram realizados com autenticação válida em ambiente de desenvolvimento.
+- O serializer implementa verificação customizada para evitar duplicidade de CPF e email ao atualizar.
+- Campos sensíveis foram validados com sucesso (ex.: número de celular, email).
+- O campo `idade` funciona corretamente como propriedade calculada (não persistida).
+
+---
+
+## ✅ Conclusão Final:
+
+O módulo **/pessoa/** está **totalmente funcional e validado**. Todos os testes de aceitação foram realizados com sucesso, garantindo confiabilidade e integridade na manipulação dos dados pessoais. O módulo está pronto para ser implantado em ambiente de homologação ou produção.
