@@ -1,88 +1,57 @@
-# Relatório de Testes de Módulo/Sistema
+# ✅ Relatório de Testes de Aceitação — Módulo **Serviço**
 
-## Responsabilidade do Testador
+## 📅 Data de Teste: 04/07/2025
 
----
-
-### Legenda
-
-- **Teste**: Código ou identificação do Teste.
-- **Descrição**: Descrição dos passos e detalhes do teste a ser executado.
-- **Especificação**: Informações sobre a função testada e se ela está de acordo com a especificação do caso de uso.
-- **Resultado**: Resultado do teste, modificações sugeridas ou resultados do teste. No caso de erro ou problema na execução do teste, descrever o erro em detalhes e adicionar prints das telas.
+## 👤 Responsável: Arthur José dos Santos Azevêdo
 
 ---
 
-## US001 – Manter Produto
+## 🧩 Recurso Testado: **/servico/**
 
-### Teste 01: Incluir Produto
+### Descrição Geral:
 
-**Descrição**
-A1 - Incluir Produto
-- A1.1. O ator preenche os dados;
-- A1.2. O ator seleciona a opção Cadastrar;
-- A1.3. O sistema salva os dados;
-- A1.4. O sistema exibe uma mensagem de acordo com a [MSG001];
-- A1.5. Fim do fluxo.
-
-**Especificação**
-A função implementada não segue os passos A1.4.
-A implementação não está de acordo com a especificação do User Story.
-
-**Resultado**
-O produto é inserido, contudo a mensagem [MSG001] não foi exibida.
+Este módulo é responsável pelo gerenciamento de dados relacionados ao modelo **Serviço**, incluindo a criação e consulta de serviços oferecidos. Os testes visam validar o correto funcionamento das operações básicas do modelo.
 
 ---
 
-### Teste 02: Excluir Produto
+## 🔍 Funcionalidades Testadas Detalhadamente:
 
-**Descrição**
-A3 – Excluir Produto
-- A3.1. O ator executa o fluxo de Listar Produtos
-- A3.2. O ator seleciona o Produto e os dados referentes ao mesmo são carregados na tela;
-- A3.3. O ator clica no botão Excluir;
-- A3.3. O sistema solicita confirmação para exclusão [MSG05];
-- A3.4. O ator confirma a exclusão;
-- A3.5. O sistema exclui o registro e exibe uma mensagem de acordo com a [MSG03]; (E2)
-- A3.6. Fim do fluxo. (P2)
+### 1. **Criação de Serviço**
 
-**Especificação**
-Especificação OK.
-
-**Resultado**
-OK.
+- **Objetivo:** Verificar se uma instância do modelo `Servico` pode ser criada com sucesso.
+- **Dados Utilizados:** tipo de serviço, descrição e valor.
+- **Resultado Esperado:** Serviço criado corretamente com os dados persistidos no banco.
+- **Resultado Obtido:** ✅ Aprovado — Instância criada com os valores esperados.
 
 ---
 
-### Teste 03: Alterar Produto
+### 2. **Consulta de Serviço**
 
-**Descrição**
-A2 – Alterar Produto
-- A2.1. O ator executa o fluxo. (A4)
-- A2.2. O ator seleciona o Produto e os dados referentes ao mesmo são carregados nos campos para edição;
-- A2.3. O ator edita os campos e clica no botão Editar;
-- A2.4. O sistema salva os dados alterados no banco de dados;
-- A2.5. O sistema exibe uma mensagem de acordo com a [MSG04];
-- A2.6. Fim do fluxo. (P2)
-
-**Especificação**
-A função não implementa o passo A2.4, ou seja, não altera o Produto.
-Na execução da função aparece uma mensagem sobre a regra de negócio RN001 que não aparece na especificação.
-
-**Resultado**
-O Produto não é alterado mesmo preenchendo e seguindo todos os passos.
-Não é apresentada nenhuma mensagem de erro referente à alteração.
-Ao tentar alterar um produto que tem compras (RN001), é exibida a mensagem MSG002:
-**“Produto não pode ser alterado.”**
+- **Objetivo:** Validar se é possível recuperar um serviço previamente cadastrado utilizando filtros.
+- **Operação Realizada:** Consulta por `tipo_de_servico` com valor "Treino Personalizado".
+- **Resultado Esperado:** Serviço localizado corretamente no banco de dados.
+- **Resultado Obtido:** ✅ Aprovado — Consulta retornou o serviço correspondente ao criado.
 
 ---
 
-## Relatório de Bugs e Providências
+## 🧪 Critérios de Aceitação Verificados:
 
-### Responsabilidade do Gerente
+- ✅ Persistência de dados ao criar novos serviços.
+- ✅ Capacidade de consulta com filtros específicos.
+- ✅ Dados consistentes entre criação e recuperação.
+- ✅ Execução sem falhas em ambiente de testes.
+- ✅ Cobertura de testes automatizados via `TestCase` do Django.
 
-| Teste                      | Providência                                                                 | Tarefas/Tipo                          |
-|---------------------------|-----------------------------------------------------------------------------|---------------------------------------|
-| Teste 01 – Incluir Produto | Corrigir a implementação do fluxo do user story.                            | Tarefa: Bug de Implementação.         |
-| Teste 03 – Alterar Produto | Corrigir a especificação do fluxo do US e sua implementação.               | Tarefa: Corrigir a análise do US.     |
-|                           |                                                                             | Tarefa: Bug de Implementação.         |
+---
+
+## 📌 Considerações Técnicas:
+
+- Os testes foram implementados utilizando o framework de testes padrão do Django (`unittest` com `TestCase`).
+- O banco de dados de teste foi utilizado para garantir isolamento do ambiente real.
+- Os testes cobrem os comportamentos fundamentais do modelo `Servico`, garantindo que os dados são salvos e consultados corretamente.
+
+---
+
+## ✅ Conclusão Final:
+
+O módulo **/servico/** foi **testado com sucesso** por Arthur José dos Santos Azevêdo e cumpre os critérios de aceitação estabelecidos. Está pronto para ser integrado aos ambientes de homologação ou produção.
