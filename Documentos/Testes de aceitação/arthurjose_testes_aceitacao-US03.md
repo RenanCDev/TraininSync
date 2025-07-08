@@ -55,3 +55,4 @@ Este módulo é responsável pelo gerenciamento de dados relacionados ao modelo 
 ## ✅ Conclusão Final:
 
 O módulo **/servico/** foi **testado com sucesso** por Arthur José dos Santos Azevêdo e cumpre os critérios de aceitação estabelecidos. Está pronto para ser integrado aos ambientes de homologação ou produção.
+
