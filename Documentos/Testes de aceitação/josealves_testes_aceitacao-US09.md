@@ -1,88 +1,90 @@
-# Relatório de Testes de Módulo/Sistema
+# ✅ Relatório de Testes de Aceitação — Módulo **Pagamento**
 
-## Responsabilidade do Testador
+## 📅 Data de Teste: 04/07/2025
 
----
-
-### Legenda
-
-- **Teste**: Código ou identificação do Teste.
-- **Descrição**: Descrição dos passos e detalhes do teste a ser executado.
-- **Especificação**: Informações sobre a função testada e se ela está de acordo com a especificação do caso de uso.
-- **Resultado**: Resultado do teste, modificações sugeridas ou resultados do teste. No caso de erro ou problema na execução do teste, descrever o erro em detalhes e adicionar prints das telas.
+## 👤 Responsável: José Alves dos Anjos Paiva
 
 ---
 
-## US001 – Manter Produto
+## 🧩 Recurso Testado: **/pagamento/**
 
-### Teste 01: Incluir Produto
+### Descrição Geral:
 
-**Descrição**
-A1 - Incluir Produto
-- A1.1. O ator preenche os dados;
-- A1.2. O ator seleciona a opção Cadastrar;
-- A1.3. O sistema salva os dados;
-- A1.4. O sistema exibe uma mensagem de acordo com a [MSG001];
-- A1.5. Fim do fluxo.
-
-**Especificação**
-A função implementada não segue os passos A1.4.
-A implementação não está de acordo com a especificação do User Story.
-
-**Resultado**
-O produto é inserido, contudo a mensagem [MSG001] não foi exibida.
+Este módulo fornece uma API RESTful para operações relacionadas a pagamentos realizados por alunos, vinculados a contratos de serviço. Os endpoints permitem listar, cadastrar, visualizar, atualizar e excluir registros de pagamento.
 
 ---
 
-### Teste 02: Excluir Produto
+## 🔍 Endpoints Testados Detalhadamente:
 
-**Descrição**
-A3 – Excluir Produto
-- A3.1. O ator executa o fluxo de Listar Produtos
-- A3.2. O ator seleciona o Produto e os dados referentes ao mesmo são carregados na tela;
-- A3.3. O ator clica no botão Excluir;
-- A3.3. O sistema solicita confirmação para exclusão [MSG05];
-- A3.4. O ator confirma a exclusão;
-- A3.5. O sistema exclui o registro e exibe uma mensagem de acordo com a [MSG03]; (E2)
-- A3.6. Fim do fluxo. (P2)
+### 1. `GET /pagamento/` — **Listar todos os pagamentos**
 
-**Especificação**
-Especificação OK.
-
-**Resultado**
-OK.
+- **Objetivo:** Verificar se a listagem de pagamentos retorna corretamente os registros existentes.
+- **Resultado Esperado:** HTTP 200 com array de objetos JSON representando os pagamentos.
+- **Resultado Obtido:** ✅ Aprovado — Listagem retornada com sucesso.
 
 ---
 
-### Teste 03: Alterar Produto
+### 2. `POST /pagamento/` — **Criar novo pagamento**
 
-**Descrição**
-A2 – Alterar Produto
-- A2.1. O ator executa o fluxo. (A4)
-- A2.2. O ator seleciona o Produto e os dados referentes ao mesmo são carregados nos campos para edição;
-- A2.3. O ator edita os campos e clica no botão Editar;
-- A2.4. O sistema salva os dados alterados no banco de dados;
-- A2.5. O sistema exibe uma mensagem de acordo com a [MSG04];
-- A2.6. Fim do fluxo. (P2)
-
-**Especificação**
-A função não implementa o passo A2.4, ou seja, não altera o Produto.
-Na execução da função aparece uma mensagem sobre a regra de negócio RN001 que não aparece na especificação.
-
-**Resultado**
-O Produto não é alterado mesmo preenchendo e seguindo todos os passos.
-Não é apresentada nenhuma mensagem de erro referente à alteração.
-Ao tentar alterar um produto que tem compras (RN001), é exibida a mensagem MSG002:
-**“Produto não pode ser alterado.”**
+- **Objetivo:** Verificar se é possível registrar um novo pagamento com dados válidos.
+- **Dados Enviados:** ID de `aluno`, ID de `contrato`, `valor`, `descricao`.
+- **Resultado Esperado:** HTTP 201 com os dados criados (incluindo campos read-only como `data_pagamento`).
+- **Resultado Obtido:** ✅ Aprovado — Pagamento registrado com sucesso.
 
 ---
 
-## Relatório de Bugs e Providências
+### 3. `GET /pagamento/{id}/` — **Consultar um pagamento específico**
 
-### Responsabilidade do Gerente
+- **Objetivo:** Verificar se os dados de um pagamento podem ser consultados via ID.
+- **Resultado Esperado:** HTTP 200 com os dados completos do pagamento.
+- **Resultado Obtido:** ✅ Aprovado — Dados retornados corretamente.
 
-| Teste                      | Providência                                                                 | Tarefas/Tipo                          |
-|---------------------------|-----------------------------------------------------------------------------|---------------------------------------|
-| Teste 01 – Incluir Produto | Corrigir a implementação do fluxo do user story.                            | Tarefa: Bug de Implementação.         |
-| Teste 03 – Alterar Produto | Corrigir a especificação do fluxo do US e sua implementação.               | Tarefa: Corrigir a análise do US.     |
-|                           |                                                                             | Tarefa: Bug de Implementação.         |
+---
+
+### 4. `PUT /pagamento/{id}/` — **Atualização total**
+
+- **Objetivo:** Validar se a substituição completa dos dados funciona corretamente.
+- **Resultado Esperado:** HTTP 200 com os dados atualizados (sem alterar campos imutáveis como `data_pagamento`).
+- **Resultado Obtido:** ✅ Aprovado — Atualização total realizada com sucesso.
+
+---
+
+### 5. `PATCH /pagamento/{id}/` — **Atualização parcial**
+
+- **Objetivo:** Atualizar campos específicos, como `valor` ou `descricao`.
+- **Resultado Esperado:** HTTP 200 com os dados refletindo as alterações.
+- **Resultado Obtido:** ✅ Aprovado — Alterações aplicadas com sucesso.
+
+---
+
+### 6. `DELETE /pagamento/{id}/` — **Exclusão de pagamento**
+
+- **Objetivo:** Testar se o sistema permite a remoção de um pagamento.
+- **Resultado Esperado:** HTTP 204 com remoção lógica do recurso.
+- **Resultado Obtido:** ✅ Aprovado — Pagamento removido corretamente.
+
+---
+
+## 🧪 Critérios de Aceitação Verificados:
+
+- ✅ Validação de campos obrigatórios (valor, contrato, aluno).
+- ✅ Rejeição de campos inválidos (ex.: valor negativo, contrato inexistente).
+- ✅ Campos read-only protegidos (`data_pagamento`, `created_at`).
+- ✅ Serialização correta e compatibilidade com o modelo.
+- ✅ Testes interativos via Swagger, Postman e interface front-end.
+- ✅ Comportamento adequado em cenários de sucesso e erro.
+
+---
+
+## 📌 Considerações Técnicas:
+
+- Os testes foram realizados com autenticação JWT ativa e usuários válidos.
+- A associação entre `Aluno` e `ContratoDeServico` foi validada com registros reais.
+- O campo `data_pagamento` é corretamente atribuído automaticamente.
+- Tentativas de inserir dados inconsistentes foram corretamente rejeitadas com mensagens claras.
+
+---
+
+## ✅ Conclusão Final:
+
+O módulo **/pagamento/** está **funcional e validado** conforme os critérios de aceitação definidos. Todos os testes passaram com sucesso, garantindo integridade dos dados e robustez das operações. Está pronto para ser promovido ao ambiente de homologação ou produção.
