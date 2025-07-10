@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { X, Menu } from "lucide-react";
 
 interface NavBarProps {
@@ -14,6 +14,7 @@ interface NavBarItem {
 
 export function NavBar({ children, variant = "clean" }: NavBarProps) {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPath, setSelectedPath] = useState<string>("");
 
@@ -25,7 +26,8 @@ export function NavBar({ children, variant = "clean" }: NavBarProps) {
 
   const secondaryNavItems: NavBarItem[] = [
     { label: "Contratar Serviço ", path: "/services" },
-    { label: "Pagamentos", path: "/pagamentos" },
+    { label: "Alunos ", path: "/student" },
+    { label: "Pagamentos", path: "/payments" },
     { label: "Contatos", path: "/contatos" },
     { label: "Agendamento", path: "/agendamento" },
     { label: "Serviços", path: "/servicos" },
@@ -37,6 +39,11 @@ export function NavBar({ children, variant = "clean" }: NavBarProps) {
       : variant === "secondary"
         ? secondaryNavItems
         : [];
+
+  const filteredNavItems =
+    variant === "home"
+      ? navItems
+      : navItems.filter((item) => item.path !== location.pathname);
 
   function handleLogoClick() {
     navigate("/");
@@ -71,7 +78,7 @@ export function NavBar({ children, variant = "clean" }: NavBarProps) {
 
   return (
     <>
-      <nav className="flex justify-between items-center py-8 px-6 md:px-14 border-b border-midGray top-0 relative z-50">
+      <nav className="flex justify-between items-center py-8 px-6 lg:px-14 border-b border-midGray top-0 relative z-50">
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent pointer-events-none"></div>
 
         <div
@@ -81,8 +88,8 @@ export function NavBar({ children, variant = "clean" }: NavBarProps) {
           TraininSync
         </div>
 
-        <div className="hidden lg:flex gap-7 md:text-lg md:font-black">
-          {navItems.map(({ label, path }) => (
+        <div className="hidden xl:flex gap-7 xl:text-lg xl:font-black">
+          {filteredNavItems.map(({ label, path }) => (
             <p
               key={path}
               onClick={() => handleItemClick(path)}
@@ -95,10 +102,10 @@ export function NavBar({ children, variant = "clean" }: NavBarProps) {
           ))}
         </div>
 
-        <div className="hidden md:flex">{children}</div>
+        <div className="hidden xl:flex">{children}</div>
 
         <button
-          className="md:hidden z-50 text-white"
+          className="xl:hidden z-50 text-white"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={32} /> : <Menu size={32} />}
@@ -107,7 +114,7 @@ export function NavBar({ children, variant = "clean" }: NavBarProps) {
 
       {isOpen && (
         <div className="fixed top-0 left-0 w-full h-full overflow-hidden bg-black flex flex-col items-center justify-center text-white text-3xl gap-10 z-40 transition-all duration-300">
-          {navItems.map(({ label, path }) => (
+          {filteredNavItems.map(({ label, path }) => (
             <p
               key={path}
               onClick={() => handleItemClick(path)}
