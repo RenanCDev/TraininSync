@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import { RegisterZod } from "./zod";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { registerUser } from "../../api/register/register";
+import { toast } from "react-toastify";
 
 type RegisterFormData = z.infer<typeof RegisterZod>;
 
@@ -18,6 +20,7 @@ export function Register() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(RegisterZod),
@@ -27,12 +30,24 @@ export function Register() {
     setIsLoading(true);
 
     const cleanData = {
-      user: data.usuario,
-      senha: data.senha,
+      username: data.username,
+      password: data.password,
+      email: data.email,
     };
 
-    console.log(cleanData);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      await registerUser(cleanData);
+      toast.success("Usuário cadastrado com sucesso!", {
+        position: "bottom-right",
+        theme: "dark",
+      });
+      reset();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   function handleRedirectToLogin() {
@@ -73,11 +88,11 @@ export function Register() {
               <h2>Usuário</h2>
               <input
                 type="text"
-                {...register("usuario")}
+                {...register("username")}
                 className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
               />
-              {errors.usuario && (
-                <span className="text-red-500">{errors.usuario.message}</span>
+              {errors.username && (
+                <span className="text-red-500">{errors.username.message}</span>
               )}
             </div>
             <div className="flex flex-col gap-2">
@@ -85,7 +100,7 @@ export function Register() {
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
-                  {...register("senha")}
+                  {...register("password")}
                   className="h-11 w-full bg-midGray rounded-xl p-2 pr-10 focus:border text-white focus:border-lowGray outline-none"
                 />
                 <button
@@ -96,8 +111,8 @@ export function Register() {
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
-              {errors.senha && (
-                <span className="text-red-500">{errors.senha.message}</span>
+              {errors.password && (
+                <span className="text-red-500">{errors.password.message}</span>
               )}
             </div>
             <div className="flex flex-col gap-2">

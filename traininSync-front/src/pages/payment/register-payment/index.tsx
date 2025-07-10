@@ -9,7 +9,7 @@ import { CreatePayment } from "./zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formatCurrencyString } from "../../../utils/dinheiro";
-import { createPayment } from "../../../api/payment/createPayment";
+import { createPagamento } from "../../../api/payment/createPayment";
 import { toast } from "react-toastify";
 
 interface Aluno {
@@ -61,7 +61,7 @@ export function RegisterPayment() {
 
     try {
       setIsLoading(true);
-      await createPayment(cleanData);
+      await createPagamento(cleanData);
       toast.success("Serviço cadastrado com sucesso!", {
         position: "bottom-right",
         theme: "dark",

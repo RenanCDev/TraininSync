@@ -9,7 +9,6 @@ import { formatCPF, removeCPFFormatting } from "../../../utils/cpf/format";
 
 import { createAluno } from "../../../api/aluno/createAluno";
 import { toast } from "react-toastify";
-import { getAllAluno } from "../../../api/aluno/getAluno";
 import { useEffect, useState } from "react";
 import { DataAtual } from "../../../utils/dia-atual";
 import {
@@ -54,10 +53,6 @@ export function RegisterStudent() {
     return () => clearTimeout(timeout);
   }, [altura, peso, setValue]);
 
-  function handleLoginClick() {
-    navigate("/login");
-  }
-
   function resetForm() {
     reset();
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -65,17 +60,15 @@ export function RegisterStudent() {
 
   const onSubmit = async (data: AlunoFormData) => {
     const cleanData = {
-      pessoa: {
-        nome: data.nome,
-        cpf: removeCPFFormatting(data.cpf),
-        data_de_nascimento: data.data_de_nascimento,
-        email: data.email,
-        numero_de_celular: unformatPhoneNumber(data.numero_de_celular),
-        sexo: data.sexo,
-        nome_social: data.nome_social,
-        etnia: data.etnia,
-        estado_civil: data.estado_civil,
-      },
+      nome: data.nome,
+      cpf: removeCPFFormatting(data.cpf),
+      data_de_nascimento: data.data_de_nascimento,
+      email: data.email,
+      numero_de_celular: unformatPhoneNumber(data.numero_de_celular),
+      sexo: data.sexo,
+      nome_social: data.nome_social,
+      etnia: data.etnia,
+      estado_civil: data.estado_civil,
       status: true,
       bioimpedancia: data.bioimpedancia,
       altura: data.altura,
@@ -110,26 +103,10 @@ export function RegisterStudent() {
     }
   };
 
-  async function getAlunos() {
-    try {
-      setIsLoading(true);
-      const dados = await getAllAluno();
-      toast.success("Aluno GET!", {
-        position: "bottom-right",
-        theme: "dark",
-      });
-      console.log("Alunos: ", dados);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
   return (
     <div className="flex flex-col">
-      <NavBar>
-        <Button onClick={handleLoginClick} title="Login" />
+      <NavBar variant="secondary">
+        <Button title="Voltar" onClick={() => navigate(-1)} />
       </NavBar>
 
       <form onSubmit={handleSubmit(onSubmit)} className="p-8">
@@ -508,15 +485,6 @@ export function RegisterStudent() {
             bgColor="bg-midGray"
             hover="hover:bg-midGray"
             onClick={resetForm}
-          />
-        </div>
-
-        <div className="mt-7">
-          <Button
-            loading={isLoading}
-            onClick={getAlunos}
-            width="w-full md:max-w-[342px]"
-            title="log Alunos teste"
           />
         </div>
       </form>

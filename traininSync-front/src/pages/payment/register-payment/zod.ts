@@ -9,7 +9,7 @@ export const CreatePayment = z.object({
     .max(255, "Descrição deve ter no máximo 255 caracteres"),
 
   aluno: z.coerce
-    .number({ required_error: "Aluno é obrigatório" })
+    .string({ required_error: "Aluno é obrigatório" })
     .min(1, "Aluno é obrigatório"),
 
   contrato: z.coerce
