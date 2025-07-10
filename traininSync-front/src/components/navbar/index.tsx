@@ -30,7 +30,7 @@ export function NavBar({ children, variant = "clean" }: NavBarProps) {
     { label: "Pagamentos", path: "/payments" },
     { label: "Contatos", path: "/contatos" },
     { label: "Agendamento", path: "/agendamento" },
-    { label: "Serviços", path: "/servicos" },
+    { label: "Serviços", path: "/service" },
   ];
 
   const navItems =

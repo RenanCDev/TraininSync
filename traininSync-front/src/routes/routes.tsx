@@ -13,6 +13,7 @@ import { StudentTable } from "../pages/student/get-student";
 import { EditStudent } from "../pages/student/update-student";
 import { ContractTable } from "../pages/contract/get-contract";
 import { RegisterContract } from "../pages/contract/register-contract";
+import { ServiceTable } from "../pages/service/get-service";
 
 export function AppRoutes() {
   return (
@@ -31,6 +32,7 @@ export function AppRoutes() {
       <Route path="/register/contract" element={<RegisterContract />} />
 
       <Route path="/student" element={<StudentTable />} />
+      <Route path="/service" element={<ServiceTable />} />
       <Route path="/contract" element={<ContractTable />} />
       {/* <Route path="/schedule" element={<ScheduleTable />} />
       <Route path="/service" element={<ServiceTable />} />
