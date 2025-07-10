@@ -14,6 +14,7 @@ import { EditStudent } from "../pages/student/update-student";
 import { ContractTable } from "../pages/contract/get-contract";
 import { RegisterContract } from "../pages/contract/register-contract";
 import { ServiceTable } from "../pages/service/get-service";
+import { EditService } from "../pages/service/update-service";
 
 export function AppRoutes() {
   return (
@@ -40,6 +41,7 @@ export function AppRoutes() {
       <Route path="/progress" element={<ProgressTable />} /> */}
 
       <Route path="/edit-student/:id" element={<EditStudent />} />
+      <Route path="/edit-service/:id" element={<EditService />} />
     </Routes>
   );
 }
