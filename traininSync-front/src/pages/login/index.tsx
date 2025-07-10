@@ -41,7 +41,7 @@ export function Login() {
         theme: "dark",
       });
       reset();
-      navigate("/student")
+      navigate("/student");
     } catch (err) {
       console.log(err);
       toast.error("Usuário ou senha inválidos!", {

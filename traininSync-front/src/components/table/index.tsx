@@ -35,6 +35,7 @@ export function DataTable<T>({
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getValue = (item: any, accessor: string) => {
     return accessor.split(".").reduce((obj, key) => obj?.[key], item);
   };

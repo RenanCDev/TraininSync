@@ -8,7 +8,7 @@ export const CreateServico = z.object({
 
   descricao_do_servico: z
     .string()
-    .min(1, "Digite uma senha")
+    .min(1, "Digite uma descrição")
     .max(500, "Descrição do serviço muito longa"),
 
   valor_do_servico: z.coerce

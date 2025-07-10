@@ -88,11 +88,13 @@ export function ContractTable() {
     {
       label: "CPF do Aluno",
       accessor: "alunoDetalhes.cpf",
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       render: (contrato: any) => formatCPF(contrato.alunoDetalhes.cpf),
     },
     {
       label: "Número do Aluno",
       accessor: "alunoDetalhes.numero_de_celular",
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       render: (contrato: any) =>
         formatPhoneNumber(contrato.alunoDetalhes.numero_de_celular),
     },
