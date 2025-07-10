@@ -1,18 +1,18 @@
-import { api } from "../..//services/api";
+import { api } from "../../services/api";
 
-interface CreatePaymentSchema {
+interface CreatePagamentoSchema {
   valor: string;
   descricao: string;
-  aluno: number;
+  aluno: string;
   contrato: number;
 }
 
-export const createPayment = async (paymentBody: CreatePaymentSchema) => {
+export const createPagamento = async (pagamentoBody: CreatePagamentoSchema) => {
   try {
-    const response = await api.post("/pagamento/", paymentBody);
+    const response = await api.post("/pagamento/", pagamentoBody);
     return response.data;
   } catch (error) {
-    console.error("Erro ao Criar pagamento:", error);
+    console.error("Erro ao criar pagamento:", error);
     throw error;
   }
 };

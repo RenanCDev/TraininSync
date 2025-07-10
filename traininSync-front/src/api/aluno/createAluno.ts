@@ -1,17 +1,15 @@
 import { api } from "../../services/api";
 
 interface CreateAlunoSchema {
-  pessoa: {
-    nome: string;
-    cpf: string;
-    data_de_nascimento: string;
-    email: string;
-    numero_de_celular: string;
-    sexo: string;
-    nome_social?: string;
-    etnia: string;
-    estado_civil: string;
-  };
+  nome: string;
+  cpf: string;
+  data_de_nascimento: string;
+  email: string;
+  numero_de_celular: string;
+  sexo: string;
+  nome_social?: string;
+  etnia: string;
+  estado_civil: string;
   status?: boolean;
   bioimpedancia?: string;
   altura: number;
