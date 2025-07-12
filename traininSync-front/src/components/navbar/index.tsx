@@ -25,12 +25,12 @@ export function NavBar({ children, variant = "clean" }: NavBarProps) {
   ];
 
   const secondaryNavItems: NavBarItem[] = [
-    { label: "Contratar Serviço ", path: "/services" },
     { label: "Alunos ", path: "/student" },
-    { label: "Pagamentos", path: "/payments" },
-    { label: "Contatos", path: "/contatos" },
-    { label: "Agendamento", path: "/agendamento" },
-    { label: "Serviços", path: "/service" },
+    { label: "Agendamentos", path: "/schedule" },
+    { label: "Serviços ", path: "/service" },
+    { label: "Pagamentos", path: "/payment" },
+    { label: "Progressos", path: "/progress" },
+    { label: "Contratos", path: "/contract" },
   ];
 
   const navItems =
