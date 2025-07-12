@@ -1,7 +1,15 @@
 import { z } from "zod";
 
 export const CreatePayment = z.object({
-  valor: z.string().max(100000, "Valor inválido"),
+  valor: z
+    .string()
+    .min(1, "O valor é obrigatório")
+    .refine(
+      (val) => !isNaN(Number(val.replace(/[^\d,-]/g, "").replace(",", "."))),
+      {
+        message: "Valor inválido",
+      }
+    ),
 
   descricao: z
     .string()

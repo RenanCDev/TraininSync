@@ -17,10 +17,6 @@ export const CreateContratoDeServico = z.object({
     .max(150, "Localidade deve ter no máximo 150 caracteres"),
 
   horario: z.object({
-    personal: z
-      .string()
-      .min(1, "ID do personal é obrigatório")
-      .max(150, "ID do personal deve ter no máximo 150 caracteres"),
 
     dia: z.string().refine(
       (val) => {
@@ -58,7 +54,8 @@ export const CreateContratoDeServico = z.object({
 
     valor_do_servico: z
       .number({ invalid_type_error: "Digite um número válido" })
-      .nonnegative("Valor do serviço deve ser positivo")
+      .min(1, "Valor inválido")
+      .nonnegative("Valor inválido")
       .max(100000.0, "Valor do serviço muito alto")
       .refine((val) => Number.isInteger(val * 100), {
         message: "O valor deve ter no máximo 2 casas decimais",

@@ -3,26 +3,72 @@ import { Button } from "../../../components/button";
 import { NavBar } from "../../../components/navbar";
 import { CreateContratoDeServico } from "./zod";
 import { z } from "zod";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createContratoDeServico } from "../../../api/contract/createContract";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { formatCurrency } from "../../../utils/dinheiro";
+import { getAllAluno } from "../../../api/aluno/getAluno";
+import { formatCPF } from "../../../utils/cpf/format";
 
 type ContratoFormData = z.infer<typeof CreateContratoDeServico>;
+
+interface Aluno {
+  id: string;
+  nome: string;
+  cpf: string;
+}
 
 export function RegisterContract() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [alunos, setAlunos] = useState<Aluno[]>([]);
+  const [selectedAluno, setSelectedAluno] = useState("");
 
   const {
     register,
+    control,
+    setValue,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm<ContratoFormData>({
     resolver: zodResolver(CreateContratoDeServico),
+    defaultValues: {
+      aluno: "",
+      personal: "",
+      localidade_desejada: "",
+      horario: {
+        dia: "",
+        hora_inicio: "",
+        hora_fim: "",
+        local: "",
+      },
+      servico_desejado: {
+        tipo_de_servico: "",
+        descricao_do_servico: "",
+        valor_do_servico: 0,
+      },
+    },
   });
+
+  useEffect(() => {
+    async function fetchAlunos() {
+      try {
+        const response = await getAllAluno();
+        const alunosFormatados = response.map((item: any) => ({
+          id: item.id.toString(),
+          nome: item.nome,
+          cpf: formatCPF(item.cpf),
+        }));
+        setAlunos(alunosFormatados);
+      } catch (error) {
+        console.error("Erro ao buscar alunos:", error);
+      }
+    }
+    fetchAlunos();
+  }, []);
 
   function resetForm() {
     reset();
@@ -90,12 +136,25 @@ export function RegisterContract() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-lowGray">
               <div className="flex flex-col gap-2">
-                <h2>Aluno ID</h2>
-                <input
-                  type="text"
+                <h2>Selecionar Aluno</h2>
+                <select
                   {...register("aluno")}
-                  className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
-                />
+                  value={selectedAluno}
+                  onChange={(e) => {
+                    setSelectedAluno(e.target.value);
+                    setValue("aluno", e.target.value, { shouldValidate: true });
+                  }}
+                  className="h-11 bg-midGray rounded-xl p-2 text-white focus:border-lowGray outline-none"
+                >
+                  <option value="" disabled>
+                    Selecione um aluno
+                  </option>
+                  {alunos.map((aluno) => (
+                    <option key={aluno.id} value={aluno.id}>
+                      {aluno.nome} ({aluno.cpf})
+                    </option>
+                  ))}
+                </select>
                 {errors.aluno && (
                   <span className="text-red-500">{errors.aluno.message}</span>
                 )}
@@ -131,10 +190,26 @@ export function RegisterContract() {
 
               <div className="flex flex-col gap-2">
                 <h2>Valor do Serviço (R$)</h2>
-                <input
-                  type="number"
-                  {...register("servico_desejado.valor_do_servico")}
-                  className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                <Controller
+                  control={control}
+                  name="servico_desejado.valor_do_servico"
+                  render={({ field }) => (
+                    <input
+                      type="text"
+                      value={formatCurrency(field.value)}
+                      onChange={(e) => {
+                        const rawValue = e.target.value.replace(/\D/g, "");
+                        const numericValue = Number(rawValue) / 100;
+                        setValue(
+                          "servico_desejado.valor_do_servico",
+                          numericValue,
+                          { shouldValidate: true }
+                        );
+                      }}
+                      placeholder="R$"
+                      className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
+                    />
+                  )}
                 />
                 {errors.servico_desejado?.valor_do_servico && (
                   <span className="text-red-500">
@@ -144,7 +219,6 @@ export function RegisterContract() {
               </div>
             </div>
           </div>
-
           <div className="border border-midPurple rounded-3xl flex flex-col gap-4 pt-6 px-6 pb-10">
             <div className="flex gap-1.5 text-2xl font-black">
               <h1>Horário e</h1>

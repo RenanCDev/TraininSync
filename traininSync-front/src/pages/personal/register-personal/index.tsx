@@ -10,7 +10,6 @@ import { Button } from "../../../components/button";
 import { NavBar } from "../../../components/navbar";
 import { createPersonal } from "../../../api/personal/createPersonal";
 import { formatCPF, removeCPFFormatting } from "../../../utils/cpf/format";
-import { getAllPersonal } from "../../../api/personal/getPersonal";
 import {
   formatPhoneNumber,
   unformatPhoneNumber,
@@ -77,22 +76,6 @@ export function RegisterPersonal() {
       setIsLoading(false);
     }
   };
-
-  async function getPersonais() {
-    try {
-      setIsLoading(true);
-      const dados = await getAllPersonal();
-      toast.success("Personal GET!", {
-        position: "bottom-right",
-        theme: "dark",
-      });
-      console.log("Personais: ", dados);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
-  }
 
   return (
     <div className="flex flex-col">
@@ -310,7 +293,7 @@ export function RegisterPersonal() {
                     )}
                   </div>
                   <div className="col-span-1 flex flex-col gap-2">
-                    <h2>Agencia</h2>
+                    <h2>Agência</h2>
                     <input
                       type="number"
                       {...register("agencia")}
@@ -347,7 +330,7 @@ export function RegisterPersonal() {
               </div>
 
               <div className="flex flex-col gap-2 col-span-2">
-                <h2>Experiencia Profissional</h2>
+                <h2>Experiência Profissional</h2>
                 <textarea
                   {...register("experiencia_profissional")}
                   className="h-24 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none resize-none"
@@ -407,15 +390,6 @@ export function RegisterPersonal() {
             bgColor="bg-midGray"
             hover="hover:bg-midGray"
             onClick={resetForm}
-          />
-        </div>
-
-        <div className="mt-7">
-          <Button
-            loading={isLoading}
-            onClick={getPersonais}
-            width="w-full md:max-w-[342px]"
-            title="log Personais teste"
           />
         </div>
       </form>

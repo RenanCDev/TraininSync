@@ -1,13 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../../../components/button";
 import { NavBar } from "../../../components/navbar";
-import { CreateRegisterProgress } from "./zod";
+import { CreateRegisterProgress } from "../register-progress/zod";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createRegistroDeProgresso } from "../../../api/progress/createProgresso";
-import { getAllAluno, getAlunoById } from "../../../api/aluno/getAluno";
-import { getUltimoProgresso } from "../../../api/progress/getProgresso";
+import { updateRegistroDeProgresso } from "../../../api/progress/updateProgresso";
+import { getRegistroDeProgressoById } from "../../../api/progress/getProgresso";
+import { getAllAluno } from "../../../api/aluno/getAluno";
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
 import { formatCPF } from "../../../utils/cpf/format";
@@ -20,7 +20,8 @@ interface Aluno {
   cpf: string;
 }
 
-export function RegisterProgress() {
+export function EditProgress() {
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [alunos, setAlunos] = useState<Aluno[]>([]);
@@ -37,76 +38,47 @@ export function RegisterProgress() {
     defaultValues: {
       aluno: undefined,
       data: "",
-      massa_gorda: undefined,
-      massa_magra: undefined,
-      massa_muscular: undefined,
-      hidratacao: undefined,
-      densidade_ossea: undefined,
-      gordura_visceral: undefined,
-      taxa_de_metabolismo_basal: undefined,
-      altura: undefined,
-      peso: undefined,
     },
   });
 
   useEffect(() => {
-    async function fetchAlunos() {
+    async function fetchData() {
       try {
-        const response = await getAllAluno();
-        const alunosFormatados = response.map((item: any) => ({
+        const [alunosResponse, progressoResponse] = await Promise.all([
+          getAllAluno(),
+          getRegistroDeProgressoById(Number(id)),
+        ]);
+
+        const alunosFormatados = alunosResponse.map((item: any) => ({
           id: item.id,
           nome: item.nome,
           cpf: formatCPF(item.cpf),
         }));
         setAlunos(alunosFormatados);
+
+        setSelectedAluno(progressoResponse.aluno);
+        Object.entries(progressoResponse).forEach(([key, value]) => {
+          if (
+            typeof value === "string" ||
+            typeof value === "number" ||
+            value === null ||
+            value === undefined
+          ) {
+            setValue(key as keyof ProgressFormData, value ?? "");
+          } else {
+            console.warn(`Campo ignorado no setValue: ${key} =`, value);
+          }
+        });
       } catch (error) {
-        console.error("Erro ao buscar alunos:", error);
+        console.error("Erro ao carregar dados:", error);
+        toast.error("Erro ao carregar dados do progresso!", {
+          position: "bottom-right",
+          theme: "dark",
+        });
       }
     }
-    fetchAlunos();
-  }, []);
-
-  async function handleAlunoChange(alunoId: string) {
-    const id = Number(alunoId);
-    setSelectedAluno(id);
-    setValue("aluno", id, { shouldValidate: true });
-
-    try {
-      const ultimo = await getUltimoProgresso(id);
-      console.log(">>> Último progresso retornado:", ultimo);
-
-      if (ultimo && Object.keys(ultimo).length > 0) {
-        setValue("massa_gorda", ultimo.massa_gorda ?? "");
-        setValue("massa_magra", ultimo.massa_magra ?? "");
-        setValue("massa_muscular", ultimo.massa_muscular ?? "");
-        setValue("hidratacao", ultimo.hidratacao ?? "");
-        setValue("densidade_ossea", ultimo.densidade_ossea ?? "");
-        setValue("gordura_visceral", ultimo.gordura_visceral ?? "");
-        setValue(
-          "taxa_de_metabolismo_basal",
-          ultimo.taxa_de_metabolismo_basal ?? ""
-        );
-        setValue("altura", ultimo.altura ?? "");
-        setValue("peso", ultimo.peso ?? "");
-        setValue("imc", ultimo.imc ?? "");
-      } else {
-        const alunoData = await getAlunoById(id);
-        setValue("altura", alunoData.altura ?? "");
-        setValue("peso", alunoData.peso ?? "");
-        setValue(
-          "taxa_de_metabolismo_basal",
-          alunoData.taxa_metabolica_basal ?? ""
-        );
-        setValue("massa_gorda", alunoData.gordura_corporal ?? "");
-        setValue("massa_magra", alunoData.massa_muscular_esqueletica ?? "");
-        setValue("massa_muscular", alunoData.massa_muscular_esqueletica ?? "");
-        setValue("hidratacao", alunoData.agua_corporal_total ?? "");
-        setValue("imc", alunoData.imc ?? "");
-      }
-    } catch (err) {
-      console.error("Erro ao carregar dados do aluno ou progresso:", err);
-    }
-  }
+    fetchData();
+  }, [id, setValue]);
 
   const onSubmit = async (data: ProgressFormData) => {
     const cleanData = {
@@ -123,15 +95,15 @@ export function RegisterProgress() {
 
     try {
       setIsLoading(true);
-      await createRegistroDeProgresso(cleanData);
-      toast.success("Progresso registrado com sucesso!", {
+      await updateRegistroDeProgresso(Number(id), cleanData);
+      toast.success("Progresso atualizado com sucesso!", {
         position: "bottom-right",
         theme: "dark",
       });
-      reset();
+      navigate("/progress");
     } catch (err) {
       console.error(err);
-      toast.error("Erro ao registrar progresso!", {
+      toast.error("Erro ao atualizar progresso!", {
         position: "bottom-right",
         theme: "dark",
       });
@@ -148,7 +120,7 @@ export function RegisterProgress() {
 
       <form onSubmit={handleSubmit(onSubmit)} className="p-8">
         <div className="flex justify-center gap-1.5 text-3xl sm:text-5xl font-black md:justify-start md:px-6 pb-6">
-          <h1>Cadastro de</h1>
+          <h1>Editar</h1>
           <h1 className="text-midPurple">Progresso</h1>
         </div>
 
@@ -160,8 +132,9 @@ export function RegisterProgress() {
                 <select
                   {...register("aluno", { valueAsNumber: true })}
                   value={selectedAluno}
-                  onChange={(e) => handleAlunoChange(e.target.value)}
+                  onChange={(e) => setSelectedAluno(Number(e.target.value))}
                   className="h-11 bg-midGray rounded-xl p-2 text-white focus:border-lowGray outline-none"
+                  disabled
                 >
                   <option value="" disabled>
                     Selecione um aluno
@@ -172,9 +145,6 @@ export function RegisterProgress() {
                     </option>
                   ))}
                 </select>
-                {errors.aluno && (
-                  <span className="text-red-500">{errors.aluno.message}</span>
-                )}
               </div>
 
               <div className="flex flex-col gap-2 col-span-1 md:col-span-2">
@@ -224,7 +194,7 @@ export function RegisterProgress() {
             loading={isLoading}
             type="submit"
             width="w-full md:max-w-[342px]"
-            title="Salvar"
+            title="Salvar Alterações"
           />
           <Button
             loading={isLoading}
