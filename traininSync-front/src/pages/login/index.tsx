@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import { loginUser } from "../../api/login/login";
+import { toast } from "react-toastify";
 
 type LoginFormData = z.infer<typeof LoginZod>;
 
@@ -17,6 +19,7 @@ export function Login() {
 
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormData>({
@@ -27,12 +30,27 @@ export function Login() {
     setIsLoading(true);
 
     const cleanData = {
-      user: data.usuario,
-      senha: data.senha,
+      username: data.username,
+      password: data.password,
     };
 
-    console.log(cleanData);
-    setIsLoading(false);
+    try {
+      await loginUser(cleanData);
+      toast.success("Login feito com sucesso!", {
+        position: "bottom-right",
+        theme: "dark",
+      });
+      reset();
+      navigate("/student");
+    } catch (err) {
+      console.log(err);
+      toast.error("Usuário ou senha inválidos!", {
+        position: "bottom-right",
+        theme: "dark",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   function handleRedirectToRegister() {
@@ -62,11 +80,11 @@ export function Login() {
               <h2>Usuário</h2>
               <input
                 type="text"
-                {...register("usuario")}
+                {...register("username")}
                 className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
               />
-              {errors.usuario && (
-                <span className="text-red-500">{errors.usuario.message}</span>
+              {errors.username && (
+                <span className="text-red-500">{errors.username.message}</span>
               )}
             </div>
             <div className="flex flex-col gap-2">
@@ -74,7 +92,7 @@ export function Login() {
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
-                  {...register("senha")}
+                  {...register("password")}
                   className="h-11 w-full bg-midGray rounded-xl p-2 pr-10 focus:border text-white focus:border-lowGray outline-none"
                 />
                 <button
@@ -85,8 +103,8 @@ export function Login() {
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
-              {errors.senha && (
-                <span className="text-red-500">{errors.senha.message}</span>
+              {errors.password && (
+                <span className="text-red-500">{errors.password.message}</span>
               )}
             </div>
             <p className="flex justify-end cursor-pointer hover:text-darkPurple transition-colors duration-300 ease-in-out">
@@ -98,7 +116,7 @@ export function Login() {
               loading={isLoading}
               type="submit"
               width="w-64"
-              title="Salvar"
+              title="Entrar"
             />
             <p
               className="text-lowGray cursor-pointer hover:text-darkPurple transition-colors duration-300 ease-in-out"

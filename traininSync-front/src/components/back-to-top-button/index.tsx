@@ -22,7 +22,7 @@ export function ScrollToTopButton() {
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-6 right-5 md:right-10 z-50 rounded-full bg-midPurple text-white p-3 shadow-lg hover:bg-black hover:scale-150 hover:text-midPurple transition"
+      className="fixed bottom-6 right-5 md:right-10 z-40 rounded-full bg-midPurple text-white p-3 shadow-lg hover:bg-black hover:scale-150 hover:text-midPurple transition"
     >
       <ArrowUp className="w-5 h-5" />
     </button>

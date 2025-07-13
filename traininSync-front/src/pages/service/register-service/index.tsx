@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { createServico } from "../../../api/service/createService";
 import { toast } from "react-toastify";
-import { formatCurrency, parseCurrency } from "../../../utils/dinheiro";
+import { formatCurrency } from "../../../utils/dinheiro";
 
 type ServiceFormData = z.infer<typeof CreateServico>;
 
@@ -18,6 +18,7 @@ export function RegisterService() {
   const {
     register,
     control,
+    setValue,
     reset,
     handleSubmit,
     formState: { errors },
@@ -108,8 +109,11 @@ export function RegisterService() {
                       type="text"
                       value={formatCurrency(field.value)}
                       onChange={(e) => {
-                        const parsed = parseCurrency(e.target.value);
-                        field.onChange(parsed);
+                        const rawValue = e.target.value.replace(/\D/g, "");
+                        const numericValue = Number(rawValue) / 100;
+                        setValue("valor_do_servico", numericValue, {
+                          shouldValidate: true,
+                        });
                       }}
                       placeholder="R$"
                       className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"

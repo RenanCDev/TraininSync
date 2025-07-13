@@ -1,93 +1,185 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../../components/button";
+import { useEffect, useState } from "react";
+import FullCalendar from "@fullcalendar/react";
+import { EventClickArg } from "@fullcalendar/core";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";''
+import interactionPlugin from "@fullcalendar/interaction";
+import ptBrLocale from "@fullcalendar/core/locales/pt-br";
+import { createAgenda } from "../../../api/schedule/createAgenda";
+import { updateAgenda } from "../../../api/schedule/updateAgenda";
+import { getAllAgenda } from "../../../api/schedule/getAgenda";
+import { deleteAgenda } from "../../../api/schedule/deletAgenda";
+import { ScheduleModal, ConfirmDeleteModal } from "../details-schedule/";
+import { toast } from "react-toastify";
 import { NavBar } from "../../../components/navbar";
+import { Button } from "../../../components/button";
+import "../../../styles/calendar.css";
 
-export function RegisterSchedule() {
+interface Agenda {
+  id: number;
+  dia: string;
+  hora_inicio: string;
+  hora_fim: string;
+  local: string;
+  personal: number;
+  aluno?: string;
+}
+
+export function ScheduleCalendar() {
   const navigate = useNavigate();
+  const [schedules, setSchedules] = useState<Agenda[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const [currentEvent, setCurrentEvent] = useState<Partial<Agenda>>({});
 
-  function handleLoginClick() {
-    navigate("/login");
-  }
+  useEffect(() => {
+    fetchSchedules();
+  }, []);
+
+  const fetchSchedules = async () => {
+    try {
+      const data = await getAllAgenda();
+      setSchedules(data);
+    } catch (error) {
+      console.error("Erro ao buscar agendas:", error);
+    }
+  };
+
+  const handleSelect = (selectInfo: any) => {
+    const startStr = selectInfo.startStr;
+    const endStr = selectInfo.endStr;
+
+    setCurrentEvent({
+      id: undefined,
+      dia: startStr.split("T")[0],
+      hora_inicio: startStr.split("T")[1]?.substring(0, 5),
+      hora_fim: endStr.split("T")[1]?.substring(0, 5),
+      local: "",
+      personal: undefined,
+    });
+
+    setIsModalOpen(true);
+  };
+
+  const handleSaveEvent = async () => {
+    try {
+      const { id, personal, dia, hora_inicio, hora_fim, local } = currentEvent;
+
+      if (!personal || !dia || !hora_inicio || !hora_fim || !local) {
+        toast.error("Preencha todos os campos obrigatórios.");
+        return;
+      }
+
+      const payload = {
+        personal: String(personal),
+        dia: dia as string,
+        hora_inicio: hora_inicio as string,
+        hora_fim: hora_fim as string,
+        local: local as string,
+        disponivel: true,
+      };
+
+      if (id) {
+        await updateAgenda(id, payload);
+        toast.success("Horário atualizado com sucesso!");
+      } else {
+        await createAgenda(payload);
+        toast.success("Horário cadastrado com sucesso!");
+      }
+
+      setIsModalOpen(false);
+      fetchSchedules();
+    } catch (error: any) {
+      console.error("Erro ao salvar agenda:", error);
+
+      const msg =
+        error?.response?.data?.non_field_errors?.[0] ||
+        "Erro ao salvar horário.";
+      toast.error(msg);
+    }
+  };
+
+  const handleDeleteEvent = async () => {
+    if (!currentEvent.id) return;
+
+    try {
+      await deleteAgenda(currentEvent.id);
+      toast.success("Horário excluído com sucesso!");
+      setIsModalOpen(false);
+      setShowConfirmDelete(false);
+      fetchSchedules();
+    } catch (error) {
+      console.error("Erro ao excluir horário:", error);
+      toast.error("Erro ao excluir horário.");
+    }
+  };
+
+  const handleEventClick = (clickInfo: EventClickArg) => {
+    const agenda = schedules.find((a) => a.id === Number(clickInfo.event.id));
+    if (agenda) {
+      setCurrentEvent(agenda);
+      setIsModalOpen(true);
+    }
+  };
+
+  const events = schedules.map((agenda) => ({
+    id: agenda.id.toString(),
+    title: agenda.local,
+    start: `${agenda.dia}T${agenda.hora_inicio}`,
+    end: `${agenda.dia}T${agenda.hora_fim}`,
+    backgroundColor: "#6B46C1",
+    borderColor: "#6B46C1",
+    textColor: "#fff",
+    extendedProps: agenda,
+  }));
 
   return (
-    <div className="flex  flex-col">
-      <NavBar>
-        <Button onClick={handleLoginClick} title="Login" />
+    <>
+      <NavBar variant="secondary">
+        <Button title="Voltar" onClick={() => navigate(-1)} />
       </NavBar>
 
-      <form className="p-8">
-        <div className="flex justify-center gap-1.5 text-3xl sm:text-5xl font-black md:justify-start md:px-6 pb-6">
-          <h1>Agenda</h1>
-        </div>
+      <div className="p-6">
+        <FullCalendar
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          initialView="dayGridMonth"
+          selectable
+          editable={false}
+          events={events}
+          select={handleSelect}
+          eventClick={handleEventClick}
+          locale={ptBrLocale}
+          headerToolbar={{
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay",
+          }}
+          height="auto"
+          eventDidMount={(info) => {
+            info.el.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
+            info.el.style.padding = "4px 8px";
+            info.el.style.fontWeight = "600";
+          }}
+        />
 
-        <div className="flex flex-col gap-6">
-          <div className="border border-midPurple rounded-3xl flex flex-col gap-4 pt-6 px-6 pb-10">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-2 text-lowGray">
-              <div className="flex flex-col gap-2 col-span-1">
-                <h2>Selecionar Personal</h2>
-                <input
-                  type="text"
-                  className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
-                />
-              </div>
-              <div className="flex flex-col gap-2 col-span-1">
-                <h2>Dia</h2>
-                <input
-                  type="date"
-                  className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
-                />
-              </div>
-              <div className="flex flex-col gap-2 col-span-1">
-                <h2>Hora Início</h2>
-                <input
-                  type="time"
-                  className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
-                />
-              </div>
-              <div className="flex flex-col gap-2 col-span-1">
-                <h2>Hora fim</h2>
-                <input
-                  type="time"
-                  className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
-                />
-              </div>
-              <div className="flex flex-col gap-2 col-span-1 md:col-span-3">
-                <h2>Local</h2>
-                <input
-                  type="text"
-                  className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
-                />
-              </div>
-              <div className="flex flex-col gap-2 col-span-1">
-                <h2>Disponibilidade</h2>
-                <input
-                  type="text"
-                  className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+        <ScheduleModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          currentEvent={currentEvent}
+          setCurrentEvent={setCurrentEvent}
+          onSave={handleSaveEvent}
+          onDelete={() => setShowConfirmDelete(true)}
+          isConfirmDeleteOpen={showConfirmDelete}
+        />
 
-        <div className="flex flex-col md:gap-5 md:flex-row">
-          <div className="mt-7">
-            <Button
-              type="submit"
-              width="w-full md:min-w-[342px]"
-              title="Salvar"
-            />
-          </div>
-
-          <div className="mt-7">
-            <Button
-              width="w-full md:min-w-[342px]"
-              title="Descartar"
-              bgColor="bg-midGray"
-              hover="hover:bg-midGray"
-            />
-          </div>
-        </div>
-      </form>
-    </div>
+        <ConfirmDeleteModal
+          isOpen={showConfirmDelete}
+          onCancel={() => setShowConfirmDelete(false)}
+          onConfirm={handleDeleteEvent}
+          message={"Tem certeza que deseja excluir esse horário ?"}
+        />
+      </div>
+    </>
   );
 }

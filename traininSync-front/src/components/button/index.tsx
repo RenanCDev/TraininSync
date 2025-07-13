@@ -7,8 +7,10 @@ interface ButtonProps {
   loading?: boolean;
   bgColor?: string;
   hover?: string;
+  disabled?: boolean;
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
+  className?: string;
 }
 
 export function Button({

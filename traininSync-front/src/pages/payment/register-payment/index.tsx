@@ -3,13 +3,13 @@ import { Button } from "../../../components/button";
 import { NavBar } from "../../../components/navbar";
 import { useEffect, useState } from "react";
 import { getAllAluno } from "../../../api/aluno/getAluno";
+import { getContratosByAlunoId } from "../../../api/contract/getContract";
 import { formatCPF } from "../../../utils/cpf/format";
 import { z } from "zod";
 import { CreatePayment } from "./zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { formatCurrencyString } from "../../../utils/dinheiro";
-import { createPayment } from "../../../api/payment/createPayment";
+import { createPagamento } from "../../../api/payment/createPayment";
 import { toast } from "react-toastify";
 
 interface Aluno {
@@ -18,12 +18,23 @@ interface Aluno {
   cpf: string;
 }
 
+interface Contrato {
+  id: number;
+  servico_desejado: {
+    tipo_de_servico: string;
+    descricao_do_servico: string;
+    valor_do_servico: number;
+  };
+}
+
 type PaymentFormData = z.infer<typeof CreatePayment>;
 
 export function RegisterPayment() {
   const navigate = useNavigate();
   const [alunos, setAlunos] = useState<Aluno[]>([]);
+  const [contratos, setContratos] = useState<Contrato[]>([]);
   const [selectedAluno, setSelectedAluno] = useState("");
+  const [selectedContrato, setSelectedContrato] = useState<number | "">("");
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -40,53 +51,22 @@ export function RegisterPayment() {
     },
   });
 
-  function handleLoginClick() {
-    navigate("/login");
-  }
-
   const valor = watch("valor");
 
   const handleValorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = formatCurrencyString(e.target.value);
-    setValue("valor", formatted);
-  };
-
-  const onSubmit = async (data: PaymentFormData) => {
-    const cleanData = {
-      aluno: data.aluno,
-      contrato: data.contrato,
-      descricao: data.descricao,
-      valor: data.valor,
-    };
-
-    try {
-      setIsLoading(true);
-      await createPayment(cleanData);
-      toast.success("Serviço cadastrado com sucesso!", {
-        position: "bottom-right",
-        theme: "dark",
-      });
-      reset();
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
+    setValue("valor", e.target.value);
   };
 
   useEffect(() => {
     async function fetchAlunos() {
       try {
         const response = await getAllAluno();
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const alunosFormatados = response.map((item: any) => ({
-          id: item.pessoa.id.toString(),
-          nome: item.pessoa.nome,
-          cpf: formatCPF(item.pessoa.cpf),
+          id: item.id.toString(),
+          nome: item.nome,
+          cpf: formatCPF(item.cpf),
         }));
-
         setAlunos(alunosFormatados);
-        console.log(alunosFormatados);
       } catch (error) {
         console.error("Erro ao buscar alunos:", error);
       }
@@ -95,20 +75,90 @@ export function RegisterPayment() {
   }, []);
 
   useEffect(() => {
-    if (selectedAluno) {
-      console.log("Aluno selecionado:", selectedAluno);
+    async function fetchContratos() {
+      if (!selectedAluno) {
+        setContratos([]);
+        setSelectedContrato("");
+        setValue("contrato", Number(""));
+        setValue("valor", "");
+        return;
+      }
+
+      try {
+        const alunoId = parseInt(selectedAluno);
+        const contratosDoAluno = await getContratosByAlunoId(alunoId);
+
+        setContratos(contratosDoAluno);
+        setSelectedContrato("");
+        setValue("contrato", Number(""));
+        setValue("valor", "");
+      } catch (error) {
+        console.error("Erro ao buscar contratos do aluno:", error);
+        setContratos([]);
+      }
     }
-  }, [selectedAluno]);
+    fetchContratos();
+  }, [selectedAluno, setValue]);
+
+  const handleContratoChange = (contratoId: string) => {
+    const id = Number(contratoId);
+    setSelectedContrato(id);
+    setValue("contrato", id, { shouldValidate: true });
+
+    const contratoSelecionado = contratos.find((c) => c.id === id);
+    if (contratoSelecionado) {
+      const valor = contratoSelecionado.servico_desejado.valor_do_servico.toFixed(2).replace(".", ",");
+      setValue("valor", `R$ ${valor}`);
+    }
+  };
+
+  const onSubmit = async (data: PaymentFormData) => {
+    const cleanData = {
+      aluno: data.aluno,
+      contrato: data.contrato,
+      descricao: data.descricao,
+      valor: String(
+        Number(data.valor.replace(/[^\d,-]/g, "").replace(",", ".")).toFixed(2)
+      ),
+    };
+
+    try {
+      setIsLoading(true);
+      await createPagamento(cleanData);
+      toast.success("Pagamento cadastrado com sucesso!", {
+        position: "bottom-right",
+        theme: "dark",
+      });
+      reset();
+      setContratos([]);
+      setSelectedContrato("");
+    } catch (err) {
+      toast.error("Erro ao cadastrar pagamento!", {
+        position: "bottom-right",
+        theme: "dark",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  function resetForm() {
+    reset();
+    setContratos([]);
+    setSelectedContrato("");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   return (
-    <div className="flex  flex-col">
+    <div className="flex flex-col">
       <NavBar>
-        <Button onClick={handleLoginClick} title="Login" />
+        <Button onClick={() => navigate(-1)} title="Voltar" />
       </NavBar>
 
       <form onSubmit={handleSubmit(onSubmit)} className="p-8">
         <div className="flex justify-center gap-1.5 text-3xl sm:text-5xl font-black md:justify-start md:px-6 pb-6">
-          <h1>Pagamento</h1>
+          <h1>Cadastro de</h1>
+          <h1 className="text-midPurple">Pagamento</h1>
         </div>
 
         <div className="flex flex-col gap-6">
@@ -126,12 +176,8 @@ export function RegisterPayment() {
                     Selecione um aluno
                   </option>
                   {alunos.map((aluno) => (
-                    <option
-                      className="flex gap-10"
-                      key={aluno.id}
-                      value={aluno.id}
-                    >
-                      {aluno.nome} <> . </> ({aluno.cpf})
+                    <option key={aluno.id} value={aluno.id}>
+                      {aluno.nome} ({aluno.cpf})
                     </option>
                   ))}
                 </select>
@@ -142,15 +188,26 @@ export function RegisterPayment() {
 
               <div className="flex flex-col gap-2 col-span-1 md:col-span-2">
                 <h2>Contrato</h2>
-                <input
-                  type="number"
-                  {...register("contrato")}
-                  className="h-11 bg-midGray rounded-xl p-2 focus:border text-white focus:border-lowGray outline-none"
-                />
+                <select
+                  {...register("contrato", { valueAsNumber: true })}
+                  value={selectedContrato}
+                  onChange={(e) => handleContratoChange(e.target.value)}
+                  className="h-11 bg-midGray rounded-xl p-2 text-white focus:border-lowGray outline-none"
+                  disabled={contratos.length === 0}
+                >
+                  <option value="" disabled>
+                    {contratos.length === 0
+                      ? "Nenhum contrato disponível"
+                      : "Selecione um contrato"}
+                  </option>
+                  {contratos.map((contrato) => (
+                    <option key={contrato.id} value={contrato.id}>
+                      {contrato.servico_desejado.tipo_de_servico}
+                    </option>
+                  ))}
+                </select>
                 {errors.contrato && (
-                  <span className="text-red-500">
-                    {errors.contrato.message}
-                  </span>
+                  <span className="text-red-500">{errors.contrato.message}</span>
                 )}
               </div>
 
@@ -202,6 +259,7 @@ export function RegisterPayment() {
               title="Descartar"
               bgColor="bg-midGray"
               hover="hover:bg-midGray"
+              onClick={resetForm}
             />
           </div>
         </div>
