@@ -1,0 +1,8 @@
+[run]
+source = .
+omit =
+    */migrations/*
+    */__init__.py
+    */settings.py
+    */traininSync-front/*
+    manage.py

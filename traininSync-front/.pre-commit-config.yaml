@@ -1,0 +1,21 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-added-large-files
+
+  - repo: local
+    hooks:
+      - id: eslint
+        name: ESLint
+        entry: bash -c "cd traininSync-front && npm run lint:fix"
+        language: system
+        pass_filenames: true
+
+      - id: prettier
+        name: Prettier
+        entry: bash -c "cd traininSync-front && npm run prettier:fix"
+        language: system
+        pass_filenames: true

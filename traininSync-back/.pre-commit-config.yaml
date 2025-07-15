@@ -1,0 +1,38 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace  # Mostra linha com espaços em branco
+      - id: end-of-file-fixer    # Mostra se arquivo não termina com \n
+      - id: debug-statements     # Aponta 'print' e 'pdb' com local
+      - id: check-yaml           # Mostra erro de YAML com linha/coluna
+      - id: check-added-large-files  # Alerta sobre arquivos grandes
+
+  - repo: https://github.com/psf/black
+    rev: 24.3.0
+    hooks:
+      - id: black
+        language_version: python3
+
+  - repo: local
+    hooks:
+      - id: isort
+        name: Isort
+        entry: isort
+        args: ["--profile=black"]
+        language: python
+        language_version: python3
+        types: [python]
+        pass_filenames: true
+
+      - id: unit-tests
+        name: Unit tests
+        entry: bash -c "cd traininSync-back && python manage.py test --verbosity=2"
+        language: system
+        pass_filenames: false
+
+      - id: lint
+        name: PyLint
+        entry: pylint --output-format=colorized --score=y --fail-under=9.0
+        language: system
+        types: [python]

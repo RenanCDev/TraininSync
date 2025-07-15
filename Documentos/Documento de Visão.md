@@ -131,6 +131,28 @@ O sistema deverá permitir a exclusão de um personal trainer, solicitando confi
 **Ator:** Personal Trainer  
 O sistema deverá fornecer métricas sobre o desempenho do personal trainer, como número de atendimentos realizados, feedbacks de alunos, etc.  
 
+### **RF01 – Manter Personal Trainer**
+
+- **RF01.01 – Cadastro de Personal Trainer**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir o cadastro de novos personal trainers, com campos obrigatórios para informações básicas (nome, email, etc.), e validação dos dados (ex.: email válido, campos não nulos).  
+
+- **RF01.02 – Visualizar Personal Trainer**  
+**Ator:** Personal Trainer  
+O sistema deverá listar os personal trainers cadastrados, com a possibilidade de exibir informações detalhadas sobre cada um deles, com filtros de busca para facilitar a visualização.  
+
+- **RF01.03 – Editar Dados do Personal Trainer**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir que o personal trainer edite seus dados, como informações de contato, especializações, etc., e atualize essas informações no banco de dados após validação.  
+
+- **RF01.04 – Excluir Personal Trainer**  
+**Ator:** Personal Trainer  
+O sistema deverá permitir a exclusão de um personal trainer, solicitando confirmação antes da remoção e registrando essa ação no log de atividades.  
+
+- **RF01.05 – Monitorar Desempenho do Personal Trainer**  
+**Ator:** Personal Trainer  
+O sistema deverá fornecer métricas sobre o desempenho do personal trainer, como número de atendimentos realizados, feedbacks de alunos, etc. 
+
 ---
 
 ### **RF02 – Manter Aluno**
@@ -311,6 +333,30 @@ OO sistema deverá enviar notificações automáticas de confirmação e lembret
 **Ator:** Sistema  
 O sistema deverá oferecer integração com serviços de calendário externo (ex.: Google Calendar) para sincronizar automaticamente os horários agendados.
 
+---
+
+### RF09 – Manter Pessoa
+
+- **RF09.01 – Cadastro de Pessoa**  
+  **Ator:** Aluno/PersonalTrainer  
+  O sistema deverá permitir o cadastro de uma pessoa com nome, CPF, data de nascimento, email, celular, sexo, nome social (opcional), etnia e estado civil. Todos os campos obrigatórios deverão ser validados conforme restrições aplicáveis.
+
+- **RF09.02 – Visualizar Pessoa**  
+  **Ator:** Aluno/PersonalTrainer  
+  O sistema deverá listar as pessoas cadastradas com possibilidade de busca por nome, CPF ou email, exibindo as informações essenciais.
+
+- **RF09.03 – Editar Pessoa**  
+  **Ator:** Aluno/PersonalTrainer 
+  O sistema deverá permitir a edição dos dados da pessoa, com revalidação dos dados modificados antes de persistência.
+
+- **RF09.04 – Excluir Pessoa**  
+  **Ator:** Aluno/PersonalTrainer
+  O sistema deverá permitir a exclusão lógica de um registro de pessoa, desde que não esteja vinculado a entidades dependentes (como Aluno ou Personal).
+
+- **RF09.05 – Monitorar Dados Pessoais**  
+  **Ator:** Aluno/PersonalTrainer 
+  O sistema deverá rastrear alterações nos dados cadastrais de Pessoa e registrar logs de modificação para controle de integridade e auditoria.
+
 
 ---
 **Processo Atomizado dos Requisitos Funcionais:**
@@ -319,10 +365,24 @@ O sistema deverá oferecer integração com serviços de calendário externo (ex
 - Revisões de código e integração contínua para cada módulo.
 
 </div>
+<div style="border: 1px solid #ccc; border-radius: 5px; padding: 15px; margin-bottom: 15px; background: #f9f9f9;">
+
+## 6. Riscos 
+
+| Risco                          | Descrição                                                                 | Mitigação                                                                 |
+|-------------------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| Incompatibilidade de tecnologias | O sistema pode não funcionar corretamente em todos os navegadores ou dispositivos. | Testes contínuos, uso de tecnologias responsivas (ex: React, Tailwind). |
+| Falta de escalabilidade       | Crescimento rápido de usuários pode causar lentidão ou falhas.           | Arquitetura escalável desde o início (ex: microserviços, cache, filas).  |
+| Treinamento insuficiente dos usuários | Usuários podem ter dificuldade em usar o sistema.                     | Documentação, tutoriais, suporte técnico eficaz.                         |
+| Escopo mal definido           | Mudanças constantes nos requisitos durante o desenvolvimento.             | Definição clara do escopo, metodologias ágeis para adaptação.            |
+| Prazos irreais                | Expectativas desalinhadas comprometem a qualidade final.                  | Cronograma realista e checkpoints regulares.                             |
+| Falta de recursos             | Equipe reduzida ou ausência de profissionais chave.                       | Planejamento adequado e possível terceirização.                          |
+
+</div>
 
 <div style="border: 1px solid #ccc; border-radius: 5px; padding: 15px; margin-bottom: 15px; background: #f9f9f9;">
 
-## 6. Requisitos Não-Funcionais – Detalhamento e Fragmentação
+## 7. Requisitos Não-Funcionais – Detalhamento e Fragmentação
 
 **Objetivo:** Assegurar que o sistema seja robusto, escalável, seguro e de fácil uso.
 
@@ -388,59 +448,59 @@ O sistema deverá oferecer integração com serviços de calendário externo (ex
 
 <div style="border: 1px solid #ccc; border-radius: 5px; padding: 15px; margin-bottom: 15px; background: #f9f9f9;">
 
-## 7. Processos de Desenvolvimento – Fragmentação Detalhada
+## 8. Processos de Desenvolvimento – Fragmentação Detalhada
 
 **Objetivo:** Segmentar cada fase do desenvolvimento para maior clareza e controle.
 
-### 7.1 Elicitação de Requisitos
+### 8.1 Elicitação de Requisitos
 
 - Realizar reuniões com stakeholders.
 - Utilizar técnicas (entrevistas, workshops, prototipagem).
 - Documentar as necessidades iniciais.
 
-### 7.2 Análise dos Requisitos
+### 8.2 Análise dos Requisitos
 
 - Revisar e analisar as necessidades identificadas.
 - Definir critérios de aceitação e restrições.
 - Validar com a equipe técnica e de negócios.
 
-### 7.3 Especificação dos Requisitos
+### 8.3 Especificação dos Requisitos
 
 - Redigir documentação detalhada dos requisitos funcionais e não funcionais.
 - Estabelecer rastreabilidade com os objetivos do cliente.
 - Revisar e validar a especificação com os stakeholders.
 
-### 7.4 Projeto de Arquitetura
+### 8.4 Projeto de Arquitetura
 
 - Definir a arquitetura de alto nível (ex.: modular, microserviços).
 - Identificar componentes de hardware, software e integrações.
 - Documentar padrões e métodos de projeto.
 
-### 7.5 Implementação
+### 8.5 Implementação
 
 - Desenvolver os módulos individualmente.
 - Escrever código conforme especificações.
 - Executar testes unitários para cada módulo.
 
-### 7.6 Integração
+### 8.6 Integração
 
 - Integrar os módulos desenvolvidos.
 - Realizar testes de integração para assegurar a comunicação entre componentes.
 - Resolver conflitos e realizar ajustes conforme necessário.
 
-### 7.7 Testes e Validação
+### 8.7 Testes e Validação
 
 - Executar testes de aceitação, regressão e usabilidade.
 - Validar a conformidade com os requisitos especificados.
 - Documentar resultados e realizar ajustes.
 
-### 7.8 Deploy e Instalação
+### 8.8 Deploy e Instalação
 
 - Automatizar o deploy por meio de pipelines de CI/CD.
 - Realizar instalação em ambientes de produção.
 - Configurar monitoramento e estratégias de rollback.
 
-### 7.9 Operação e Manutenção
+### 8.9 Operação e Manutenção
 
 - Monitorar performance e disponibilidade.
 - Aplicar atualizações e patches de segurança.
@@ -455,7 +515,7 @@ O sistema deverá oferecer integração com serviços de calendário externo (ex
 
 <div style="border: 1px solid #ccc; border-radius: 5px; padding: 15px; margin-bottom: 15px; background: #f9f9f9;">
 
-## 8. Processos de Gestão e Automação
+## 9. Processos de Gestão e Automação
 
 **Objetivo:** Otimizar a execução e o monitoramento dos processos do projeto.
 
@@ -480,7 +540,7 @@ O sistema deverá oferecer integração com serviços de calendário externo (ex
 
 <div style="border: 1px solid #ccc; border-radius: 5px; padding: 15px; background: #f9f9f9;">
 
-## 9. Conclusão
+## 10. Conclusão
 
 A fragmentação e a atomização dos processos – dividindo claramente as ações de gerenciamento, monitoramento, edição/atualização, exclusão/cancelamento e detalhando os aspectos de escalabilidade e capacidade – proporcionam:
 
